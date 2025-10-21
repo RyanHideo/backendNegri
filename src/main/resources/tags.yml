@@ -1,0 +1,13 @@
+tags:
+  - name: setpoint_ozonio
+    type: HR       # HR | IR | COIL | DI
+    unitId: 1
+    address: 40001
+    scale: 1.0
+    writable: true
+  - name: status_bomba
+    type: COIL
+    unitId: 1
+    address: 1
+    scale: 1.0
+    writable: true
