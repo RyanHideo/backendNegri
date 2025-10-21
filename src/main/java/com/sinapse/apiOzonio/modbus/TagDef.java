@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class TagDef {
-    public enum Kind { HR, IR, COIL, DI }
     private String name;
-    private Kind type;
-    private int address;      // endereço modbus
-    private int unitId = 1;
-    private double scale = 1; // multiplicador
-    private boolean writable = false;
+    private TagType type;
+    private int address;
+    private int unitId;
+    private double scale = 1.0;
+    private boolean writable;
+    private String description;
 }

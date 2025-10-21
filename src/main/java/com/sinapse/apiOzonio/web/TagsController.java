@@ -36,4 +36,27 @@ public class TagsController {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
+    @PostMapping("/cmd/reset")
+    public ResponseEntity<?> cmdReset(@RequestParam(defaultValue = "200") int pulseMs) {
+        try {
+            modbus.pulse("RESET", pulseMs); // não-retentivo
+            return ResponseEntity.accepted().body(Map.of("status", "RESET pulsed", "ms", pulseMs));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    /**
+     * EMERGÊNCIA deve ser retentiva (latch no CLP).
+     * Aqui só ligamos. O destrave deve ocorrer pelo circuito de RESET no CLP.
+     */
+    @PostMapping("/cmd/emergencia")
+    public ResponseEntity<?> cmdEmergencia() {
+        try {
+            modbus.write("EMERGENCIA", 1); // retentivo - não desliga aqui
+            return ResponseEntity.accepted().body(Map.of("status", "EMERGENCIA ON"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
 }

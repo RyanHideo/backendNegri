@@ -1,13 +1,76 @@
 tags:
-  - name: setpoint_ozonio
-    type: HR       # HR | IR | COIL | DI
-    unitId: 1
-    address: 40001
-    scale: 1.0
-    writable: true
-  - name: status_bomba
-    type: COIL
-    unitId: 1
+  # COMANDOS / SEGURANÇA
+  emergencia:
+    type: CO
     address: 1
-    scale: 1.0
     writable: true
+    description: "Emergência retentiva: liga com ON e permanece até enviar OFF (ou clicar novamente em TOGGLE)"
+
+  reset:
+    type: CO
+    address: 2
+    writable: true
+    description: "Pulso de reset não-retentivo"
+
+  # CICLO 12 HORAS
+  ciclo_iniciar:
+    type: CO
+    address: 3
+    writable: true
+    description: "Comando para iniciar o ciclo de 12h"
+
+  ciclo_finalizado:
+    type: CO
+    address: 4
+    writable: false
+    description: "Bit de ciclo concluído"
+
+  ciclo_interrompido:
+    type: CO
+    address: 5
+    writable: false
+    description: "Bit de ciclo interrompido por falha ou parada"
+
+  # ESTADOS DE MOTORES
+  bomba_1_run:
+    type: CO
+    address: 10
+    writable: false
+    description: "Status de funcionamento da bomba principal"
+
+  bomba_1_fault:
+    type: CO
+    address: 11
+    writable: false
+    description: "Falha da bomba principal"
+
+  bomba_2_run:
+    type: CO
+    address: 12
+    writable: false
+    description: "Status de funcionamento da bomba secundária"
+
+  bomba_2_fault:
+    type: CO
+    address: 13
+    writable: false
+    description: "Falha da bomba secundária"
+
+  # SENSORES / MEDIÇÕES
+  nivel_tanque_efluente:
+    type: HR
+    address: 4001
+    writable: false
+    description: "Nível do tanque da efluente(%)"
+
+  nivel_tanque_tratamento:
+    type: HR
+    address: 4002
+    writable: false
+    description: "Nível do tanque de tratamento(%)"
+
+  ozonio_ppm:
+    type: HR
+    address: 4003
+    writable: false
+    description: "Nível do tanque de evaporação(%)"
