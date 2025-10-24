@@ -5,10 +5,9 @@ import lombok.Data;
 @Data
 public class TagDef {
     private String name;
-    private TagType type;
+    private TagType type;   // <-- agora usa TagType
     private int address;
-    private int unitId;
-    private double scale = 1.0;
+    private Integer unitId; // opcional
+    private Double scale = 1.0; // default 1.0 pra evitar NPE
     private boolean writable;
-    private String description;
 }

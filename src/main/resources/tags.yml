@@ -1,76 +1,76 @@
 tags:
   # COMANDOS / SEGURANÇA
-  emergencia:
-    type: CO
+  - name: parada
+    type: COIL
     address: 1
     writable: true
-    description: "Emergência retentiva: liga com ON e permanece até enviar OFF (ou clicar novamente em TOGGLE)"
+    description: "Parada retentiva: liga com ON e permanece até enviar OFF (ou clicar novamente em TOGGLE)"
 
-  reset:
-    type: CO
+  - name: reset
+    type: COIL
     address: 2
     writable: true
     description: "Pulso de reset não-retentivo"
 
   # CICLO 12 HORAS
-  ciclo_iniciar:
-    type: CO
+  - name: ciclo_iniciar
+    type: COIL
     address: 3
     writable: true
     description: "Comando para iniciar o ciclo de 12h"
 
-  ciclo_finalizado:
-    type: CO
+  - name: ciclo_finalizado
+    type: COIL
     address: 4
     writable: false
     description: "Bit de ciclo concluído"
 
-  ciclo_interrompido:
-    type: CO
+  - name: ciclo_interrompido
+    type: COIL
     address: 5
     writable: false
     description: "Bit de ciclo interrompido por falha ou parada"
 
   # ESTADOS DE MOTORES
-  bomba_1_run:
-    type: CO
+  - name: bomba_1_run
+    type: COIL
     address: 10
     writable: false
     description: "Status de funcionamento da bomba principal"
 
-  bomba_1_fault:
-    type: CO
+  - name: bomba_1_fault
+    type: COIL
     address: 11
     writable: false
     description: "Falha da bomba principal"
 
-  bomba_2_run:
-    type: CO
+  - name: bomba_2_run
+    type: COIL
     address: 12
     writable: false
     description: "Status de funcionamento da bomba secundária"
 
-  bomba_2_fault:
-    type: CO
+  - name: bomba_2_fault
+    type: COIL
     address: 13
     writable: false
     description: "Falha da bomba secundária"
 
   # SENSORES / MEDIÇÕES
-  nivel_tanque_efluente:
+  - name: nivel_tanque_efluente
     type: HR
     address: 4001
     writable: false
     description: "Nível do tanque da efluente(%)"
 
-  nivel_tanque_tratamento:
+  - name: nivel_tanque_tratamento
     type: HR
-    address: 4002
+    address: 4003
     writable: false
     description: "Nível do tanque de tratamento(%)"
 
-  ozonio_ppm:
+  - name: ozonio_ppm
     type: HR
-    address: 4003
+    address: 4005
     writable: false
     description: "Nível do tanque de evaporação(%)"

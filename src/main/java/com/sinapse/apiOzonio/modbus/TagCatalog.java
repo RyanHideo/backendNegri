@@ -14,8 +14,8 @@ import java.util.*;
 @Component
 public class TagCatalog {
     @Getter
-    private List<TagDef> tags = new ArrayList<>();
-    private Map<String, TagDef> byName = new HashMap<>();
+    private final List<TagDef> tags = new ArrayList<>();
+    private final Map<String, TagDef> byName = new HashMap<>();
 
     @PostConstruct
     void load() {
@@ -26,10 +26,11 @@ public class TagCatalog {
             root.get("tags").forEach(n -> {
                 var t = new TagDef();
                 t.setName(n.get("name").asText());
-                t.setType(TagDef.Kind.valueOf(n.get("type").asText()));
+                // >>> usar TagType (não TagDef.Kind)
+                t.setType(TagType.valueOf(n.get("type").asText().toUpperCase()));
                 t.setAddress(n.get("address").asInt());
-                if (n.has("unitId")) t.setUnitId(n.get("unitId").asInt());
-                if (n.has("scale"))  t.setScale(n.get("scale").asDouble());
+                if (n.has("unitId"))   t.setUnitId(n.get("unitId").asInt());
+                if (n.has("scale"))    t.setScale(n.get("scale").asDouble());
                 if (n.has("writable")) t.setWritable(n.get("writable").asBoolean());
                 tags.add(t);
                 byName.put(t.getName(), t);
