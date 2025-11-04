@@ -1,76 +1,295 @@
 tags:
-  # COMANDOS / SEGURANÇA
-  - name: parada
+  # ========================
+  # COMANDOS / SEGURANÇA (Coils 1..2)
+  # ========================
+  - name: EMERGENCIA
     type: COIL
     address: 1
     writable: true
-    description: "Parada retentiva: liga com ON e permanece até enviar OFF (ou clicar novamente em TOGGLE)"
+    readable: false   # não ler
+    polled: false     # não entrar no polling
+    description: "Ativa a emergência (retentivo até reset)"
 
-  - name: reset
+  - name: RESET
     type: COIL
     address: 2
     writable: true
-    description: "Pulso de reset não-retentivo"
+    readable: false   # não ler
+    polled: false     # não entrar no polling
+    description: "Pulso de reset global"
 
-  # CICLO 12 HORAS
+  # ========================
+  # CICLO (mapeado na tela como Ton_1_IN e Ton_1_Q) - Coils 3..4
+  # ========================
   - name: ciclo_iniciar
     type: COIL
     address: 3
-    writable: true
-    description: "Comando para iniciar o ciclo de 12h"
+    writable: false
+    readable: true
+    polled: true
+    description: "Entrada para iniciar ciclo (UserPrg.Ton_1_IN)"
 
   - name: ciclo_finalizado
     type: COIL
     address: 4
     writable: false
-    description: "Bit de ciclo concluído"
+    readable: true
+    polled: true
+    description: "Saída do temporizador do ciclo (UserPrg.Ton_1_Q)"
 
-  - name: ciclo_interrompido
+  # ========================
+  # ESTADOS DE MOTORES (Coils 5..8)
+  # ========================
+  - name: motor_1_run
     type: COIL
     address: 5
     writable: false
-    description: "Bit de ciclo interrompido por falha ou parada"
+    readable: true
+    polled: true
+    description: "Saída motor 1"
 
-  # ESTADOS DE MOTORES
-  - name: bomba_1_run
+  - name: motor_1_fault
+    type: COIL
+    address: 6
+    writable: false
+    readable: true
+    polled: true
+    description: "Falha motor 1"
+
+  - name: motor_2_run
+    type: COIL
+    address: 7
+    writable: false
+    readable: true
+    polled: true
+    description: "Saída motor 2"
+
+  - name: motor_2_fault
+    type: COIL
+    address: 8
+    writable: false
+    readable: true
+    polled: true
+    description: "Falha motor 2"
+
+  # FEEDBACK (LEITURA) — ESTADO DA PARADA
+  - name: emergencia_fb
+    type: COIL
+    address: 9
+    writable: false
+    readable: true
+    polled: true
+    description: "Feedback da emergência/parada: 1 = latched no CLP"
+
+  # EQUIPAMENTO DE OZÔNIO (somente leitura)
+  - name: ozonio_equipamento
     type: COIL
     address: 10
     writable: false
-    description: "Status de funcionamento da bomba principal"
+    readable: true
+    polled: true
+    description: "Status do equipamento de ozônio (1 = ligado, 0 = desligado)"
 
-  - name: bomba_1_fault
-    type: COIL
-    address: 11
-    writable: false
-    description: "Falha da bomba principal"
-
-  - name: bomba_2_run
-    type: COIL
-    address: 12
-    writable: false
-    description: "Status de funcionamento da bomba secundária"
-
-  - name: bomba_2_fault
-    type: COIL
-    address: 13
-    writable: false
-    description: "Falha da bomba secundária"
-
-  # SENSORES / MEDIÇÕES
-  - name: nivel_tanque_efluente
+  # ========================
+  # NÍVEIS DE TANQUES (HR 4001..4003) — 1 word (16 bits)
+  # ========================
+  - name: nivel_tanque_1
     type: HR
     address: 4001
+    words: 1
+    format: U16
     writable: false
-    description: "Nível do tanque da efluente(%)"
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "Nível do tanque 1 (%)"
 
-  - name: nivel_tanque_tratamento
+  - name: nivel_tanque_2
+    type: HR
+    address: 4002
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "Nível do tanque 2 (%)"
+
+  - name: nivel_tanque_3
     type: HR
     address: 4003
+    words: 1
+    format: U16
     writable: false
-    description: "Nível do tanque de tratamento(%)"
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "Nível do tanque 3 (%)"
 
-  - name: ozonio_ppm
+  # ========================
+  # MULTIMEDIDOR (14 leituras) – HR 4004..4017 — 1 word (16 bits)
+  # ========================
+  - name: multimedidor_1
+    type: HR
+    address: 4004
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[0]"
+
+  - name: multimedidor_2
     type: HR
     address: 4005
+    words: 1
+    format: U16
     writable: false
-    description: "Nível do tanque de evaporação(%)"
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[1]"
+
+  - name: multimedidor_3
+    type: HR
+    address: 4006
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[2]"
+
+  - name: multimedidor_4
+    type: HR
+    address: 4007
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[3]"
+
+  - name: multimedidor_5
+    type: HR
+    address: 4008
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[4]"
+
+  - name: multimedidor_6
+    type: HR
+    address: 4009
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[5]"
+
+  - name: multimedidor_7
+    type: HR
+    address: 4010
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 0.01
+    description: "MultTCP[6]"
+
+  - name: multimedidor_8
+    type: HR
+    address: 4011
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 0.01
+    description: "MultTCP[7]"
+
+  - name: multimedidor_9
+    type: HR
+    address: 4012
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 0.01
+    description: "MultTCP[8]"
+
+  - name: multimedidor_10
+    type: HR
+    address: 4013
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[9]"
+
+  - name: multimedidor_11
+    type: HR
+    address: 4014
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[10]"
+
+  - name: multimedidor_12
+    type: HR
+    address: 4015
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[11]"
+
+  - name: multimedidor_13
+    type: HR
+    address: 4016
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 0.01   # duas casas decimais
+    description: "MultTCP[12]"
+
+  - name: multimedidor_14
+    type: HR
+    address: 4017
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 1.0
+    description: "MultTCP[13]"
+
+  - name: agua_tratada_total
+    type: HR
+    address: 4018
+    words: 1
+    format: U16
+    writable: false
+    readable: true
+    polled: true
+    scale: 0.1
+    description: "Agua total tratada"
