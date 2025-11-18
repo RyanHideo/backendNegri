@@ -55,10 +55,21 @@ public class ModbusService {
         }
     }
 
+    /** Garante conexão antes de operar; retorna true se conectado. */
+    private boolean ensureConnected() {
+        try {
+            if (master == null || !master.isConnected()) {
+                connect();
+            }
+        } catch (Exception e) {
+            log.warn("Falha ao garantir conexão: {}", e.getMessage());
+        }
+        return master != null && master.isConnected();
+    }
+
     private void pollCycle() {
         try {
-            if (master == null || !master.isConnected()) connect();
-            if (master == null || !master.isConnected()) return;
+            if (!ensureConnected()) return;
 
             for (TagDef t : catalog.getTags()) {
                 // Ignora tags não legíveis ou que não devem ser "polled"
@@ -124,6 +135,7 @@ public class ModbusService {
 
     private double readHR(TagDef t) throws Exception {
         ensureType(t, TagType.HR);
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus");
         int ref = t.getAddress() - HR_BASE;
 
         int words      = t.getWordsOrDefault();         // 1 ou 2
@@ -165,6 +177,7 @@ public class ModbusService {
 
     private double readIR(TagDef t) throws Exception {
         ensureType(t, TagType.IR);
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus");
         int ref = t.getAddress() - IR_BASE;
         InputRegister[] r = master.readInputRegisters(t.getUnitIdOrDefault(), ref, 1);
         return r[0].getValue() * t.getScaleOrDefault();
@@ -172,12 +185,14 @@ public class ModbusService {
 
     private boolean readCoil(TagDef t) throws Exception {
         ensureType(t, TagType.COIL);
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus");
         int ref = t.getAddress() - COIL_BASE;
         return master.readCoils(t.getUnitIdOrDefault(), ref, 1).getBit(0);
     }
 
     private boolean readDI(TagDef t) throws Exception {
         ensureType(t, TagType.DI);
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus");
         int ref = t.getAddress() - DI_BASE;
         return master.readInputDiscretes(t.getUnitIdOrDefault(), ref, 1).getBit(0);
     }
@@ -188,6 +203,7 @@ public class ModbusService {
         TagDef t = catalog.byName(name);
         if (t == null) throw new IllegalArgumentException("Tag não encontrada: " + name);
         if (!t.isWritableOrDefault()) throw new IllegalArgumentException("Tag somente leitura: " + name);
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus");
 
         switch (t.getType()) {
             case HR -> {
@@ -204,9 +220,30 @@ public class ModbusService {
 
     /** Pulso não-retentivo (ex.: RESET) */
     public void pulse(String name, int ms) throws Exception {
+        if (ms <= 0) ms = 200;
         write(name, 1);
         try { Thread.sleep(ms); }
         finally { write(name, 0); }
+    }
+
+    /* =================== COMANDOS ESPECÍFICOS =================== */
+
+    /** Parada/Emergência RETENTIVA: seta o coil EMERGENCIA = 1 e NÃO limpa aqui. */
+    public void latchEmergency() throws Exception {
+        write("EMERGENCIA", 1); // coil addr 1 conforme seu tags.yml
+        log.info("EMERGENCIA setada (retentivo). Limpa somente com RESET ou clearEmergency().");
+    }
+
+    /** Opcional: limpar a emergência explicitamente (normalmente usamos apenas RESET). */
+    public void clearEmergency() throws Exception {
+        write("EMERGENCIA", 0);
+        log.info("EMERGENCIA limpa manualmente.");
+    }
+
+    /** RESET por pulso. O CLP decide o que limpar (incluindo EMERGENCIA). */
+    public void resetPulse(int ms) throws Exception {
+        pulse("RESET", ms); // coil addr 2 no seu tags.yml
+        log.info("RESET pulsado ({} ms).", ms);
     }
 
     /* =================== SNAPSHOT =================== */
