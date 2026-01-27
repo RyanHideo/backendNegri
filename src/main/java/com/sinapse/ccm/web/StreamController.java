@@ -1,6 +1,6 @@
-package com.sinapse.apiOzonio.web;
+package com.sinapse.ccm.web;
 
-import com.sinapse.apiOzonio.modbus.ModbusService;
+import com.sinapse.ccm.modbus.ModbusService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

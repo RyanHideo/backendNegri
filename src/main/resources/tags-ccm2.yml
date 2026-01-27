@@ -1,0 +1,135 @@
+# tags-ccm2.yml
+# Definições de tags para o CCM2
+
+tags:
+  # ============================================================
+  # COMANDOS / SEGURANÇA CCM2
+  # ============================================================
+  - name: EMERGENCIA
+    type: COIL
+    address: 1
+    writable: true
+    readable: false
+    polled: false
+    description: "CCM2 - Ativa a emergência (retentivo até reset)"
+
+  - name: RESET
+    type: COIL
+    address: 2
+    writable: true
+    readable: false
+    polled: false
+    description: "CCM2 - Pulso de reset global"
+
+  # ============================================================
+  # MOTORES CCM2 (M1..M14)
+  # ============================================================
+
+  # ---------- M1 ----------
+  - name: M1_status
+    type: HR
+    address: 4002
+    description: "CCM2 - M1 Status"
+  - name: M1_fault
+    type: HR
+    address: 4003
+    description: "CCM2 - M1 Falha"
+  - name: M1_corrente
+    type: HR
+    address: 4004
+    scale: 0.1
+    description: "CCM2 - M1 Corrente"
+  - name: M1_horimetro
+    type: HR
+    address: 4005
+    description: "CCM2 - M1 Horímetro (h)"
+  - name: M1_xStatus
+    type: COIL
+    address: 152
+    description: "CCM2 - M1 xStatus (RUN)"
+  - name: M1_xFalha
+    type: COIL
+    address: 153
+    description: "CCM2 - M1 xFalha"
+
+  # ---------- M2 ----------
+  - name: M2_status
+    type: HR
+    address: 4006
+    description: "CCM2 - M2 Status"
+  - name: M2_fault
+    type: HR
+    address: 4007
+    description: "CCM2 - M2 Falha"
+  - name: M2_corrente
+    type: HR
+    address: 4008
+    scale: 0.1
+    description: "CCM2 - M2 Corrente"
+  - name: M2_horimetro
+    type: HR
+    address: 4009
+    description: "CCM2 - M2 Horímetro"
+  - name: M2_xStatus
+    type: COIL
+    address: 154
+    description: "CCM2 - M2 xStatus"
+  - name: M2_xFalha
+    type: COIL
+    address: 155
+    description: "CCM2 - M2 xFalha"
+
+  # ---------- M3 ----------
+  - name: M3_status
+    type: HR
+    address: 4010
+    description: "CCM2 - M3 Status"
+  - name: M3_fault
+    type: HR
+    address: 4011
+    description: "CCM2 - M3 Falha"
+  - name: M3_corrente
+    type: HR
+    address: 4012
+    scale: 0.1
+    description: "CCM2 - M3 Corrente"
+  - name: M3_horimetro
+    type: HR
+    address: 4013
+    description: "CCM2 - M3 Horímetro"
+  - name: M3_xStatus
+    type: COIL
+    address: 156
+    description: "CCM2 - M3 xStatus"
+  - name: M3_xFalha
+    type: COIL
+    address: 157
+    description: "CCM2 - M3 xFalha"
+
+  # ============================================================
+  # CCM2 - STATUS GERAIS (COILS)
+  # ============================================================
+  - name: alarm_ff
+    type: COIL
+    address: 1
+    readable: true
+    polled: true
+    description: "CCM2 - Alarme falta de fase (FF)"
+  - name: alarm_temp
+    type: COIL
+    address: 4
+    readable: true
+    polled: true
+    description: "CCM2 - Alarme de temperatura alta"
+  - name: emergencia_fb
+    type: COIL
+    address: 3
+    readable: true
+    polled: true
+    description: "CCM2 - Feedback emergência (0 = emergência ativa, 1 = normal)"
+  - name: aut_man
+    type: COIL
+    address: 151
+    readable: true
+    polled: true
+    description: "CCM2 - Seleção AUTO/MAN"

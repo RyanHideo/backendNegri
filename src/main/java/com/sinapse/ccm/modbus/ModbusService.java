@@ -1,4 +1,4 @@
-package com.sinapse.apiOzonio.modbus;
+package com.sinapse.ccm.modbus;
 
 import com.ghgande.j2mod.modbus.facade.ModbusTCPMaster;
 import com.ghgande.j2mod.modbus.procimg.InputRegister;

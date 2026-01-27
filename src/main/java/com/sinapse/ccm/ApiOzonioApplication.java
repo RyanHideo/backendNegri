@@ -1,4 +1,4 @@
-package com.sinapse.apiOzonio;
+package com.sinapse.ccm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

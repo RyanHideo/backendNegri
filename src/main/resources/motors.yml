@@ -1,0 +1,39 @@
+# src/main/resources/motors.yml
+# Definição dos equipamentos (motores) para cálculo de eficiência.
+
+motors:
+  # ----------------- CCM1 -----------------
+  - name: "Elevador de Grãos 1"
+    ccm: "ccm1"
+    # A categoria é usada para filtrar apenas os motores produtivos.
+    # Use "elevador", "redler", ou o que for relevante.
+    category: "elevador"
+    # Corrente nominal (em Amperes) do motor. Usada como base para o cálculo de 100% de eficiência.
+    nominalCurrent: 25.5
+    # Nome da tag de STATUS no arquivo 'tags-ccm1.yml'. O motor é considerado 'ativo' se o valor for > 0.
+    statusTagName: "M1_status"
+    # Nome da tag de CORRENTE no arquivo 'tags-ccm1.yml'.
+    currentTagName: "M1_corrente"
+
+  - name: "Motor de Ventilação"
+    ccm: "ccm1"
+    # Este motor não será incluído no cálculo pois a categoria não é 'elevador' ou 'redler'.
+    category: "ventilador"
+    nominalCurrent: 10.0
+    statusTagName: "M2_status"
+    currentTagName: "M2_corrente"
+
+  # ----------------- CCM2 -----------------
+  - name: "Redler de Expedição"
+    ccm: "ccm2"
+    category: "redler"
+    nominalCurrent: 18.0
+    statusTagName: "M5_status"
+    currentTagName: "M5_corrente"
+
+  - name: "Rosca de Descarga"
+    ccm: "ccm2"
+    category: "redler" # Exemplo, se roscas contam como produtivas
+    nominalCurrent: 22.0
+    statusTagName: "M8_status"
+    currentTagName: "M8_corrente"

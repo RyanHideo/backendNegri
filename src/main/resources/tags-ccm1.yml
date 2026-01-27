@@ -1,0 +1,46 @@
+# tags-ccm1.yml
+# Definições de tags para o CCM1
+
+tags:
+  # ============================================================
+  # COMANDOS / SEGURANÇA CCM1
+  # ============================================================
+  - name: EMERGENCIA
+    type: COIL
+    address: 1
+    writable: true
+    readable: false
+    polled: false
+    description: "CCM1 - Ativa a emergência (retentivo até reset)"
+
+  - name: RESET
+    type: COIL
+    address: 2
+    writable: true
+    readable: false
+    polled: false
+    description: "CCM1 - Pulso de reset global"
+
+  # ============================================================
+  # Exemplo de Motor para CCM1
+  # ============================================================
+  - name: M1_status
+    type: HR
+    address: 4002
+    readable: true
+    polled: true
+    description: "CCM1 - M1 Status"
+
+  # ============================================================
+  # Exemplo de Multimedidor para CCM1
+  # ============================================================
+  - name: tensao_rs
+    type: HR
+    address: 4100
+    words: 2
+    format: F32
+    endian: BIG
+    scale: 1
+    readable: true
+    polled: true
+    description: "CCM1 - Tensão entre fases R e S"

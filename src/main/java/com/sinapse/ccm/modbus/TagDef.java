@@ -1,4 +1,4 @@
-package com.sinapse.apiOzonio.modbus;
+package com.sinapse.ccm.modbus;
 
 import lombok.Getter;
 import lombok.Setter;

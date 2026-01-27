@@ -1,7 +1,7 @@
-package com.sinapse.apiOzonio.web;
+package com.sinapse.ccm.web;
 
-import com.sinapse.apiOzonio.modbus.ModbusService;
-import com.sinapse.apiOzonio.modbus.TagValue;
+import com.sinapse.ccm.modbus.ModbusService;
+import com.sinapse.ccm.modbus.TagValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

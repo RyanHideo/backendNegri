@@ -1,4 +1,4 @@
-package com.sinapse.apiOzonio.modbus;
+package com.sinapse.ccm.modbus;
 
 public enum TagType {
     HR,   // Holding Register 4xxxx
