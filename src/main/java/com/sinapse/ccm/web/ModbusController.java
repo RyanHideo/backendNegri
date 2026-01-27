@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,6 +18,20 @@ import java.util.Map;
 public class ModbusController {
 
     private final ModbusService modbusService;
+
+    /**
+     * Retorna um mapa com os snapshots de todos os CCMs.
+     * Exemplo: GET /api/modbus/tags/all
+     * @return Um mapa onde a chave é o ID do CCM ("ccm1", "ccm2") e o valor é o snapshot das tags.
+     */
+    @GetMapping("/tags/all")
+    public Map<String, Map<String, TagValue>> getAllTags() {
+        return Arrays.stream(ModbusService.CcmKey.values())
+                .collect(Collectors.toMap(
+                        ModbusService.CcmKey::getKey,
+                        key -> modbusService.snapshot(key.getKey())
+                ));
+    }
 
     /**
      * Retorna o snapshot mais recente de todas as tags para um CCM específico.

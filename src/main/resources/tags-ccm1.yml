@@ -2,45 +2,2716 @@
 # Definições de tags para o CCM1
 
 tags:
-  # ============================================================
-  # COMANDOS / SEGURANÇA CCM1
-  # ============================================================
-  - name: EMERGENCIA
-    type: COIL
-    address: 1
-    writable: true
-    readable: false
-    polled: false
-    description: "CCM1 - Ativa a emergência (retentivo até reset)"
-
-  - name: RESET
-    type: COIL
-    address: 2
-    writable: true
-    readable: false
-    polled: false
-    description: "CCM1 - Pulso de reset global"
-
-  # ============================================================
-  # Exemplo de Motor para CCM1
-  # ============================================================
-  - name: M1_status
+  # Registrador usado para enviar códigos de comando para o CLP
+  - name: CMD_REGISTER
     type: HR
-    address: 4002
+    address: 4001
+    writable: true
+    readable: false # Geralmente não se lê um registrador de comando
+    polled: false   # Não precisa ser lido no polling normal
+    description: "Registrador de Comando (Ex: 1-200 para zerar horímetro motor, 999 para zerar consumo total)"
+
+  #============================================
+  #=== Motores Softstarter=====================
+  #============================================
+  #==============================
+  #=== Motor 01 =================
+  #==============================
+  - name: M1_S
+    type: DI
+    address: 1002
+    writable: false
     readable: true
     polled: true
     description: "CCM1 - M1 Status"
 
-  # ============================================================
-  # Exemplo de Multimedidor para CCM1
-  # ============================================================
-  - name: tensao_rs
+  - name: M1_F
     type: HR
-    address: 4100
-    words: 2
-    format: F32
-    endian: BIG
-    scale: 1
+    address: 4003
+    writable: false
     readable: true
     polled: true
-    description: "CCM1 - Tensão entre fases R e S"
+    description: "CCM1 - M1 Falha"
+
+  - name: M1_A
+    type: HR
+    address: 4004
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M1 Corrente"
+
+  - name: M1_H
+    type: HR
+    address: 4005
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M1 Horimetro"
+
+  #==============================
+  #=== Motor 02 =================
+  #==============================
+  - name: M2_S
+    type: DI
+    address: 1003
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M2 Status"
+
+  - name: M2_F
+    type: HR
+    address: 4007
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M2 Falha"
+
+  - name: M2_A
+    type: HR
+    address: 4008
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M2 Corrente"
+
+  - name: M2_H
+    type: HR
+    address: 4009
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M2 Horimetro"
+
+  #==============================
+  #=== Motor 03 =================
+  #==============================
+  - name: M3_S
+    type: DI
+    address: 1004
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M3 Status"
+
+  - name: M3_F
+    type: HR
+    address: 4011
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M3 Falha"
+
+  - name: M3_A
+    type: HR
+    address: 4012
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M3 Corrente"
+
+  - name: M3_H
+    type: HR
+    address: 4013
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M3 Horimetro"
+
+  #==============================
+  #=== Motor 04 =================
+  #==============================
+  - name: M4_S
+    type: DI
+    address: 1005
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M4 Status"
+
+  - name: M4_F
+    type: HR
+    address: 4015
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M4 Falha"
+
+  - name: M4_A
+    type: HR
+    address: 4016
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M4 Corrente"
+
+  - name: M4_H
+    type: HR
+    address: 4017
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M4 Horimetro"
+
+  #==============================
+  #=== Motor 05 =================
+  #==============================
+  - name: M5_S
+    type: DI
+    address: 1006
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M5 Status"
+
+  - name: M5_F
+    type: HR
+    address: 4019
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M5 Falha"
+
+  - name: M5_A
+    type: HR
+    address: 4020
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M5 Corrente"
+
+  - name: M5_H
+    type: HR
+    address: 4021
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M5 Horimetro"
+
+  #==============================
+  #=== Motor 06 =================
+  #==============================
+  - name: M6_S
+    type: DI
+    address: 1007
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M6 Status"
+
+  - name: M6_F
+    type: HR
+    address: 4023
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M6 Falha"
+
+  - name: M6_A
+    type: HR
+    address: 4024
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M6 Corrente"
+
+  - name: M6_H
+    type: HR
+    address: 4025
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M6 Horimetro"
+
+  #==============================
+  #=== Motor 07 =================
+  #==============================
+  - name: M7_S
+    type: DI
+    address: 1008
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M7 Status"
+
+  - name: M7_F
+    type: HR
+    address: 4027
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M7 Falha"
+
+  - name: M7_A
+    type: HR
+    address: 4028
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M7 Corrente"
+
+  - name: M7_H
+    type: HR
+    address: 4029
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M7 Horimetro"
+
+  #==============================
+  #=== Motor 08 =================
+  #==============================
+  - name: M8_S
+    type: DI
+    address: 1009
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M8 Status"
+
+  - name: M8_F
+    type: HR
+    address: 4031
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M8 Falha"
+
+  - name: M8_A
+    type: HR
+    address: 4032
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M8 Corrente"
+
+  - name: M8_H
+    type: HR
+    address: 4033
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M8 Horimetro"
+
+  #==============================
+  #=== Motor 09 =================
+  #==============================
+  - name: M9_S
+    type: DI
+    address: 1010
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M9 Status"
+
+  - name: M9_F
+    type: HR
+    address: 4035
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M9 Falha"
+
+  - name: M9_A
+    type: HR
+    address: 4036
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M9 Corrente"
+
+  - name: M9_H
+    type: HR
+    address: 4037
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M9 Horimetro"
+
+  #==============================
+  #=== Motor 10 =================
+  #==============================
+  - name: M10_S
+    type: DI
+    address: 1011
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M10 Status"
+
+  - name: M10_F
+    type: HR
+    address: 4039
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M10 Falha"
+
+  - name: M10_A
+    type: HR
+    address: 4040
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M10 Corrente"
+
+  - name: M10_H
+    type: HR
+    address: 4041
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M10 Horimetro"
+
+  #==============================
+  #=== Motor 11 =================
+  #==============================
+  - name: M11_S
+    type: DI
+    address: 1012
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M11 Status"
+
+  - name: M11_F
+    type: HR
+    address: 4043
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M11 Falha"
+
+  - name: M11_A
+    type: HR
+    address: 4044
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M11 Corrente"
+
+  - name: M11_H
+    type: HR
+    address: 4045
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M11 Horimetro"
+
+  #==============================
+  #=== Motor 12 =================
+  #==============================
+  - name: M12_S
+    type: DI
+    address: 1013
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M12 Status"
+
+  - name: M12_F
+    type: HR
+    address: 4047
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M12 Falha"
+
+  - name: M12_A
+    type: HR
+    address: 4048
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M12 Corrente"
+
+  - name: M12_H
+    type: HR
+    address: 4049
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M12 Horimetro"
+
+  #==============================
+  #=== Motor 13 =================
+  #==============================
+  - name: M13_S
+    type: DI
+    address: 1014
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M13 Status"
+
+  - name: M13_F
+    type: HR
+    address: 4051
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M13 Falha"
+
+  - name: M13_A
+    type: HR
+    address: 4052
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M13 Corrente"
+
+  - name: M13_H
+    type: HR
+    address: 4053
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M13 Horimetro"
+
+  #============================================
+  #=== Motores Inversores======================
+  #============================================
+  #==============================
+  #=== Motor 14 =================
+  #==============================
+  - name: M14_S
+    type: DI
+    address: 1015
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M14 Status"
+
+  - name: M14_F
+    type: HR
+    address: 4055
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M14 Falha"
+
+  - name: M14_A
+    type: HR
+    address: 4056
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M14 Corrente"
+
+  - name: M14_H
+    type: HR
+    address: 4057
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M14 Horimetro"
+
+  #==============================
+  #=== Motor 15 =================
+  #==============================
+  - name: M15_S
+    type: DI
+    address: 1016
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M15 Status"
+
+  - name: M15_F
+    type: HR
+    address: 4059
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M15 Falha"
+
+  - name: M15_A
+    type: HR
+    address: 4060
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M15 Corrente"
+
+  - name: M15_H
+    type: HR
+    address: 4061
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M15 Horimetro"
+
+  #==============================
+  #=== Motor 16 =================
+  #==============================
+  - name: M16_S
+    type: DI
+    address: 1017
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M16 Status"
+
+  - name: M16_F
+    type: HR
+    address: 4063
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M16 Falha"
+
+  - name: M16_A
+    type: HR
+    address: 4064
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M16 Corrente"
+
+  - name: M16_H
+    type: HR
+    address: 4065
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M16 Horimetro"
+
+  #==============================
+  #=== Motor 17 =================
+  #==============================
+  - name: M17_S
+    type: DI
+    address: 1018
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M17 Status"
+
+  - name: M17_F
+    type: HR
+    address: 4067
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M17 Falha"
+
+  - name: M17_A
+    type: HR
+    address: 4068
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M17 Corrente"
+
+  - name: M17_H
+    type: HR
+    address: 4069
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M17 Horimetro"
+
+  #==============================
+  #=== Motor 18 =================
+  #==============================
+  - name: M18_S
+    type: DI
+    address: 1019
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M18 Status"
+
+  - name: M18_F
+    type: HR
+    address: 4071
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M18 Falha"
+
+  - name: M18_A
+    type: HR
+    address: 4072
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M18 Corrente"
+
+  - name: M18_H
+    type: HR
+    address: 4073
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M18 Horimetro"
+
+  #==============================
+  #=== Motor 19 =================
+  #==============================
+  - name: M19_S
+    type: DI
+    address: 1020
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M19 Status"
+
+  - name: M19_F
+    type: HR
+    address: 4075
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M19 Falha"
+
+  - name: M19_A
+    type: HR
+    address: 4076
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M19 Corrente"
+
+  - name: M19_H
+    type: HR
+    address: 4077
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M19 Horimetro"
+
+  #==============================
+  #=== Motor 20 =================
+  #==============================
+  - name: M20_S
+    type: DI
+    address: 1021
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M20 Status"
+
+  - name: M20_F
+    type: HR
+    address: 4079
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M20 Falha"
+
+  - name: M20_A
+    type: HR
+    address: 4080
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M20 Corrente"
+
+  - name: M20_H
+    type: HR
+    address: 4081
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M20 Horimetro"
+
+  #==============================
+  #=== Motor 21 =================
+  #==============================
+  - name: M21_S
+    type: DI
+    address: 1022
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M21 Status"
+
+  - name: M21_F
+    type: HR
+    address: 4083
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M21 Falha"
+
+  - name: M21_A
+    type: HR
+    address: 4084
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M21 Corrente"
+
+  - name: M21_H
+    type: HR
+    address: 4085
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M21 Horimetro"
+
+  #==============================
+  #=== Motor 22 =================
+  #==============================
+  - name: M22_S
+    type: DI
+    address: 1023
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M22 Status"
+
+  - name: M22_F
+    type: HR
+    address: 4087
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M22 Falha"
+
+  - name: M22_A
+    type: HR
+    address: 4088
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M22 Corrente"
+
+  - name: M22_H
+    type: HR
+    address: 4089
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M22 Horimetro"
+
+  #==============================
+  #=== Motor 23 =================
+  #==============================
+  - name: M23_S
+    type: DI
+    address: 1024
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M23 Status"
+
+  - name: M23_F
+    type: HR
+    address: 4091
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M23 Falha"
+
+  - name: M23_A
+    type: HR
+    address: 4092
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M23 Corrente"
+
+  - name: M23_H
+    type: HR
+    address: 4093
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M23 Horimetro"
+
+  #==============================
+  #=== Motor 24 =================
+  #==============================
+  - name: M24_S
+    type: DI
+    address: 1025
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M24 Status"
+
+  - name: M24_F
+    type: HR
+    address: 4095
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M24 Falha"
+
+  - name: M24_A
+    type: HR
+    address: 4096
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M24 Corrente"
+
+  - name: M24_H
+    type: HR
+    address: 4097
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M24 Horimetro"
+
+  #==============================
+  #=== Motor 25 =================
+  #==============================
+  - name: M25_S
+    type: DI
+    address: 1026
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M25 Status"
+
+  - name: M25_F
+    type: HR
+    address: 4099
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M25 Falha"
+
+  - name: M25_A
+    type: HR
+    address: 4100
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M25 Corrente"
+
+  - name: M25_H
+    type: HR
+    address: 4101
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M25 Horimetro"
+
+  #==============================
+  #=== Motor 26 =================
+  #==============================
+  - name: M26_S
+    type: DI
+    address: 1027
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M26 Status"
+
+  - name: M26_F
+    type: HR
+    address: 4103
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M26 Falha"
+
+  - name: M26_A
+    type: HR
+    address: 4104
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M26 Corrente"
+
+  - name: M26_H
+    type: HR
+    address: 4105
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M26 Horimetro"
+
+  #==============================
+  #=== Motor 27 =================
+  #==============================
+  - name: M27_S
+    type: DI
+    address: 1028
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M27 Status"
+
+  - name: M27_F
+    type: HR
+    address: 4107
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M27 Falha"
+
+  - name: M27_A
+    type: HR
+    address: 4108
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M27 Corrente"
+
+  - name: M27_H
+    type: HR
+    address: 4109
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M27 Horimetro"
+
+  #==============================
+  #=== Motor 28 =================
+  #==============================
+  - name: M28_S
+    type: DI
+    address: 1029
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M28 Status"
+
+  - name: M28_F
+    type: HR
+    address: 4111
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M28 Falha"
+
+  - name: M28_A
+    type: HR
+    address: 4112
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M28 Corrente"
+
+  - name: M28_H
+    type: HR
+    address: 4113
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M28 Horimetro"
+
+  #==============================
+  #=== Motor 29 =================
+  #==============================
+  - name: M29_S
+    type: DI
+    address: 1030
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M29 Status"
+
+  - name: M29_F
+    type: HR
+    address: 4115
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M29 Falha"
+
+  - name: M29_A
+    type: HR
+    address: 4116
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M29 Corrente"
+
+  - name: M29_H
+    type: HR
+    address: 4117
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M29 Horimetro"
+
+  #==============================
+  #=== Motor 30 =================
+  #==============================
+  - name: M30_S
+    type: DI
+    address: 1031
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M30 Status"
+
+  - name: M30_F
+    type: HR
+    address: 4119
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M30 Falha"
+
+  - name: M30_A
+    type: HR
+    address: 4120
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M30 Corrente"
+
+  - name: M30_H
+    type: HR
+    address: 4121
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M30 Horimetro"
+
+  #==============================
+  #=== Motor 31 =================
+  #==============================
+  - name: M31_S
+    type: DI
+    address: 1032
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M31 Status"
+
+  - name: M31_F
+    type: HR
+    address: 4123
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M31 Falha"
+
+  - name: M31_A
+    type: HR
+    address: 4124
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M31 Corrente"
+
+  - name: M31_H
+    type: HR
+    address: 4125
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M31 Horimetro"
+
+  #==============================
+  #=== Motor 32 =================
+  #==============================
+  - name: M32_S
+    type: DI
+    address: 1033
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M32 Status"
+
+  - name: M32_F
+    type: HR
+    address: 4127
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M32 Falha"
+
+  - name: M32_A
+    type: HR
+    address: 4128
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M32 Corrente"
+
+  - name: M32_H
+    type: HR
+    address: 4129
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M32 Horimetro"
+
+  #==============================
+  #=== Motor 33 =================
+  #==============================
+  - name: M33_S
+    type: DI
+    address: 1034
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M33 Status"
+
+  - name: M33_F
+    type: HR
+    address: 4131
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M33 Falha"
+
+  - name: M33_A
+    type: HR
+    address: 4132
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M33 Corrente"
+
+  - name: M33_H
+    type: HR
+    address: 4133
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M33 Horimetro"
+
+  #==============================
+  #=== Motor 34 =================
+  #==============================
+  - name: M34_S
+    type: DI
+    address: 1035
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M34 Status"
+
+  - name: M34_F
+    type: HR
+    address: 4135
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M34 Falha"
+
+  - name: M34_A
+    type: HR
+    address: 4136
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M34 Corrente"
+
+  - name: M34_H
+    type: HR
+    address: 4137
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M34 Horimetro"
+
+  #==============================
+  #=== Motor 35 =================
+  #==============================
+  - name: M35_S
+    type: DI
+    address: 1036
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M35 Status"
+
+  - name: M35_F
+    type: HR
+    address: 4139
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M35 Falha"
+
+  - name: M35_A
+    type: HR
+    address: 4140
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M35 Corrente"
+
+  - name: M35_H
+    type: HR
+    address: 4141
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M35 Horimetro"
+
+  #==============================
+  #=== Motor 36 =================
+  #==============================
+  - name: M36_S
+    type: DI
+    address: 1037
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M36 Status"
+
+  - name: M36_F
+    type: HR
+    address: 4143
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M36 Falha"
+
+  - name: M36_A
+    type: HR
+    address: 4144
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M36 Corrente"
+
+  - name: M36_H
+    type: HR
+    address: 4145
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M36 Horimetro"
+
+  #==============================
+  #=== Motor 37 =================
+  #==============================
+  - name: M37_S
+    type: DI
+    address: 1038
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M37 Status"
+
+  - name: M37_F
+    type: HR
+    address: 4147
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M37 Falha"
+
+  - name: M37_A
+    type: HR
+    address: 4148
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M37 Corrente"
+
+  - name: M37_H
+    type: HR
+    address: 4149
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M37 Horimetro"
+
+  #============================================
+  #=== Motores Partida Direta =================
+  #============================================
+  #==============================
+  #=== Motor 38 =================
+  #==============================
+  - name: M38_S
+    type: DI
+    address: 1039
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M38 Status"
+
+  - name: M38_F
+    type: HR
+    address: 4151
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M38 Falha"
+
+  - name: M38_H
+    type: HR
+    address: 4152
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M38 Horimetro"
+
+  #==============================
+  #=== Motor 39 =================
+  #==============================
+  - name: M39_S
+    type: DI
+    address: 1040
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M39 Status"
+
+  - name: M39_F
+    type: HR
+    address: 4154
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M39 Falha"
+
+  - name: M39_H
+    type: HR
+    address: 4155
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M39 Horimetro"
+
+  #==============================
+  #=== Motor 40 =================
+  #==============================
+  - name: M40_S
+    type: DI
+    address: 1041
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M40 Status"
+
+  - name: M40_F
+    type: HR
+    address: 4157
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M40 Falha"
+
+  - name: M40_H
+    type: HR
+    address: 4158
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M40 Horimetro"
+
+  #==============================
+  #=== Motor 41 =================
+  #==============================
+  - name: M41_S
+    type: DI
+    address: 1042
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M41 Status"
+
+  - name: M41_F
+    type: HR
+    address: 4160
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M41 Falha"
+
+  - name: M41_H
+    type: HR
+    address: 4161
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M41 Horimetro"
+
+  #==============================
+  #=== Motor 42 =================
+  #==============================
+  - name: M42_S
+    type: DI
+    address: 1043
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M42 Status"
+
+  - name: M42_F
+    type: HR
+    address: 4163
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M42 Falha"
+
+  - name: M42_H
+    type: HR
+    address: 4164
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M42 Horimetro"
+
+  #==============================
+  #=== Motor 43 =================
+  #==============================
+  - name: M43_S
+    type: DI
+    address: 1044
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M43 Status"
+
+  - name: M43_F
+    type: HR
+    address: 4166
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M43 Falha"
+
+  - name: M43_H
+    type: HR
+    address: 4167
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M43 Horimetro"
+
+  #==============================
+  #=== Motor 44 =================
+  #==============================
+  - name: M44_S
+    type: DI
+    address: 1045
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M44 Status"
+
+  - name: M44_F
+    type: HR
+    address: 4169
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M44 Falha"
+
+  - name: M44_H
+    type: HR
+    address: 4170
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M44 Horimetro"
+
+  #==============================
+  #=== Motor 45 =================
+  #==============================
+  - name: M45_S
+    type: DI
+    address: 1046
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M45 Status"
+
+  - name: M45_F
+    type: HR
+    address: 4172
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M45 Falha"
+
+  - name: M45_H
+    type: HR
+    address: 4173
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M45 Horimetro"
+
+  #==============================
+  #=== Motor 46 =================
+  #==============================
+  - name: M46_S
+    type: DI
+    address: 1047
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M46 Status"
+
+  - name: M46_F
+    type: HR
+    address: 4175
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M46 Falha"
+
+  - name: M46_H
+    type: HR
+    address: 4176
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M46 Horimetro"
+
+  #==============================
+  #=== Motor 47 =================
+  #==============================
+  - name: M47_S
+    type: DI
+    address: 1048
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M47 Status"
+
+  - name: M47_F
+    type: HR
+    address: 4178
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M47 Falha"
+
+  - name: M47_H
+    type: HR
+    address: 4179
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M47 Horimetro"
+
+  #==============================
+  #=== Motor 48 =================
+  #==============================
+  - name: M48_S
+    type: DI
+    address: 1049
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M48 Status"
+
+  - name: M48_F
+    type: HR
+    address: 4181
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M48 Falha"
+
+  - name: M48_H
+    type: HR
+    address: 4182
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M48 Horimetro"
+
+  #==============================
+  #=== Motor 49 =================
+  #==============================
+  - name: M49_S
+    type: DI
+    address: 1050
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M49 Status"
+
+  - name: M49_F
+    type: HR
+    address: 4184
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M49 Falha"
+
+  - name: M49_H
+    type: HR
+    address: 4185
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M49 Horimetro"
+
+  #==============================
+  #=== Motor 50 =================
+  #==============================
+  - name: M50_S
+    type: DI
+    address: 1051
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M50 Status"
+
+  - name: M50_F
+    type: HR
+    address: 4187
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M50 Falha"
+
+  - name: M50_H
+    type: HR
+    address: 4188
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M50 Horimetro"
+
+  #==============================
+  #=== Motor 51 =================
+  #==============================
+  - name: M51_S
+    type: DI
+    address: 1052
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M51 Status"
+
+  - name: M51_F
+    type: HR
+    address: 4190
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M51 Falha"
+
+  - name: M51_H
+    type: HR
+    address: 4191
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M51 Horimetro"
+
+  #==============================
+  #=== Motor 52 =================
+  #==============================
+  - name: M52_S
+    type: DI
+    address: 1053
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M52 Status"
+
+  - name: M52_F
+    type: HR
+    address: 4193
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M52 Falha"
+
+  - name: M52_H
+    type: HR
+    address: 4194
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M52 Horimetro"
+
+  #==============================
+  #=== Motor 53 =================
+  #==============================
+  - name: M53_S
+    type: DI
+    address: 1054
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M53 Status"
+
+  - name: M53_F
+    type: HR
+    address: 4196
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M53 Falha"
+
+  - name: M53_H
+    type: HR
+    address: 4197
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M53 Horimetro"
+
+  #==============================
+  #=== Motor 54 =================
+  #==============================
+  - name: M54_S
+    type: DI
+    address: 1055
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M54 Status"
+
+  - name: M54_F
+    type: HR
+    address: 4199
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M54 Falha"
+
+  - name: M54_H
+    type: HR
+    address: 4200
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M54 Horimetro"
+
+  #==============================
+  #=== Motor 55 =================
+  #==============================
+  - name: M55_S
+    type: DI
+    address: 1056
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M55 Status"
+
+  - name: M55_F
+    type: HR
+    address: 4202
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M55 Falha"
+
+  - name: M55_H
+    type: HR
+    address: 4203
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M55 Horimetro"
+
+  #==============================
+  #=== Motor 56 =================
+  #==============================
+  - name: M56_S
+    type: DI
+    address: 1057
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M56 Status"
+
+  - name: M56_F
+    type: HR
+    address: 4205
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M56 Falha"
+
+  - name: M56_H
+    type: HR
+    address: 4206
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M56 Horimetro"
+
+  #==============================
+  #=== Motor 57 =================
+  #==============================
+  - name: M57_S
+    type: DI
+    address: 1058
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M57 Status"
+
+  - name: M57_F
+    type: HR
+    address: 4208
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M57 Falha"
+
+  - name: M57_H
+    type: HR
+    address: 4209
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M57 Horimetro"
+
+  #==============================
+  #=== Motor 58 =================
+  #==============================
+  - name: M58_S
+    type: DI
+    address: 1059
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M58 Status"
+
+  - name: M58_F
+    type: HR
+    address: 4211
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M58 Falha"
+
+  - name: M58_H
+    type: HR
+    address: 4212
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M58 Horimetro"
+
+  #==============================
+  #=== Motor 59 =================
+  #==============================
+  - name: M59_S
+    type: DI
+    address: 1060
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M59 Status"
+
+  - name: M59_F
+    type: HR
+    address: 4214
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M59 Falha"
+
+  - name: M59_H
+    type: HR
+    address: 4215
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M59 Horimetro"
+
+  #==============================
+  #=== Motor 60 =================
+  #==============================
+  - name: M60_S
+    type: DI
+    address: 1061
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M60 Status"
+
+  - name: M60_F
+    type: HR
+    address: 4217
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M60 Falha"
+
+  - name: M60_H
+    type: HR
+    address: 4218
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M60 Horimetro"
+
+  #==============================
+  #=== Motor 61 =================
+  #==============================
+  - name: M61_S
+    type: DI
+    address: 1062
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M61 Status"
+
+  - name: M61_F
+    type: HR
+    address: 4220
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M61 Falha"
+
+  - name: M61_H
+    type: HR
+    address: 4221
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M61 Horimetro"
+
+  #==============================
+  #=== Motor 62 =================
+  #==============================
+  - name: M62_S
+    type: DI
+    address: 1063
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M62 Status"
+
+  - name: M62_F
+    type: HR
+    address: 4223
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M62 Falha"
+
+  - name: M62_H
+    type: HR
+    address: 4224
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M62 Horimetro"
+
+  #==============================
+  #=== Motor 63 =================
+  #==============================
+  - name: M63_S
+    type: DI
+    address: 1064
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M63 Status"
+
+  - name: M63_F
+    type: HR
+    address: 4226
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M63 Falha"
+
+  - name: M63_H
+    type: HR
+    address: 4227
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M63 Horimetro"
+
+  #==============================
+  #=== Motor 64 =================
+  #==============================
+  - name: M64_S
+    type: DI
+    address: 1065
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M64 Status"
+
+  - name: M64_F
+    type: HR
+    address: 4229
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M64 Falha"
+
+  - name: M64_H
+    type: HR
+    address: 4230
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M64 Horimetro"
+
+  #==============================
+  #=== Motor 65 =================
+  #==============================
+  - name: M65_S
+    type: DI
+    address: 1066
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M65 Status"
+
+  - name: M65_F
+    type: HR
+    address: 4232
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M65 Falha"
+
+  - name: M65_H
+    type: HR
+    address: 4233
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M65 Horimetro"
+
+  #==============================
+  #=== Motor 66 =================
+  #==============================
+  - name: M66_S
+    type: DI
+    address: 1067
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M66 Status"
+
+  - name: M66_F
+    type: HR
+    address: 4235
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M66 Falha"
+
+  - name: M66_H
+    type: HR
+    address: 4236
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M66 Horimetro"
+
+  #==============================
+  #=== Motor 67 =================
+  #==============================
+  - name: M67_S
+    type: DI
+    address: 1068
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M67 Status"
+
+  - name: M67_F
+    type: HR
+    address: 4238
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M67 Falha"
+
+  - name: M67_H
+    type: HR
+    address: 4239
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M67 Horimetro"
+
+  #==============================
+  #=== Motor 68 =================
+  #==============================
+  - name: M68_S
+    type: DI
+    address: 1069
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M68 Status"
+
+  - name: M68_F
+    type: HR
+    address: 4241
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M68 Falha"
+
+  - name: M68_H
+    type: HR
+    address: 4242
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M68 Horimetro"
+
+  #==============================
+  #=== Motor 69 =================
+  #==============================
+  - name: M69_S
+    type: DI
+    address: 1070
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M69 Status"
+
+  - name: M69_F
+    type: HR
+    address: 4244
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M69 Falha"
+
+  - name: M69_H
+    type: HR
+    address: 4245
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M69 Horimetro"
+
+  #==============================
+  #=== Motor 70 =================
+  #==============================
+  - name: M70_S
+    type: DI
+    address: 1071
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M70 Status"
+
+  - name: M70_F
+    type: HR
+    address: 4247
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M70 Falha"
+
+  - name: M70_H
+    type: HR
+    address: 4248
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M70 Horimetro"
+
+  #==============================
+  #=== Motor 71 =================
+  #==============================
+  - name: M71_S
+    type: DI
+    address: 1072
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M71 Status"
+
+  - name: M71_F
+    type: HR
+    address: 4250
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M71 Falha"
+
+  - name: M71_H
+    type: HR
+    address: 4251
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M71 Horimetro"
+
+  #==============================
+  #=== Motor 72 =================
+  #==============================
+  - name: M72_S
+    type: DI
+    address: 1073
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M72 Status"
+
+  - name: M72_F
+    type: HR
+    address: 4253
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M72 Falha"
+
+  - name: M72_H
+    type: HR
+    address: 4254
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M72 Horimetro"
+
+  #==============================
+  #=== Motor 73 =================
+  #==============================
+  - name: M73_S
+    type: DI
+    address: 1074
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M73 Status"
+
+  - name: M73_F
+    type: HR
+    address: 4256
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M73 Falha"
+
+  - name: M73_H
+    type: HR
+    address: 4257
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M73 Horimetro"
+
+  #==============================
+  #=== Motor 74 =================
+  #==============================
+  - name: M74_S
+    type: DI
+    address: 1075
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M74 Status"
+
+  - name: M74_F
+    type: HR
+    address: 4259
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M74 Falha"
+
+  - name: M74_H
+    type: HR
+    address: 4260
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M74 Horimetro"
+
+  #==============================
+  #=== Motor 75 =================
+  #==============================
+  - name: M75_S
+    type: DI
+    address: 1076
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M75 Status"
+
+  - name: M75_F
+    type: HR
+    address: 4262
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M75 Falha"
+
+  - name: M75_H
+    type: HR
+    address: 4263
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M75 Horimetro"
+
+  #==============================
+  #=== Motor 76 =================
+  #==============================
+  - name: M76_S
+    type: DI
+    address: 1077
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M76 Status"
+
+  - name: M76_F
+    type: HR
+    address: 4265
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M76 Falha"
+
+  - name: M76_H
+    type: HR
+    address: 4266
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M76 Horimetro"
+
+  #==============================
+  #=== Motor 77 =================
+  #==============================
+  - name: M77_S
+    type: DI
+    address: 1078
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M77 Status"
+
+  - name: M77_F
+    type: HR
+    address: 4268
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M77 Falha"
+
+  - name: M77_H
+    type: HR
+    address: 4269
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M77 Horimetro"
+
+  #==============================
+  #=== Motor 78 =================
+  #==============================
+  - name: M78_S
+    type: DI
+    address: 1079
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M78 Status"
+
+  - name: M78_F
+    type: HR
+    address: 4271
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M78 Falha"
+
+  - name: M78_H
+    type: HR
+    address: 4272
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M78 Horimetro"
+
+  #==============================
+  #=== Motor 79 =================
+  #==============================
+  - name: M79_S
+    type: DI
+    address: 1080
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M79 Status"
+
+  - name: M79_F
+    type: HR
+    address: 4274
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M79 Falha"
+
+  - name: M79_H
+    type: HR
+    address: 4275
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M79 Horimetro"
+
+  #==============================
+  #=== Motor 80 =================
+  #==============================
+  - name: M80_S
+    type: DI
+    address: 1081
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M80 Status"
+
+  - name: M80_F
+    type: HR
+    address: 4277
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M80 Falha"
+
+  - name: M80_H
+    type: HR
+    address: 4278
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M80 Horimetro"
+
+  #==============================
+  #=== Motor 81 =================
+  #==============================
+  - name: M81_S
+    type: DI
+    address: 1082
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M81 Status"
+
+  - name: M81_F
+    type: HR
+    address: 4280
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M81 Falha"
+
+  - name: M81_H
+    type: HR
+    address: 4281
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M81 Horimetro"
+
+  #==============================
+  #=== Motor 82 =================
+  #==============================
+  - name: M82_S
+    type: DI
+    address: 1083
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M82 Status"
+
+  - name: M82_F
+    type: HR
+    address: 4283
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M82 Falha"
+
+  - name: M82_H
+    type: HR
+    address: 4284
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M82 Horimetro"
+
+  #==============================
+  #=== Motor 83 =================
+  #==============================
+  - name: M83_S
+    type: DI
+    address: 1084
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M83 Status"
+
+  - name: M83_F
+    type: HR
+    address: 4286
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M83 Falha"
+
+  - name: M83_H
+    type: HR
+    address: 4287
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M83 Horimetro"
+
+  #==============================
+  #=== Motor 84 =================
+  #==============================
+  - name: M84_S
+    type: DI
+    address: 1085
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M84 Status"
+
+  - name: M84_F
+    type: HR
+    address: 4289
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M84 Falha"
+
+  - name: M84_H
+    type: HR
+    address: 4290
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - M84 Horimetro"
+
+  #==============================
+  #=== V1-V2 ====================
+  #==============================
+  - name: V1-V2
+    type: HR
+    address: 4301
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V1_V2"
+
+  #==============================
+  #=== V2-V3 ====================
+  #==============================
+  - name: V2-V3
+    type: HR
+    address: 4302
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V2-V3"
+
+  #==============================
+  #=== V3-V1 ====================
+  #==============================
+  - name: V3-V1
+    type: HR
+    address: 4303
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V3-V1"
+
+  #==============================
+  #=== L1 =======================
+  #==============================
+  - name: L1
+    type: HR
+    address: 4304
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - L1"
+
+  #==============================
+  #=== L2 =======================
+  #==============================
+  - name: L2
+    type: HR
+    address: 4305
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - L2"
+
+  #==============================
+  #=== L3 =======================
+  #==============================
+  - name: L3
+    type: HR
+    address: 4306
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - L3"
+
+  #==============================
+  #=== Fator de potencia ========
+  #==============================
+  - name: FP
+    type: HR
+    address: 4307
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - FP"
+
+  #==============================
+  #=== HZ =======================
+  #==============================
+  - name: HZ
+    type: HR
+    address: 4308
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - HZ"
+
+  #==============================
+  #=== V1-N =====================
+  #==============================
+  - name: V1-N
+    type: HR
+    address: 4309
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V1-N"
+
+  #==============================
+  #=== V2-N =====================
+  #==============================
+  - name: V2-N
+    type: HR
+    address: 4310
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V2-N"
+
+  #==============================
+  #=== V3-N =====================
+  #==============================
+  - name: V3-N
+    type: HR
+    address: 4311
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V3-N"
+
+  #==============================
+  #=== KW =======================
+  #==============================
+  - name: KW
+    type: HR
+    address: 4312
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - KW"

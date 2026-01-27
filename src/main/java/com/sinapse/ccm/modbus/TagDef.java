@@ -1,5 +1,6 @@
 package com.sinapse.ccm.modbus;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,10 @@ import lombok.Setter;
 public class TagDef {
 
     private String  name;
+
+    @JsonProperty("name_front") // Mapeia a propriedade do YAML para o campo Java
+    private String  nameFront;     // Nome para exibição no front-end
+
     private TagType type;          // HR | IR | COIL | DI
     private Integer address;       // ex.: 4005, 1, 1001...
     private Integer unitId;        // opcional (default 1)

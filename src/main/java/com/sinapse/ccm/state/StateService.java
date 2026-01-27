@@ -1,5 +1,6 @@
 package com.sinapse.ccm.state;
 
+import com.sinapse.ccm.modbus.ModbusService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,16 +12,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
 public class StateService {
 
-    private static final String TIMESTAMP_KEY = "last.consumption.reset.timestamp";
+    private static final String TIMESTAMP_KEY_PREFIX = "last.consumption.reset.timestamp.";
     private final Path stateFilePath = Paths.get("data", "app_state.properties");
 
-    private Instant lastResetTimestamp;
+    // Usar um mapa para armazenar a data de reset para cada CCM
+    private final Map<String, Instant> lastResetTimestamps = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void initialize() {
@@ -40,10 +44,16 @@ public class StateService {
         Properties props = new Properties();
         try (InputStream input = Files.newInputStream(stateFilePath)) {
             props.load(input);
-            String timestampStr = props.getProperty(TIMESTAMP_KEY);
-            if (timestampStr != null && !timestampStr.isEmpty()) {
-                this.lastResetTimestamp = Instant.parse(timestampStr);
-                log.info("Data do último reset de consumo carregada: {}", this.lastResetTimestamp);
+            // Itera sobre as chaves do enum CcmKey para carregar os dados de cada CCM
+            for (ModbusService.CcmKey ccmKey : ModbusService.CcmKey.values()) {
+                String key = ccmKey.getKey();
+                String propertyKey = TIMESTAMP_KEY_PREFIX + key;
+                String timestampStr = props.getProperty(propertyKey);
+                if (timestampStr != null && !timestampStr.isEmpty()) {
+                    Instant timestamp = Instant.parse(timestampStr);
+                    this.lastResetTimestamps.put(key, timestamp);
+                    log.info("Data do último reset de consumo para {} carregada: {}", key, timestamp);
+                }
             }
         } catch (IOException e) {
             log.error("Falha ao carregar o estado do arquivo '{}'.", stateFilePath, e);
@@ -52,9 +62,12 @@ public class StateService {
 
     private void saveState() {
         Properties props = new Properties();
-        if (this.lastResetTimestamp != null) {
-            props.setProperty(TIMESTAMP_KEY, this.lastResetTimestamp.toString());
-        }
+        // Salva a data de cada CCM no arquivo de propriedades
+        this.lastResetTimestamps.forEach((ccmKey, timestamp) -> {
+            if (timestamp != null) {
+                props.setProperty(TIMESTAMP_KEY_PREFIX + ccmKey, timestamp.toString());
+            }
+        });
 
         try (OutputStream output = Files.newOutputStream(stateFilePath)) {
             props.store(output, "Application State - Do not edit manually unless you know what you are doing");
@@ -64,13 +77,14 @@ public class StateService {
         }
     }
 
-    public Instant getLastResetTimestamp() {
-        return this.lastResetTimestamp;
+    public Instant getLastResetTimestamp(String ccmKey) {
+        return this.lastResetTimestamps.get(ccmKey);
     }
 
-    public void updateAndPersistResetTimestamp() {
-        this.lastResetTimestamp = Instant.now();
-        log.info("Atualizando data do reset de consumo para: {}", this.lastResetTimestamp);
+    public void updateAndPersistResetTimestamp(String ccmKey) {
+        Instant now = Instant.now();
+        this.lastResetTimestamps.put(ccmKey, now);
+        log.info("Atualizando data do reset de consumo para {}: {}", ccmKey, now);
         saveState();
     }
 }

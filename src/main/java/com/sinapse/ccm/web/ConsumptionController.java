@@ -1,15 +1,12 @@
 package com.sinapse.ccm.web;
 
+import com.sinapse.ccm.modbus.ModbusService;
 import com.sinapse.ccm.state.StateService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 
@@ -20,29 +17,37 @@ import java.time.Instant;
 public class ConsumptionController {
 
     private final StateService stateService;
+    private final ModbusService modbusService;
+
+    private static final String CMD_REGISTER_TAG = "CMD_REGISTER";
+    private static final int RESET_CONSUMPTION_CODE = 999; // Código para zerar consumo total
 
     /**
-     * Endpoint para o front-end acionar o reset do consumo.
-     * Além de atualizar a data, ele também precisa enviar o comando para o CLP.
+     * Endpoint para o front-end acionar o reset do consumo para um CCM específico.
+     * @param ccmKey "ccm1" ou "ccm2"
      */
-    @PostMapping("/reset")
-    public ResponseEntity<String> resetConsumption() {
-        // Aqui, você também precisaria enviar o comando para o CLP zerar o acumulador.
-        // Por exemplo, usando o ModbusService que já temos.
-        // modbusService.write("ccm1", "COMANDO_ZERAR_CONSUMO", 1);
+    @PostMapping("/{ccmKey}/reset")
+    public ResponseEntity<String> resetConsumption(@PathVariable String ccmKey) {
+        try {
+            // Envia o código de comando para o registrador de comando do CLP
+            modbusService.write(ccmKey, CMD_REGISTER_TAG, RESET_CONSUMPTION_CODE);
 
-        // Atualiza e persiste a data do reset no arquivo.
-        stateService.updateAndPersistResetTimestamp();
+            // Atualiza e persiste a data do reset para o CCM específico
+            stateService.updateAndPersistResetTimestamp(ccmKey);
 
-        return ResponseEntity.ok("Consumo resetado e data atualizada.");
+            return ResponseEntity.ok("Comando de reset de consumo enviado para " + ccmKey + " e data atualizada.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Falha ao enviar comando para " + ccmKey + ": " + e.getMessage());
+        }
     }
 
     /**
-     * Endpoint para o front-end buscar a data do último reset.
+     * Endpoint para o front-end buscar a data do último reset de um CCM específico.
+     * @param ccmKey "ccm1" ou "ccm2"
      */
-    @GetMapping("/reset-date")
-    public ResponseEntity<ResetDateResponse> getResetDate() {
-        Instant timestamp = stateService.getLastResetTimestamp();
+    @GetMapping("/{ccmKey}/reset-date")
+    public ResponseEntity<ResetDateResponse> getResetDate(@PathVariable String ccmKey) {
+        Instant timestamp = stateService.getLastResetTimestamp(ccmKey);
         return ResponseEntity.ok(new ResetDateResponse(timestamp));
     }
 
