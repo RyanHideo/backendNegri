@@ -7,7 +7,7 @@ import com.sinapse.ccm.motors.MotorDef;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j; // Importar Slf4j
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Slf4j // Adicionar anotação Slf4j
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/motors")
@@ -65,13 +65,8 @@ public class MotorController {
         return emitter;
     }
 
-    /**
-     * Novo endpoint para zerar o horímetro de um motor específico.
-     * O front-end chama este endpoint passando o nome do motor e o CCM.
-     */
     @PostMapping("/reset-hourmeter")
     public ResponseEntity<?> resetHourmeter(@RequestBody ResetHourmeterRequest request) {
-        // Encontra o motor pelo nome e CCM para garantir que estamos no motor certo
         Optional<MotorDef> motorOpt = motorCatalog.getMotors().stream()
                 .filter(m -> m.getName().equals(request.getMotorName()) && m.getCcm().equals(request.getCcm()))
                 .findFirst();
@@ -82,7 +77,6 @@ public class MotorController {
 
         MotorDef motor = motorOpt.get();
         
-        // Extrai o número do motor do nome da tag (ex: "M1_S" -> 1)
         Pattern pattern = Pattern.compile("M(\\d+)_S");
         Matcher matcher = pattern.matcher(motor.getStatusTagName());
 
@@ -92,15 +86,10 @@ public class MotorController {
 
         try {
             int motorId = Integer.parseInt(matcher.group(1));
-            
-            // Lógica de comando: ID do Motor + 100
-            // Ex: Motor 1 -> Envia 101
-            // Ex: Motor 50 -> Envia 150
             int commandValue = motorId + 100;
 
-            log.info("Reset Horímetro: Motor ID extraído = {}, Valor de comando enviado ao CLP = {}", motorId, commandValue); // Linha de log adicionada
+            log.info("Reset Horímetro: Motor ID extraído = {}, Valor de comando enviado ao CLP = {}", motorId, commandValue);
 
-            // Envia o código para o registrador de comando
             modbusService.write(motor.getCcm(), CMD_REGISTER_TAG, commandValue);
             
             return ResponseEntity.ok().body("Comando para zerar horímetro do motor " + motorId + " (código " + commandValue + ") enviado para " + motor.getCcm());
@@ -113,6 +102,16 @@ public class MotorController {
 
     private MotorOverviewDto buildDtoForMotor(MotorDef motor) {
         Double status = getValue(motor.getCcm(), motor.getStatusTagName()).orElse(0.0);
+        
+        // Lógica para motor reversível (M85)
+        if (motor.getSecondaryStatusTagName() != null && !motor.getSecondaryStatusTagName().isBlank()) {
+            Double status2 = getValue(motor.getCcm(), motor.getSecondaryStatusTagName()).orElse(0.0);
+            // Se qualquer um dos dois estiver ligado (> 0), consideramos ligado
+            if (status2 > 0) {
+                status = status2; 
+            }
+        }
+
         Double current = getValue(motor.getCcm(), motor.getCurrentTagName()).orElse(0.0);
         Double fault = getValue(motor.getCcm(), motor.getFaultTagName()).orElse(0.0);
         Double hours = getValue(motor.getCcm(), motor.getHoursTagName()).orElse(0.0);

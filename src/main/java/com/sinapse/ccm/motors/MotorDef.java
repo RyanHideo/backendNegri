@@ -15,6 +15,9 @@ public class MotorDef {
     @JsonProperty("statusTagName")
     private String statusTagName;
 
+    @JsonProperty("secondaryStatusTagName")
+    private String secondaryStatusTagName; // Para motores com reversão (ex: M85)
+
     @JsonProperty("currentTagName")
     private String currentTagName;
 

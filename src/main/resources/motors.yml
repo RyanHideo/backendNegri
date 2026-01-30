@@ -559,9 +559,9 @@ motors:
     hoursTagName: "M55_H"
     hasInverter: false
 
-  - name: "Correia Transportadora 07"
+  - name: "Redler Secador 2"
     ccm: "ccm1"
-    category: "correia"
+    category: "redler"
     nominalCurrent: 10.0
     statusTagName: "M56_S"
     currentTagName: "M56_A"
@@ -609,9 +609,9 @@ motors:
     hoursTagName: "M60_H"
     hasInverter: false
 
-  - name: "Rosca Varredora 01"
+  - name: "Redler 1 Pré Limpeza 1"
     ccm: "ccm1"
-    category: "rosca"
+    category: "redler"
     nominalCurrent: 10.0
     statusTagName: "M61_S"
     currentTagName: "M61_A"
@@ -619,7 +619,7 @@ motors:
     hoursTagName: "M61_H"
     hasInverter: false
 
-  - name: "Rosca Varredora 02"
+  - name: "Rosca 02 Pré Limpeza 2"
     ccm: "ccm1"
     category: "rosca"
     nominalCurrent: 10.0
@@ -819,7 +819,7 @@ motors:
     hoursTagName: "M81_H"
     hasInverter: false
 
-  - name: "Redler Silo Pulmão 02"
+  - name: "Redler Secador 1"
     ccm: "ccm1"
     category: "redler"
     nominalCurrent: 10.0
@@ -847,6 +847,27 @@ motors:
     currentTagName: "M84_A"
     faultTagName: "M84_F"
     hoursTagName: "M84_H"
+    hasInverter: false
+
+  - name: "Correia Transportadora 07 - Reversível"
+    ccm: "ccm1"
+    category: "correia"
+    nominalCurrent: 10.0
+    statusTagName: "M85_S"
+    secondaryStatusTagName: "M85_1_S"
+    currentTagName: "M85_A"
+    faultTagName: "M85_F"
+    hoursTagName: "M85_H"
+    hasInverter: false
+
+  - name: "Elevador 11"
+    ccm: "ccm1"
+    category: "elevador"
+    nominalCurrent: 10.0
+    statusTagName: "M86_S"
+    currentTagName: "M86_A"
+    faultTagName: "M86_F"
+    hoursTagName: "M86_H"
     hasInverter: false
 
   # ==============================================================================
@@ -992,4 +1013,3 @@ motors:
     faultTagName: "M14_F"
     hoursTagName: "M14_H"
     hasInverter: false
-
