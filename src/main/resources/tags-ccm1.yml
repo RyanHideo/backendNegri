@@ -1973,6 +1973,7 @@ tags:
   - name: V1-V2
     type: HR
     address: 4301
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -1984,6 +1985,7 @@ tags:
   - name: V2-V3
     type: HR
     address: 4302
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -1995,6 +1997,7 @@ tags:
   - name: V3-V1
     type: HR
     address: 4303
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -2061,6 +2064,7 @@ tags:
   - name: V1-N
     type: HR
     address: 4309
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -2072,6 +2076,7 @@ tags:
   - name: V2-N
     type: HR
     address: 4310
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -2083,6 +2088,7 @@ tags:
   - name: V3-N
     type: HR
     address: 4311
+    scale: 0.1
     writable: false
     readable: true
     polled: true

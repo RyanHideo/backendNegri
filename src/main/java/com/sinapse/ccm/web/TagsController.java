@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.annotation.PreDestroy;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.*;
@@ -64,6 +65,34 @@ public class TagsController {
         return Map.of(
                 "ts", Instant.now().toString(),
                 "tags", modbus.snapshot(ccmKey)
+        );
+    }
+
+    /**
+     * Endpoint unificado que retorna todas as tags de todos os CCMs em um único mapa plano.
+     * As chaves são renomeadas para evitar colisão: "TAG_NAME" -> "TAG_NAME__ccm1"
+     */
+    @GetMapping("/tags/unified")
+    public Map<String, Object> listUnified() {
+        Map<String, TagValue> unifiedTags = new HashMap<>();
+
+        // Processa CCM1
+        Map<String, TagValue> ccm1Tags = modbus.snapshot("ccm1");
+        ccm1Tags.forEach((key, value) -> {
+            String newKey = key + "__ccm1";
+            unifiedTags.put(newKey, value);
+        });
+
+        // Processa CCM2
+        Map<String, TagValue> ccm2Tags = modbus.snapshot("ccm2");
+        ccm2Tags.forEach((key, value) -> {
+            String newKey = key + "__ccm2";
+            unifiedTags.put(newKey, value);
+        });
+
+        return Map.of(
+                "ts", Instant.now().toString(),
+                "tags", unifiedTags
         );
     }
 
