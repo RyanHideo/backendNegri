@@ -6,7 +6,6 @@ import com.ghgande.j2mod.modbus.procimg.Register;
 import com.ghgande.j2mod.modbus.procimg.SimpleRegister;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,11 +26,8 @@ public class ModbusService {
     private final TagCatalog ccm2Catalog;
 
     // --- Configuração ---
-    @Value("${modbus.ccm1.host}") private String ccm1Host;
-    @Value("${modbus.ccm1.port:502}") private int ccm1Port;
-
-    @Value("${modbus.ccm2.host}") private String ccm2Host;
-    @Value("${modbus.ccm2.port:502}") private int ccm2Port;
+    @Value("${modbus.host}") private String host;
+    @Value("${modbus.port:502}") private int port;
 
     @Value("${modbus.poll-ms:1000}") private long pollMs;
 
@@ -68,27 +64,24 @@ public class ModbusService {
     }
 
     private static class CcmState {
-        final String host;
-        final int port;
         final TagCatalog catalog;
-        ModbusTCPMaster master;
         final Map<String, TagValue> cache = new ConcurrentHashMap<>();
 
-        CcmState(String host, int port, TagCatalog catalog) {
-            this.host = host;
-            this.port = port;
+        CcmState(TagCatalog catalog) {
             this.catalog = catalog;
         }
     }
 
     private final Map<CcmKey, CcmState> states = new EnumMap<>(CcmKey.class);
-    private final ScheduledExecutorService exec = Executors.newScheduledThreadPool(CcmKey.values().length);
+    private final ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
+    private final Object connectionLock = new Object();
+    private ModbusTCPMaster master;
 
     @PostConstruct
     void init() {
-        states.put(CcmKey.CCM1, new CcmState(ccm1Host, ccm1Port, ccm1Catalog));
-        states.put(CcmKey.CCM2, new CcmState(ccm2Host, ccm2Port, ccm2Catalog));
+        states.put(CcmKey.CCM1, new CcmState(ccm1Catalog));
+        states.put(CcmKey.CCM2, new CcmState(ccm2Catalog));
 
         if (simulationEnabled) {
             log.warn("=========================================");
@@ -97,10 +90,16 @@ public class ModbusService {
             log.warn("=========================================");
         }
 
-        for (CcmKey key : CcmKey.values()) {
-            Runnable task = simulationEnabled ? () -> simulationPollCycle(key) : () -> pollCycle(key);
-            exec.scheduleAtFixedRate(task, 0, pollMs, TimeUnit.MILLISECONDS);
-        }
+        Runnable task = () -> {
+            for (CcmKey key : CcmKey.values()) {
+                if (simulationEnabled) {
+                    simulationPollCycle(key);
+                } else {
+                    pollCycle(key);
+                }
+            }
+        };
+        exec.scheduleAtFixedRate(task, 0, pollMs, TimeUnit.MILLISECONDS);
     }
 
     private void simulationPollCycle(CcmKey key) {
@@ -155,27 +154,29 @@ public class ModbusService {
         CcmState state = stateOf(key);
         if (state.catalog == null) return;
 
-        try {
-            if (!ensureConnected(state, key)) return;
+        synchronized (connectionLock) {
+            try {
+                if (!ensureConnected()) return;
 
-            for (TagDef t : state.catalog.getTags()) {
-                if (!t.isReadableOrDefault() || !t.isPolledOrDefault()) continue;
+                for (TagDef t : state.catalog.getTags()) {
+                    if (!t.isReadableOrDefault() || !t.isPolledOrDefault()) continue;
 
-                try {
-                    double value = switch (t.getType()) {
-                        case HR   -> readHR(state, key, t);
-                        case IR   -> readIR(state, key, t);
-                        case COIL -> readCoil(state, key, t) ? 1.0 : 0.0;
-                        case DI   -> readDI(state, key, t) ? 1.0 : 0.0;
-                    };
-                    state.cache.put(t.getName(), new TagValue(t.getName(), value, Instant.now(), TagValue.Quality.GOOD, null));
-                } catch (Exception ex) {
-                    log.debug("Falha lendo {} [{}]: {}", t.getName(), key.getKey(), ex.getMessage());
-                    state.cache.put(t.getName(), new TagValue(t.getName(), 0.0, Instant.now(), TagValue.Quality.BAD, ex.getMessage()));
+                    try {
+                        double value = switch (t.getType()) {
+                            case HR   -> readHR(key, t);
+                            case IR   -> readIR(key, t);
+                            case COIL -> readCoil(key, t) ? 1.0 : 0.0;
+                            case DI   -> readDI(key, t) ? 1.0 : 0.0;
+                        };
+                        state.cache.put(t.getName(), new TagValue(t.getName(), value, Instant.now(), TagValue.Quality.GOOD, null));
+                    } catch (Exception ex) {
+                        log.debug("Falha lendo {} [{}]: {}", t.getName(), key.getKey(), ex.getMessage());
+                        state.cache.put(t.getName(), new TagValue(t.getName(), 0.0, Instant.now(), TagValue.Quality.BAD, ex.getMessage()));
+                    }
                 }
+            } catch (Exception e) {
+                log.warn("Erro no polling {}: {}", key.getKey(), e.getMessage());
             }
-        } catch (Exception e) {
-            log.warn("Erro no polling {}: {}", key.getKey(), e.getMessage());
         }
     }
 
@@ -194,48 +195,51 @@ public class ModbusService {
         TagDef t = state.catalog.byName(name);
         if (t == null) throw new IllegalArgumentException("Tag não encontrada '" + name + "' no CCM '" + ccmKey + "'");
         if (!t.isWritableOrDefault()) throw new IllegalArgumentException("Tag somente leitura: " + name);
-        if (!ensureConnected(state, key)) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
 
-        switch (t.getType()) {
-            case HR -> {
-                int ref = t.getAddress() - HR_BASE;
-                state.master.writeSingleRegister(t.getUnitIdOrDefault(), ref, new SimpleRegister(raw));
+        synchronized (connectionLock) {
+            if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
+
+            switch (t.getType()) {
+                case HR -> {
+                    int ref = t.getAddress() - HR_BASE;
+                    master.writeSingleRegister(t.getUnitIdOrDefault(), ref, new SimpleRegister(raw));
+                }
+                case COIL -> {
+                    int ref = t.getAddress() - COIL_BASE;
+                    master.writeCoil(t.getUnitIdOrDefault(), ref, raw != 0);
+                }
+                default -> throw new IllegalArgumentException("Escrita suportada só para HR/COIL");
             }
-            case COIL -> {
-                int ref = t.getAddress() - COIL_BASE;
-                state.master.writeCoil(t.getUnitIdOrDefault(), ref, raw != 0);
-            }
-            default -> throw new IllegalArgumentException("Escrita suportada só para HR/COIL");
         }
     }
 
-    private void connect(CcmState state, CcmKey key) {
+    private void connect() {
         try {
-            if (state.master != null) state.master.disconnect();
+            if (master != null) master.disconnect();
         } catch (Exception ignored) {}
 
-        state.master = new ModbusTCPMaster(state.host, state.port);
-        state.master.setTimeout(1000);
+        master = new ModbusTCPMaster(host, port);
+        master.setTimeout(1000);
         try {
-            state.master.connect();
-            log.info("Conectado ao CLP {} ({}:{})", key.getKey(), state.host, state.port);
+            master.connect();
+            log.info("Conectado ao CLP compartilhado ({}:{})", host, port);
         } catch (Exception e) {
-            log.warn("Falha ao conectar CLP {} ({}:{}): {}", key.getKey(), state.host, state.port, e.getMessage());
+            log.warn("Falha ao conectar CLP compartilhado ({}:{}): {}", host, port, e.getMessage());
         }
     }
 
-    private boolean ensureConnected(CcmState state, CcmKey key) {
+    private boolean ensureConnected() {
         if (simulationEnabled) {
             return true;
         }
         try {
-            if (state.master == null || !state.master.isConnected()) {
-                connect(state, key);
+            if (master == null || !master.isConnected()) {
+                connect();
             }
         } catch (Exception e) {
-            log.warn("Falha ao garantir conexão {}: {}", key.getKey(), e.getMessage());
+            log.warn("Falha ao garantir conexão com o CLP compartilhado: {}", e.getMessage());
         }
-        return state.master != null && state.master.isConnected();
+        return master != null && master.isConnected();
     }
 
     private CcmState stateOf(CcmKey key) {
@@ -258,19 +262,19 @@ public class ModbusService {
         };
     }
 
-    private double readHR(CcmState state, CcmKey key, TagDef t) throws Exception {
+    private double readHR(CcmKey key, TagDef t) throws Exception {
         ensureType(t, TagType.HR);
-        if (!ensureConnected(state, key)) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
         int ref = t.getAddress() - HR_BASE;
         int words = t.getWordsOrDefault();
         double scale = t.getScaleOrDefault();
 
         if (words <= 1) {
-            Register[] r = state.master.readMultipleRegisters(t.getUnitIdOrDefault(), ref, 1);
+            Register[] r = master.readMultipleRegisters(t.getUnitIdOrDefault(), ref, 1);
             return (r[0].getValue() & 0xFFFF) * scale;
         }
 
-        Register[] r = state.master.readMultipleRegisters(t.getUnitIdOrDefault(), ref, 2);
+        Register[] r = master.readMultipleRegisters(t.getUnitIdOrDefault(), ref, 2);
         long u32 = buildU32(r[0].getValue(), r[1].getValue(), t.getEndianOrDefault());
 
         return switch (t.getFormatOrDefault().toUpperCase()) {
@@ -281,26 +285,26 @@ public class ModbusService {
         };
     }
 
-    private double readIR(CcmState state, CcmKey key, TagDef t) throws Exception {
+    private double readIR(CcmKey key, TagDef t) throws Exception {
         ensureType(t, TagType.IR);
-        if (!ensureConnected(state, key)) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
         int ref = t.getAddress() - IR_BASE;
-        InputRegister[] r = state.master.readInputRegisters(t.getUnitIdOrDefault(), ref, 1);
+        InputRegister[] r = master.readInputRegisters(t.getUnitIdOrDefault(), ref, 1);
         return r[0].getValue() * t.getScaleOrDefault();
     }
 
-    private boolean readCoil(CcmState state, CcmKey key, TagDef t) throws Exception {
+    private boolean readCoil(CcmKey key, TagDef t) throws Exception {
         ensureType(t, TagType.COIL);
-        if (!ensureConnected(state, key)) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
         int ref = t.getAddress() - COIL_BASE;
-        return state.master.readCoils(t.getUnitIdOrDefault(), ref, 1).getBit(0);
+        return master.readCoils(t.getUnitIdOrDefault(), ref, 1).getBit(0);
     }
 
-    private boolean readDI(CcmState state, CcmKey key, TagDef t) throws Exception {
+    private boolean readDI(CcmKey key, TagDef t) throws Exception {
         ensureType(t, TagType.DI);
-        if (!ensureConnected(state, key)) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
+        if (!ensureConnected()) throw new IllegalStateException("Sem conexão Modbus (" + key.getKey() + ")");
         int ref = t.getAddress() - DI_BASE;
-        return state.master.readInputDiscretes(t.getUnitIdOrDefault(), ref, 1).getBit(0);
+        return master.readInputDiscretes(t.getUnitIdOrDefault(), ref, 1).getBit(0);
     }
 
     public void write(String name, int raw) throws Exception { write("ccm1", name, raw); }
@@ -340,9 +344,9 @@ public class ModbusService {
     void shutdown() {
         exec.shutdownNow();
         if (simulationEnabled) return;
-        for (CcmState state : states.values()) {
+        synchronized (connectionLock) {
             try {
-                if (state.master != null) state.master.disconnect();
+                if (master != null) master.disconnect();
             } catch (Exception ignored) {}
         }
     }

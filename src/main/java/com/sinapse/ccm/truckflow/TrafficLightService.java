@@ -20,11 +20,12 @@ public class TrafficLightService {
     private final TruckCountStore truckCountStore;
     private final boolean enabled;
     private final String ccm;
-    private final String stateTag;
-    private final String redTag;
-    private final String greenTag;
+    private final String colorTag;
+    private final String powerTag;
     private final double redValue;
     private final double greenValue;
+    private final double powerOffValue;
+    private final double powerOnValue;
 
     private volatile TrafficLightSnapshot currentSnapshot;
     private TrafficLightStatus previousStatus = TrafficLightStatus.UNKNOWN;
@@ -34,21 +35,23 @@ public class TrafficLightService {
             TruckCountStore truckCountStore,
             @Value("${truckflow.enabled:false}") boolean enabled,
             @Value("${truckflow.ccm:ccm1}") String ccm,
-            @Value("${truckflow.state-tag:}") String stateTag,
-            @Value("${truckflow.red-tag:}") String redTag,
-            @Value("${truckflow.green-tag:}") String greenTag,
+            @Value("${truckflow.color-tag:}") String colorTag,
+            @Value("${truckflow.power-tag:}") String powerTag,
             @Value("${truckflow.red-value:0}") double redValue,
-            @Value("${truckflow.green-value:1}") double greenValue
+            @Value("${truckflow.green-value:1}") double greenValue,
+            @Value("${truckflow.power-off-value:0}") double powerOffValue,
+            @Value("${truckflow.power-on-value:1}") double powerOnValue
     ) {
         this.modbusService = modbusService;
         this.truckCountStore = truckCountStore;
         this.enabled = enabled;
         this.ccm = ccm;
-        this.stateTag = stateTag;
-        this.redTag = redTag;
-        this.greenTag = greenTag;
+        this.colorTag = colorTag;
+        this.powerTag = powerTag;
         this.redValue = redValue;
         this.greenValue = greenValue;
+        this.powerOffValue = powerOffValue;
+        this.powerOnValue = powerOnValue;
         this.currentSnapshot = TrafficLightSnapshot.unknown(truckCountStore.getCount());
     }
 
@@ -59,14 +62,11 @@ public class TrafficLightService {
             return;
         }
 
-        if (usesSingleTag()) {
-            log.info("Semaforo configurado com uma tag: {} em {} (vermelho={}, verde={}).",
-                    stateTag, ccm, redValue, greenValue);
-        } else if (usesTwoTags()) {
-            log.info("Semaforo configurado com duas tags em {}: vermelho={}, verde={}.",
-                    ccm, redTag, greenTag);
+        if (hasRequiredTags()) {
+            log.info("Semaforo configurado em {}: tag de energia={}, tag de cor={}.",
+                    ccm, powerTag, colorTag);
         } else {
-            log.warn("Fluxo de caminhoes ativado, mas nenhuma configuracao valida de tags foi informada.");
+            log.warn("Fluxo de caminhoes ativado, mas as tags de energia e cor nao foram informadas.");
         }
     }
 
@@ -100,76 +100,66 @@ public class TrafficLightService {
     }
 
     private Observation readObservation() {
-        if (usesSingleTag()) {
-            return readSingleTag();
-        }
-        if (usesTwoTags()) {
-            return readTwoTags();
-        }
-        return Observation.unknown(TagValue.Quality.STALE);
-    }
-
-    private Observation readSingleTag() {
-        TagValue tagValue = modbusService.get(ccm, stateTag).orElse(null);
-        if (tagValue == null) {
-            return Observation.unknown(TagValue.Quality.STALE);
-        }
-        if (tagValue.getQuality() != TagValue.Quality.GOOD) {
-            return new Observation(TrafficLightStatus.UNKNOWN, tagValue.getQuality(), tagValue.getTs());
-        }
-
-        TrafficLightStatus status = TrafficLightStatus.UNKNOWN;
-        if (equalsValue(tagValue.getValue(), redValue)) {
-            status = TrafficLightStatus.RED;
-        } else if (equalsValue(tagValue.getValue(), greenValue)) {
-            status = TrafficLightStatus.GREEN;
-        }
-
-        return new Observation(status, tagValue.getQuality(), tagValue.getTs());
-    }
-
-    private Observation readTwoTags() {
-        TagValue redTagValue = modbusService.get(ccm, redTag).orElse(null);
-        TagValue greenTagValue = modbusService.get(ccm, greenTag).orElse(null);
-
-        if (redTagValue == null || greenTagValue == null) {
+        if (!hasRequiredTags()) {
             return Observation.unknown(TagValue.Quality.STALE);
         }
 
-        TagValue.Quality quality = combineQuality(redTagValue.getQuality(), greenTagValue.getQuality());
-        java.time.Instant updatedAt = latest(redTagValue.getTs(), greenTagValue.getTs());
+        TagValue powerTagValue = modbusService.get(ccm, powerTag).orElse(null);
+        if (powerTagValue == null) {
+            return Observation.unknown(TagValue.Quality.STALE);
+        }
+        if (powerTagValue.getQuality() != TagValue.Quality.GOOD) {
+            return new Observation(
+                    TrafficLightStatus.UNKNOWN,
+                    powerTagValue.getQuality(),
+                    powerTagValue.getTs()
+            );
+        }
+
+        if (equalsValue(powerTagValue.getValue(), powerOffValue)) {
+            return new Observation(
+                    TrafficLightStatus.OFF,
+                    powerTagValue.getQuality(),
+                    powerTagValue.getTs()
+            );
+        }
+
+        if (!equalsValue(powerTagValue.getValue(), powerOnValue)) {
+            return new Observation(
+                    TrafficLightStatus.UNKNOWN,
+                    powerTagValue.getQuality(),
+                    powerTagValue.getTs()
+            );
+        }
+
+        TagValue colorTagValue = modbusService.get(ccm, colorTag).orElse(null);
+        if (colorTagValue == null) {
+            return Observation.unknown(TagValue.Quality.STALE);
+        }
+
+        TagValue.Quality quality = combineQuality(powerTagValue.getQuality(), colorTagValue.getQuality());
+        java.time.Instant updatedAt = latest(powerTagValue.getTs(), colorTagValue.getTs());
         if (quality != TagValue.Quality.GOOD) {
             return new Observation(TrafficLightStatus.UNKNOWN, quality, updatedAt);
         }
 
-        boolean redActive = isActive(redTagValue.getValue());
-        boolean greenActive = isActive(greenTagValue.getValue());
         TrafficLightStatus status = TrafficLightStatus.UNKNOWN;
-
-        if (redActive && !greenActive) {
+        if (equalsValue(colorTagValue.getValue(), redValue)) {
             status = TrafficLightStatus.RED;
-        } else if (greenActive && !redActive) {
+        } else if (equalsValue(colorTagValue.getValue(), greenValue)) {
             status = TrafficLightStatus.GREEN;
         }
 
         return new Observation(status, quality, updatedAt);
     }
 
-    private boolean usesSingleTag() {
-        return stateTag != null && !stateTag.isBlank();
-    }
-
-    private boolean usesTwoTags() {
-        return redTag != null && !redTag.isBlank()
-                && greenTag != null && !greenTag.isBlank();
+    private boolean hasRequiredTags() {
+        return colorTag != null && !colorTag.isBlank()
+                && powerTag != null && !powerTag.isBlank();
     }
 
     private static boolean equalsValue(double actual, double expected) {
         return Math.abs(actual - expected) < EPSILON;
-    }
-
-    private static boolean isActive(double value) {
-        return Math.abs(value) >= EPSILON;
     }
 
     private static TagValue.Quality combineQuality(TagValue.Quality first, TagValue.Quality second) {

@@ -30,9 +30,11 @@ class TrafficLightServiceTests {
 
     @Test
     void doesNotCountWhenTheFirstKnownStateIsGreen() {
-        TrafficLightService service = singleTagService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT"))
-                .thenReturn(Optional.of(tag("TRAFFIC_LIGHT", 1)));
+        TrafficLightService service = trafficLightService();
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+                .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)));
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+                .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1)));
 
         service.refresh();
 
@@ -42,12 +44,18 @@ class TrafficLightServiceTests {
 
     @Test
     void countsAndPersistsOnlyTheRedToGreenTransition() {
-        TrafficLightService service = singleTagService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT"))
+        TrafficLightService service = trafficLightService();
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
                 .thenReturn(
-                        Optional.of(tag("TRAFFIC_LIGHT", 0)),
-                        Optional.of(tag("TRAFFIC_LIGHT", 1)),
-                        Optional.of(tag("TRAFFIC_LIGHT", 1))
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 1))
+                );
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+                .thenReturn(
+                        Optional.of(tag("TRAFFIC_LIGHT_COLOR", 0)),
+                        Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1)),
+                        Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1))
                 );
 
         service.refresh();
@@ -62,39 +70,50 @@ class TrafficLightServiceTests {
     }
 
     @Test
-    void supportsSeparateRedAndGreenTags() {
-        TrafficLightService service = new TrafficLightService(
-                modbusService,
-                truckCountStore,
-                true,
-                "ccm1",
-                "",
-                "RED_LIGHT",
-                "GREEN_LIGHT",
-                0,
-                1
-        );
-        when(modbusService.get("ccm1", "RED_LIGHT"))
-                .thenReturn(Optional.of(tag("RED_LIGHT", 1)), Optional.of(tag("RED_LIGHT", 0)));
-        when(modbusService.get("ccm1", "GREEN_LIGHT"))
-                .thenReturn(Optional.of(tag("GREEN_LIGHT", 0)), Optional.of(tag("GREEN_LIGHT", 1)));
+    void returnsOffWhenThePowerBitIsZero() {
+        TrafficLightService service = trafficLightService();
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+                .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_POWER", 0)));
 
+        service.refresh();
+
+        assertThat(service.getCurrentSnapshot().status()).isEqualTo(TrafficLightStatus.OFF);
+        assertThat(service.getCurrentSnapshot().truckCount()).isZero();
+    }
+
+    @Test
+    void doesNotCountRedToOffToGreenAsADirectTransition() {
+        TrafficLightService service = trafficLightService();
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+                .thenReturn(
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 0)),
+                        Optional.of(tag("TRAFFIC_LIGHT_POWER", 1))
+                );
+        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+                .thenReturn(
+                        Optional.of(tag("TRAFFIC_LIGHT_COLOR", 0)),
+                        Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1))
+                );
+
+        service.refresh();
         service.refresh();
         service.refresh();
 
         assertThat(service.getCurrentSnapshot().status()).isEqualTo(TrafficLightStatus.GREEN);
-        assertThat(service.getCurrentSnapshot().truckCount()).isEqualTo(1);
+        assertThat(service.getCurrentSnapshot().truckCount()).isZero();
     }
 
-    private TrafficLightService singleTagService() {
+    private TrafficLightService trafficLightService() {
         return new TrafficLightService(
                 modbusService,
                 truckCountStore,
                 true,
                 "ccm1",
-                "TRAFFIC_LIGHT",
-                "",
-                "",
+                "TRAFFIC_LIGHT_COLOR",
+                "TRAFFIC_LIGHT_POWER",
+                0,
+                1,
                 0,
                 1
         );
