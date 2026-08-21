@@ -12,7 +12,7 @@
 	</parent>
 
 	<groupId>com.sinapse</groupId>
-	<artifactId>apiOzonio</artifactId>
+	<artifactId>apiNegri</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>apiOzonio</name>
 	<description>Api para comunicar clp e front end rogerio menezes</description>
