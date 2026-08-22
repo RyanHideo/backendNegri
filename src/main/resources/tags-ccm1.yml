@@ -1,5 +1,6 @@
 # tags-ccm1.yml
 # Definições de tags para o CCM1
+# Status/Falha: somente entradas X da planilha; registradores D dessas colunas foram ignorados.
 
 tags:
   # Registrador de Comando
@@ -11,2097 +12,1024 @@ tags:
     polled: false
     description: "Registrador de Comando"
 
-  # M01 - ELEVADOR-02 MOEGA
-  - name: M1_S
-    type: DI
-    address: 1106
-    writable: false
-    readable: true
-    polled: true
+  # M01 - 200 HP
   - name: M1_F
-    type: HR
-    address: 4003
+    type: DI
+    address: 1240
     writable: false
     readable: true
     polled: true
   - name: M1_A
     type: HR
-    address: 4004
+    address: 4003
     writable: false
     readable: true
     polled: true
   - name: M1_H
     type: HR
-    address: 4005
+    address: 4004
     writable: false
     readable: true
     polled: true
 
-  # M02 - ELEVADOR-04
-  - name: M2_S
-    type: DI
-    address: 1108
-    writable: false
-    readable: true
-    polled: true
+  # M02 - CT TUNEL 0200-CT-01
   - name: M2_F
-    type: HR
-    address: 4007
+    type: DI
+    address: 1241
     writable: false
     readable: true
     polled: true
   - name: M2_A
     type: HR
-    address: 4008
+    address: 4007
     writable: false
     readable: true
     polled: true
   - name: M2_H
     type: HR
-    address: 4009
+    address: 4008
     writable: false
     readable: true
     polled: true
 
-  # M03 - ELEVADOR-06
-  - name: M3_S
-    type: DI
-    address: 1110
-    writable: false
-    readable: true
-    polled: true
+  # M03 - PENEIRA VIBRATORIA SCALP
   - name: M3_F
-    type: HR
-    address: 4011
+    type: DI
+    address: 1242
     writable: false
     readable: true
     polled: true
   - name: M3_A
     type: HR
-    address: 4012
+    address: 4011
     writable: false
     readable: true
     polled: true
   - name: M3_H
     type: HR
-    address: 4013
+    address: 4012
     writable: false
     readable: true
     polled: true
 
-  # M04 - REDLER SILO-1
-  - name: M4_S
-    type: DI
-    address: 1112
-    writable: false
-    readable: true
-    polled: true
+  # M04 - PENEIRA VIBRATORIA 02
   - name: M4_F
-    type: HR
-    address: 4015
+    type: DI
+    address: 1243
     writable: false
     readable: true
     polled: true
   - name: M4_A
     type: HR
-    address: 4016
+    address: 4015
     writable: false
     readable: true
     polled: true
   - name: M4_H
     type: HR
-    address: 4017
+    address: 4016
     writable: false
     readable: true
     polled: true
 
-  # M05 - REDLER SILO-2
-  - name: M5_S
-    type: DI
-    address: 1114
-    writable: false
-    readable: true
-    polled: true
+  # M05 - PENEIRA VIBRATORIA 01
   - name: M5_F
-    type: HR
-    address: 4019
+    type: DI
+    address: 1244
     writable: false
     readable: true
     polled: true
   - name: M5_A
     type: HR
-    address: 4020
+    address: 4019
     writable: false
     readable: true
     polled: true
   - name: M5_H
     type: HR
-    address: 4021
+    address: 4020
     writable: false
     readable: true
     polled: true
 
-  # M06 - REDLER SILO-3
-  - name: M6_S
-    type: DI
-    address: 1116
-    writable: false
-    readable: true
-    polled: true
+  # M06 - CT BRITADOR
   - name: M6_F
-    type: HR
-    address: 4023
+    type: DI
+    address: 1245
     writable: false
     readable: true
     polled: true
   - name: M6_A
     type: HR
-    address: 4024
+    address: 4023
     writable: false
     readable: true
     polled: true
   - name: M6_H
     type: HR
-    address: 4025
+    address: 4024
     writable: false
     readable: true
     polled: true
 
-  # M07 - REDLER SILO-4
-  - name: M7_S
-    type: DI
-    address: 1118
-    writable: false
-    readable: true
-    polled: true
+  # M07 - BRITADOR HP300
   - name: M7_F
-    type: HR
-    address: 4027
+    type: DI
+    address: 1246
     writable: false
     readable: true
     polled: true
   - name: M7_A
     type: HR
-    address: 4028
+    address: 4027
     writable: false
     readable: true
     polled: true
   - name: M7_H
     type: HR
-    address: 4029
+    address: 4028
     writable: false
     readable: true
     polled: true
 
-  # M08 - ROSCA VARREDORA SILO 2
-  - name: M8_S
-    type: DI
-    address: 1120
-    writable: false
-    readable: true
-    polled: true
+  # M08 - RETORNO CONE 01
   - name: M8_F
-    type: HR
-    address: 4031
+    type: DI
+    address: 1247
     writable: false
     readable: true
     polled: true
   - name: M8_A
     type: HR
-    address: 4032
+    address: 4031
     writable: false
     readable: true
     polled: true
   - name: M8_H
     type: HR
-    address: 4033
+    address: 4032
     writable: false
     readable: true
     polled: true
 
-  # M09 - ELEVADOR-07 ARMAZÉM
-  - name: M9_S
-    type: DI
-    address: 1122
-    writable: false
-    readable: true
-    polled: true
+  # M09 - SEM INFORMAÇÃO
   - name: M9_F
-    type: HR
-    address: 4035
+    type: DI
+    address: 1250
     writable: false
     readable: true
     polled: true
   - name: M9_A
     type: HR
-    address: 4036
+    address: 4035
     writable: false
     readable: true
     polled: true
   - name: M9_H
     type: HR
-    address: 4037
+    address: 4036
     writable: false
     readable: true
     polled: true
 
-  # M10 - ELEVADOR-08 ARMAZÉM
-  - name: M10_S
-    type: DI
-    address: 1124
-    writable: false
-    readable: true
-    polled: true
+  # M10 - CT NOVA CT4 - PL2
   - name: M10_F
-    type: HR
-    address: 4039
+    type: DI
+    address: 1251
     writable: false
     readable: true
     polled: true
   - name: M10_A
     type: HR
-    address: 4040
+    address: 4039
     writable: false
     readable: true
     polled: true
   - name: M10_H
     type: HR
-    address: 4041
+    address: 4040
     writable: false
     readable: true
     polled: true
 
-  # M11 - ELEVADOR-01 MOEGA
-  - name: M11_S
-    type: DI
-    address: 1126
-    writable: false
-    readable: true
-    polled: true
+  # M11 - SEM INFORMAÇÃO
   - name: M11_F
-    type: HR
-    address: 4043
+    type: DI
+    address: 1252
     writable: false
     readable: true
     polled: true
   - name: M11_A
     type: HR
-    address: 4044
+    address: 4043
     writable: false
     readable: true
     polled: true
   - name: M11_H
+    type: HR
+    address: 4044
+    writable: false
+    readable: true
+    polled: true
+
+  # M12 - SEM INFORMAÇÃO
+  - name: M12_S
+    type: DI
+    address: 1010
+    writable: false
+    readable: true
+    polled: true
+  - name: M12_F
+    type: DI
+    address: 1253
+    writable: false
+    readable: true
+    polled: true
+  - name: M12_H
     type: HR
     address: 4045
     writable: false
     readable: true
     polled: true
 
-  # M12 - ELEVADOR-09 SILO CARGA
-  - name: M12_S
+  # M13 - SIRENE
+  - name: M13_S
     type: DI
-    address: 1128
+    address: 1011
     writable: false
     readable: true
     polled: true
-  - name: M12_F
+  - name: M13_F
+    type: DI
+    address: 1254
+    writable: false
+    readable: true
+    polled: true
+  - name: M13_H
+    type: HR
+    address: 4046
+    writable: false
+    readable: true
+    polled: true
+
+  # M14 - CT2 INF CONES
+  - name: M14_S
+    type: DI
+    address: 1012
+    writable: false
+    readable: true
+    polled: true
+  - name: M14_F
+    type: DI
+    address: 1255
+    writable: false
+    readable: true
+    polled: true
+  - name: M14_H
     type: HR
     address: 4047
     writable: false
     readable: true
     polled: true
-  - name: M12_A
+
+  # M15 - CT7 PEDRA 1
+  - name: M15_S
+    type: DI
+    address: 1013
+    writable: false
+    readable: true
+    polled: true
+  - name: M15_F
+    type: DI
+    address: 1256
+    writable: false
+    readable: true
+    polled: true
+  - name: M15_H
     type: HR
     address: 4048
     writable: false
     readable: true
     polled: true
-  - name: M12_H
+
+  # M16 - SEM INFORMAÇÃO
+  - name: M16_S
+    type: DI
+    address: 1014
+    writable: false
+    readable: true
+    polled: true
+  - name: M16_F
+    type: DI
+    address: 1257
+    writable: false
+    readable: true
+    polled: true
+  - name: M16_H
     type: HR
     address: 4049
     writable: false
     readable: true
     polled: true
 
-  # M13 - ELEVADOR-10 SILO DESCARGA
-  - name: M13_S
+  # M17 - CT6 DESC VSI
+  - name: M17_S
     type: DI
-    address: 1130
+    address: 1015
     writable: false
     readable: true
     polled: true
-  - name: M13_F
+  - name: M17_F
+    type: DI
+    address: 1260
+    writable: false
+    readable: true
+    polled: true
+  - name: M17_H
+    type: HR
+    address: 4050
+    writable: false
+    readable: true
+    polled: true
+
+  # M18 - CT8 PEDRA 0
+  - name: M18_S
+    type: DI
+    address: 1016
+    writable: false
+    readable: true
+    polled: true
+  - name: M18_F
+    type: DI
+    address: 1261
+    writable: false
+    readable: true
+    polled: true
+  - name: M18_H
     type: HR
     address: 4051
     writable: false
     readable: true
     polled: true
-  - name: M13_A
+
+  # M19 - CT9 PEDRISCO
+  - name: M19_S
+    type: DI
+    address: 1017
+    writable: false
+    readable: true
+    polled: true
+  - name: M19_F
+    type: DI
+    address: 1262
+    writable: false
+    readable: true
+    polled: true
+  - name: M19_H
     type: HR
     address: 4052
     writable: false
     readable: true
     polled: true
-  - name: M13_H
+
+  # M20 - CT10 BICA CO
+  - name: M20_S
+    type: DI
+    address: 1020
+    writable: false
+    readable: true
+    polled: true
+  - name: M20_F
+    type: DI
+    address: 1263
+    writable: false
+    readable: true
+    polled: true
+  - name: M20_H
     type: HR
     address: 4053
     writable: false
     readable: true
     polled: true
 
-  # M14 - EXAUSTOR SECADOR-01 M1
-  - name: M14_S
+  # M21 - CT16 PEDRA 2
+  - name: M21_S
     type: DI
-    address: 1132
+    address: 1021
     writable: false
     readable: true
     polled: true
-  - name: M14_F
+  - name: M21_F
+    type: DI
+    address: 1264
+    writable: false
+    readable: true
+    polled: true
+  - name: M21_H
+    type: HR
+    address: 4054
+    writable: false
+    readable: true
+    polled: true
+
+  # M22 - CT11 PO 1
+  - name: M22_S
+    type: DI
+    address: 1022
+    writable: false
+    readable: true
+    polled: true
+  - name: M22_F
+    type: DI
+    address: 1265
+    writable: false
+    readable: true
+    polled: true
+  - name: M22_H
     type: HR
     address: 4055
     writable: false
     readable: true
     polled: true
-  - name: M14_A
+
+  # M23 - CT12 PO 2
+  - name: M23_S
+    type: DI
+    address: 1023
+    writable: false
+    readable: true
+    polled: true
+  - name: M23_F
+    type: DI
+    address: 1266
+    writable: false
+    readable: true
+    polled: true
+  - name: M23_H
     type: HR
     address: 4056
     writable: false
     readable: true
     polled: true
-  - name: M14_H
+
+  # M24 - CT13 REGEITO
+  - name: M24_S
+    type: DI
+    address: 1024
+    writable: false
+    readable: true
+    polled: true
+  - name: M24_F
+    type: DI
+    address: 1267
+    writable: false
+    readable: true
+    polled: true
+  - name: M24_H
     type: HR
     address: 4057
     writable: false
     readable: true
     polled: true
 
-  # M15 - EXAUSTOR SECADOR-01 M2
-  - name: M15_S
+  # M25 - SEM INFORMAÇÃO
+  - name: M25_S
     type: DI
-    address: 1134
+    address: 1025
     writable: false
     readable: true
     polled: true
-  - name: M15_F
-    type: HR
-    address: 4059
+  - name: M25_F
+    type: DI
+    address: 1270
     writable: false
     readable: true
     polled: true
-  - name: M15_A
-    type: HR
-    address: 4060
-    writable: false
-    readable: true
-    polled: true
-  - name: M15_H
+  - name: M25_H
     type: HR
     address: 4061
     writable: false
     readable: true
     polled: true
 
-  # M16 - EXAUSTOR SECADOR-01 M1 (Repetido na tabela? Assumindo M3)
-  - name: M16_S
+  # M26 - SEM INFORMAÇÃO
+  - name: M26_S
     type: DI
-    address: 1136
+    address: 1026
     writable: false
     readable: true
     polled: true
-  - name: M16_F
+  - name: M26_F
+    type: DI
+    address: 1271
+    writable: false
+    readable: true
+    polled: true
+  - name: M26_H
+    type: HR
+    address: 4062
+    writable: false
+    readable: true
+    polled: true
+
+  # M27 - BOMBA D'AGUA
+  - name: M27_S
+    type: DI
+    address: 1027
+    writable: false
+    readable: true
+    polled: true
+  - name: M27_F
+    type: DI
+    address: 1272
+    writable: false
+    readable: true
+    polled: true
+  - name: M27_H
     type: HR
     address: 4063
     writable: false
     readable: true
     polled: true
-  - name: M16_A
+
+  # M28 - CT15 RET CONE 2
+  - name: M28_S
+    type: DI
+    address: 1030
+    writable: false
+    readable: true
+    polled: true
+  - name: M28_F
+    type: DI
+    address: 1273
+    writable: false
+    readable: true
+    polled: true
+  - name: M28_H
     type: HR
     address: 4064
     writable: false
     readable: true
     polled: true
-  - name: M16_H
-    type: HR
-    address: 4065
-    writable: false
-    readable: true
-    polled: true
 
-  # M17 - EXAUSTOR SECADOR-02 M1
-  - name: M17_S
+  # M29 - SEM INFORMAÇÃO
+  - name: M29_S
     type: DI
-    address: 1138
+    address: 1031
     writable: false
     readable: true
     polled: true
-  - name: M17_F
-    type: HR
-    address: 4067
-    writable: false
-    readable: true
-    polled: true
-  - name: M17_A
-    type: HR
-    address: 4068
-    writable: false
-    readable: true
-    polled: true
-  - name: M17_H
-    type: HR
-    address: 4069
-    writable: false
-    readable: true
-    polled: true
-
-  # M18 - EXAUSTOR SECADOR-02 M2
-  - name: M18_S
+  - name: M29_F
     type: DI
-    address: 1140
+    address: 1274
     writable: false
     readable: true
     polled: true
-  - name: M18_F
+  - name: M29_H
     type: HR
     address: 4071
     writable: false
     readable: true
     polled: true
-  - name: M18_A
+
+  # M30 - Unidade Hidraulica VSI
+  - name: M30_S
+    type: DI
+    address: 1032
+    writable: false
+    readable: true
+    polled: true
+  - name: M30_F
+    type: DI
+    address: 1275
+    writable: false
+    readable: true
+    polled: true
+  - name: M30_H
     type: HR
     address: 4072
     writable: false
     readable: true
     polled: true
-  - name: M18_H
+
+  # M31 - SEM INFORMAÇÃO
+  - name: M31_S
+    type: DI
+    address: 1033
+    writable: false
+    readable: true
+    polled: true
+  - name: M31_F
+    type: DI
+    address: 1276
+    writable: false
+    readable: true
+    polled: true
+  - name: M31_H
     type: HR
     address: 4073
     writable: false
     readable: true
     polled: true
 
-  # M19 - AERAÇÃO-01 ARMAZÉM
-  - name: M19_S
+  # M32 - SEM INFORMAÇÃO
+  - name: M32_S
     type: DI
-    address: 1142
+    address: 1034
     writable: false
     readable: true
     polled: true
-  - name: M19_F
+  - name: M32_F
+    type: DI
+    address: 1277
+    writable: false
+    readable: true
+    polled: true
+  - name: M32_H
+    type: HR
+    address: 4074
+    writable: false
+    readable: true
+    polled: true
+
+  # M33 - SEM INFORMAÇÃO
+  - name: M33_S
+    type: DI
+    address: 1035
+    writable: false
+    readable: true
+    polled: true
+  - name: M33_F
+    type: DI
+    address: 1300
+    writable: false
+    readable: true
+    polled: true
+  - name: M33_H
     type: HR
     address: 4075
     writable: false
     readable: true
     polled: true
-  - name: M19_A
+
+  # M34 - SEM INFORMAÇÃO
+  - name: M34_S
+    type: DI
+    address: 1036
+    writable: false
+    readable: true
+    polled: true
+  - name: M34_F
+    type: DI
+    address: 1301
+    writable: false
+    readable: true
+    polled: true
+  - name: M34_H
     type: HR
     address: 4076
     writable: false
     readable: true
     polled: true
-  - name: M19_H
+
+  # M35 - BOMBA PRESSÃO ÁGUA
+  - name: M35_S
+    type: DI
+    address: 1037
+    writable: false
+    readable: true
+    polled: true
+  - name: M35_F
+    type: DI
+    address: 1302
+    writable: false
+    readable: true
+    polled: true
+  - name: M35_H
     type: HR
     address: 4077
     writable: false
     readable: true
     polled: true
 
-  # M20 - AERAÇÃO-02 ARMAZÉM
-  - name: M20_S
+  # M36 - MESA VIBRATÓRIA ANTIGO
+  - name: M36_S
     type: DI
-    address: 1144
+    address: 1001
     writable: false
     readable: true
     polled: true
-  - name: M20_F
-    type: HR
-    address: 4079
-    writable: false
-    readable: true
-    polled: true
-  - name: M20_A
-    type: HR
-    address: 4080
-    writable: false
-    readable: true
-    polled: true
-  - name: M20_H
-    type: HR
-    address: 4081
-    writable: false
-    readable: true
-    polled: true
-
-  # M21 - AERAÇÃO-03 ARMAZÉM
-  - name: M21_S
+  - name: M36_F
     type: DI
-    address: 1146
+    address: 1303
     writable: false
     readable: true
     polled: true
-  - name: M21_F
-    type: HR
-    address: 4083
-    writable: false
-    readable: true
-    polled: true
-  - name: M21_A
-    type: HR
-    address: 4084
-    writable: false
-    readable: true
-    polled: true
-  - name: M21_H
-    type: HR
-    address: 4085
-    writable: false
-    readable: true
-    polled: true
-
-  # M22 - AERAÇÃO-01 SILO 1
-  - name: M22_S
-    type: DI
-    address: 1148
-    writable: false
-    readable: true
-    polled: true
-  - name: M22_F
-    type: HR
-    address: 4087
-    writable: false
-    readable: true
-    polled: true
-  - name: M22_A
-    type: HR
-    address: 4088
-    writable: false
-    readable: true
-    polled: true
-  - name: M22_H
-    type: HR
-    address: 4089
-    writable: false
-    readable: true
-    polled: true
-
-  # M23 - AERAÇÃO-02 SILO 1
-  - name: M23_S
-    type: DI
-    address: 1150
-    writable: false
-    readable: true
-    polled: true
-  - name: M23_F
-    type: HR
-    address: 4091
-    writable: false
-    readable: true
-    polled: true
-  - name: M23_A
+  - name: M36_H
     type: HR
     address: 4092
     writable: false
     readable: true
     polled: true
-  - name: M23_H
+
+  # M37 - MESA VIBRATÓRIA TUNEL
+  - name: M37_S
+    type: DI
+    address: 1000
+    writable: false
+    readable: true
+    polled: true
+  - name: M37_F
+    type: DI
+    address: 1304
+    writable: false
+    readable: true
+    polled: true
+  - name: M37_H
     type: HR
     address: 4093
     writable: false
     readable: true
     polled: true
 
-  # M24 - AERAÇÃO-03 SILO 1
-  - name: M24_S
-    type: DI
-    address: 1152
-    writable: false
-    readable: true
-    polled: true
-  - name: M24_F
-    type: HR
-    address: 4095
-    writable: false
-    readable: true
-    polled: true
-  - name: M24_A
-    type: HR
-    address: 4096
-    writable: false
-    readable: true
-    polled: true
-  - name: M24_H
-    type: HR
-    address: 4097
-    writable: false
-    readable: true
-    polled: true
-
-  # M25 - AERAÇÃO-04 SILO 1
-  - name: M25_S
-    type: DI
-    address: 1154
-    writable: false
-    readable: true
-    polled: true
-  - name: M25_F
-    type: HR
-    address: 4099
-    writable: false
-    readable: true
-    polled: true
-  - name: M25_A
-    type: HR
-    address: 4100
-    writable: false
-    readable: true
-    polled: true
-  - name: M25_H
-    type: HR
-    address: 4101
-    writable: false
-    readable: true
-    polled: true
-
-  # M26 - AERAÇÃO-01 SILO 2
-  - name: M26_S
-    type: DI
-    address: 1156
-    writable: false
-    readable: true
-    polled: true
-  - name: M26_F
-    type: HR
-    address: 4103
-    writable: false
-    readable: true
-    polled: true
-  - name: M26_A
-    type: HR
-    address: 4104
-    writable: false
-    readable: true
-    polled: true
-  - name: M26_H
-    type: HR
-    address: 4105
-    writable: false
-    readable: true
-    polled: true
-
-  # M27 - AERAÇÃO-02 SILO 2
-  - name: M27_S
-    type: DI
-    address: 1158
-    writable: false
-    readable: true
-    polled: true
-  - name: M27_F
-    type: HR
-    address: 4107
-    writable: false
-    readable: true
-    polled: true
-  - name: M27_A
-    type: HR
-    address: 4108
-    writable: false
-    readable: true
-    polled: true
-  - name: M27_H
-    type: HR
-    address: 4109
-    writable: false
-    readable: true
-    polled: true
-
-  # M28 - AERAÇÃO-03 SILO 2
-  - name: M28_S
-    type: DI
-    address: 1160
-    writable: false
-    readable: true
-    polled: true
-  - name: M28_F
-    type: HR
-    address: 4111
-    writable: false
-    readable: true
-    polled: true
-  - name: M28_A
-    type: HR
-    address: 4112
-    writable: false
-    readable: true
-    polled: true
-  - name: M28_H
-    type: HR
-    address: 4113
-    writable: false
-    readable: true
-    polled: true
-
-  # M29 - AERAÇÃO-04 SILO 2
-  - name: M29_S
-    type: DI
-    address: 1162
-    writable: false
-    readable: true
-    polled: true
-  - name: M29_F
-    type: HR
-    address: 4115
-    writable: false
-    readable: true
-    polled: true
-  - name: M29_A
-    type: HR
-    address: 4116
-    writable: false
-    readable: true
-    polled: true
-  - name: M29_H
-    type: HR
-    address: 4117
-    writable: false
-    readable: true
-    polled: true
-
-  # M30 - AERAÇÃO-01 SILO 3
-  - name: M30_S
-    type: DI
-    address: 1164
-    writable: false
-    readable: true
-    polled: true
-  - name: M30_F
-    type: HR
-    address: 4119
-    writable: false
-    readable: true
-    polled: true
-  - name: M30_A
-    type: HR
-    address: 4120
-    writable: false
-    readable: true
-    polled: true
-  - name: M30_H
-    type: HR
-    address: 4121
-    writable: false
-    readable: true
-    polled: true
-
-  # M31 - AERAÇÃO-02 SILO 3
-  - name: M31_S
-    type: DI
-    address: 1166
-    writable: false
-    readable: true
-    polled: true
-  - name: M31_F
-    type: HR
-    address: 4123
-    writable: false
-    readable: true
-    polled: true
-  - name: M31_A
-    type: HR
-    address: 4124
-    writable: false
-    readable: true
-    polled: true
-  - name: M31_H
-    type: HR
-    address: 4125
-    writable: false
-    readable: true
-    polled: true
-
-  # M32 - AERAÇÃO-03 SILO 3
-  - name: M32_S
-    type: DI
-    address: 1168
-    writable: false
-    readable: true
-    polled: true
-  - name: M32_F
-    type: HR
-    address: 4127
-    writable: false
-    readable: true
-    polled: true
-  - name: M32_A
-    type: HR
-    address: 4128
-    writable: false
-    readable: true
-    polled: true
-  - name: M32_H
-    type: HR
-    address: 4129
-    writable: false
-    readable: true
-    polled: true
-
-  # M33 - AERAÇÃO-04 SILO 3
-  - name: M33_S
-    type: DI
-    address: 1170
-    writable: false
-    readable: true
-    polled: true
-  - name: M33_F
-    type: HR
-    address: 4131
-    writable: false
-    readable: true
-    polled: true
-  - name: M33_A
-    type: HR
-    address: 4132
-    writable: false
-    readable: true
-    polled: true
-  - name: M33_H
-    type: HR
-    address: 4133
-    writable: false
-    readable: true
-    polled: true
-
-  # M34 - AERAÇÃO-01 SILO 4
-  - name: M34_S
-    type: DI
-    address: 1172
-    writable: false
-    readable: true
-    polled: true
-  - name: M34_F
-    type: HR
-    address: 4135
-    writable: false
-    readable: true
-    polled: true
-  - name: M34_A
-    type: HR
-    address: 4136
-    writable: false
-    readable: true
-    polled: true
-  - name: M34_H
-    type: HR
-    address: 4137
-    writable: false
-    readable: true
-    polled: true
-
-  # M35 - AERAÇÃO-02 SILO 4
-  - name: M35_S
-    type: DI
-    address: 1174
-    writable: false
-    readable: true
-    polled: true
-  - name: M35_F
-    type: HR
-    address: 4139
-    writable: false
-    readable: true
-    polled: true
-  - name: M35_A
-    type: HR
-    address: 4140
-    writable: false
-    readable: true
-    polled: true
-  - name: M35_H
-    type: HR
-    address: 4141
-    writable: false
-    readable: true
-    polled: true
-
-  # M36 - AERAÇÃO-03 SILO 4
-  - name: M36_S
-    type: DI
-    address: 1176
-    writable: false
-    readable: true
-    polled: true
-  - name: M36_F
-    type: HR
-    address: 4143
-    writable: false
-    readable: true
-    polled: true
-  - name: M36_A
-    type: HR
-    address: 4144
-    writable: false
-    readable: true
-    polled: true
-  - name: M36_H
-    type: HR
-    address: 4145
-    writable: false
-    readable: true
-    polled: true
-
-  # M37 - AERAÇÃO-04 SILO 4
-  - name: M37_S
-    type: DI
-    address: 1178
-    writable: false
-    readable: true
-    polled: true
-  - name: M37_F
-    type: HR
-    address: 4147
-    writable: false
-    readable: true
-    polled: true
-  - name: M37_A
-    type: HR
-    address: 4148
-    writable: false
-    readable: true
-    polled: true
-  - name: M37_H
-    type: HR
-    address: 4149
-    writable: false
-    readable: true
-    polled: true
-
-  # M38 - ELEVADOR-03
+  # M38 - SEM INFORMAÇÃO
   - name: M38_S
     type: DI
-    address: 1209
+    address: 1007
     writable: false
     readable: true
     polled: true
   - name: M38_F
-    type: HR
-    address: 4150
-    writable: false
-    readable: true
-    polled: true
-  - name: M38_H
-    type: HR
-    address: 4151
-    writable: false
-    readable: true
-    polled: true
-
-  # M39 - ELEVADOR-05
-  - name: M39_S
-    type: DI
-    address: 1211
-    writable: false
-    readable: true
-    polled: true
-  - name: M39_F
-    type: HR
-    address: 4151
-    writable: false
-    readable: true
-    polled: true
-  - name: M39_H
-    type: HR
-    address: 4152
-    writable: false
-    readable: true
-    polled: true
-
-  # M40 - REDLER SILO PULMÃO 1 (RD-SP2 na tabela, mas M40)
-  - name: M40_S
-    type: DI
-    address: 1213
-    writable: false
-    readable: true
-    polled: true
-  - name: M40_F
-    type: HR
-    address: 4152
-    writable: false
-    readable: true
-    polled: true
-  - name: M40_H
-    type: HR
-    address: 4153
-    writable: false
-    readable: true
-    polled: true
-
-  # M41 - ROSCA VARREDORA
-  - name: M41_S
-    type: DI
-    address: 1215
-    writable: false
-    readable: true
-    polled: true
-  - name: M41_F
-    type: HR
-    address: 4153
-    writable: false
-    readable: true
-    polled: true
-  - name: M41_H
-    type: HR
-    address: 4154
-    writable: false
-    readable: true
-    polled: true
-
-  # M42 - ELEVADOR RESIDUO (EL-RES)
-  - name: M42_S
-    type: DI
-    address: 1217
-    writable: false
-    readable: true
-    polled: true
-  - name: M42_F
-    type: HR
-    address: 4154
-    writable: false
-    readable: true
-    polled: true
-  - name: M42_H
-    type: HR
-    address: 4155
-    writable: false
-    readable: true
-    polled: true
-
-  # M43 - ROSCA VARREDORA SILO 4
-  - name: M43_S
-    type: DI
-    address: 1219
-    writable: false
-    readable: true
-    polled: true
-  - name: M43_F
-    type: HR
-    address: 4155
-    writable: false
-    readable: true
-    polled: true
-  - name: M43_H
-    type: HR
-    address: 4156
-    writable: false
-    readable: true
-    polled: true
-
-  # M44 - CORREIA TRANSPORTADORA 08
-  - name: M44_S
-    type: DI
-    address: 1221
-    writable: false
-    readable: true
-    polled: true
-  - name: M44_F
-    type: HR
-    address: 4156
-    writable: false
-    readable: true
-    polled: true
-  - name: M44_H
-    type: HR
-    address: 4157
-    writable: false
-    readable: true
-    polled: true
-
-  # M45 - REDLER 1
-  - name: M45_S
-    type: DI
-    address: 1223
-    writable: false
-    readable: true
-    polled: true
-  - name: M45_F
-    type: HR
-    address: 4157
-    writable: false
-    readable: true
-    polled: true
-  - name: M45_H
-    type: HR
-    address: 4158
-    writable: false
-    readable: true
-    polled: true
-
-  # M46 - REDLER 2
-  - name: M46_S
-    type: DI
-    address: 1225
-    writable: false
-    readable: true
-    polled: true
-  - name: M46_F
-    type: HR
-    address: 4158
-    writable: false
-    readable: true
-    polled: true
-  - name: M46_H
-    type: HR
-    address: 4159
-    writable: false
-    readable: true
-    polled: true
-
-  # M47 - CORREIA TRANSPORTADORA 06
-  - name: M47_S
-    type: DI
-    address: 1227
-    writable: false
-    readable: true
-    polled: true
-  - name: M47_F
-    type: HR
-    address: 4159
-    writable: false
-    readable: true
-    polled: true
-  - name: M47_H
-    type: HR
-    address: 4160
-    writable: false
-    readable: true
-    polled: true
-
-  # M48 - CORREIA TRANSPORTADORA 09
-  - name: M48_S
-    type: DI
-    address: 1229
-    writable: false
-    readable: true
-    polled: true
-  - name: M48_F
-    type: HR
-    address: 4160
-    writable: false
-    readable: true
-    polled: true
-  - name: M48_H
-    type: HR
-    address: 4161
-    writable: false
-    readable: true
-    polled: true
-
-  # M49 - PRÉ LIMPEZA 03
-  - name: M49_S
-    type: DI
-    address: 1231
-    writable: false
-    readable: true
-    polled: true
-  - name: M49_F
-    type: HR
-    address: 4161
-    writable: false
-    readable: true
-    polled: true
-  - name: M49_H
-    type: HR
-    address: 4162
-    writable: false
-    readable: true
-    polled: true
-
-  # M50 - REDLER-09
-  - name: M50_S
-    type: DI
-    address: 1233
-    writable: false
-    readable: true
-    polled: true
-  - name: M50_F
-    type: HR
-    address: 4162
-    writable: false
-    readable: true
-    polled: true
-  - name: M50_H
-    type: HR
-    address: 4163
-    writable: false
-    readable: true
-    polled: true
-
-  # M51 - REDLER-10
-  - name: M51_S
-    type: DI
-    address: 1235
-    writable: false
-    readable: true
-    polled: true
-  - name: M51_F
-    type: HR
-    address: 4163
-    writable: false
-    readable: true
-    polled: true
-  - name: M51_H
-    type: HR
-    address: 4164
-    writable: false
-    readable: true
-    polled: true
-
-  # M52 - CORREIA TRANSPORTADORA 02
-  - name: M52_S
-    type: DI
-    address: 1237
-    writable: false
-    readable: true
-    polled: true
-  - name: M52_F
-    type: HR
-    address: 4164
-    writable: false
-    readable: true
-    polled: true
-  - name: M52_H
-    type: HR
-    address: 4165
-    writable: false
-    readable: true
-    polled: true
-
-  # M53 - CORREIA TRANSPORTADORA 03
-  - name: M53_S
-    type: DI
-    address: 1239
-    writable: false
-    readable: true
-    polled: true
-  - name: M53_F
-    type: HR
-    address: 4165
-    writable: false
-    readable: true
-    polled: true
-  - name: M53_H
-    type: HR
-    address: 4166
-    writable: false
-    readable: true
-    polled: true
-
-  # M54 - CORREIA TRANSPORTADORA 04
-  - name: M54_S
-    type: DI
-    address: 1241
-    writable: false
-    readable: true
-    polled: true
-  - name: M54_F
-    type: HR
-    address: 4166
-    writable: false
-    readable: true
-    polled: true
-  - name: M54_H
-    type: HR
-    address: 4167
-    writable: false
-    readable: true
-    polled: true
-
-  # M55 - CORREIA TRANSPORTADORA 05
-  - name: M55_S
-    type: DI
-    address: 1243
-    writable: false
-    readable: true
-    polled: true
-  - name: M55_F
-    type: HR
-    address: 4167
-    writable: false
-    readable: true
-    polled: true
-  - name: M55_H
-    type: HR
-    address: 4168
-    writable: false
-    readable: true
-    polled: true
-
-  # M56 - REDLER SECADOR 2 (RD-SCC2)
-  - name: M56_S
     type: DI
     address: 1305
     writable: false
     readable: true
     polled: true
-  - name: M56_F
+  - name: M38_H
     type: HR
-    address: 4197
-    writable: false
-    readable: true
-    polled: true
-  - name: M56_H
-    type: HR
-    address: 4198
+    address: 4094
     writable: false
     readable: true
     polled: true
 
-  # M57 - EXAUSTOR MOEGA
-  - name: M57_S
+  # M39 - VSI
+  - name: M39_S
     type: DI
-    address: 1247
+    address: 1207
     writable: false
     readable: true
     polled: true
-  - name: M57_F
-    type: HR
-    address: 4169
+  - name: M39_F
+    type: DI
+    address: 1210
     writable: false
     readable: true
     polled: true
-  - name: M57_H
+  - name: M39_A
     type: HR
-    address: 4170
+    address: 4069
+    writable: false
+    readable: true
+    polled: true
+  - name: M39_H
+    type: HR
+    address: 4095
     writable: false
     readable: true
     polled: true
 
-  # M58 - AERAÇÃO SILO PULMÃO 01
-  - name: M58_S
-    type: DI
-    address: 1249
-    writable: false
-    readable: true
-    polled: true
-  - name: M58_F
+  # M40 - SEM INFORMAÇÃO
+  - name: M40_A
     type: HR
-    address: 4170
-    writable: false
-    readable: true
-    polled: true
-  - name: M58_H
-    type: HR
-    address: 4171
-    writable: false
-    readable: true
-    polled: true
-
-  # M59 - AERAÇÃO SILO PULMÃO 02
-  - name: M59_S
-    type: DI
-    address: 1251
-    writable: false
-    readable: true
-    polled: true
-  - name: M59_F
-    type: HR
-    address: 4171
-    writable: false
-    readable: true
-    polled: true
-  - name: M59_H
-    type: HR
-    address: 4172
-    writable: false
-    readable: true
-    polled: true
-
-  # M60 - EXAUSTOR TUNEL SILO
-  - name: M60_S
-    type: DI
-    address: 1253
-    writable: false
-    readable: true
-    polled: true
-  - name: M60_F
-    type: HR
-    address: 4172
-    writable: false
-    readable: true
-    polled: true
-  - name: M60_H
-    type: HR
-    address: 4173
-    writable: false
-    readable: true
-    polled: true
-
-  # M61 - REDLER 1 PRELIMPEZA 1
-  - name: M61_S
-    type: DI
-    address: 1255
-    writable: false
-    readable: true
-    polled: true
-  - name: M61_F
-    type: HR
-    address: 4173
-    writable: false
-    readable: true
-    polled: true
-  - name: M61_H
-    type: HR
-    address: 4174
-    writable: false
-    readable: true
-    polled: true
-
-  # M62 - ROSCA 02 PRELIMPEZA 2
-  - name: M62_S
-    type: DI
-    address: 1257
-    writable: false
-    readable: true
-    polled: true
-  - name: M62_F
-    type: HR
-    address: 4174
-    writable: false
-    readable: true
-    polled: true
-  - name: M62_H
-    type: HR
-    address: 4175
-    writable: false
-    readable: true
-    polled: true
-
-  # M63 - (Vazio na tabela, mas tem endereços)
-  - name: M63_S
-    type: DI
-    address: 1259
-    writable: false
-    readable: true
-    polled: true
-  - name: M63_F
-    type: HR
-    address: 4175
-    writable: false
-    readable: true
-    polled: true
-  - name: M63_H
-    type: HR
-    address: 4176
-    writable: false
-    readable: true
-    polled: true
-
-  # M64 - CORREIA TRANSPORTADORA 10
-  - name: M64_S
-    type: DI
-    address: 1261
-    writable: false
-    readable: true
-    polled: true
-  - name: M64_F
-    type: HR
-    address: 4176
-    writable: false
-    readable: true
-    polled: true
-  - name: M64_H
-    type: HR
-    address: 4177
-    writable: false
-    readable: true
-    polled: true
-
-  # M65 - EXAUSTOR MI 01
-  - name: M65_S
-    type: DI
-    address: 1263
-    writable: false
-    readable: true
-    polled: true
-  - name: M65_F
-    type: HR
-    address: 4177
-    writable: false
-    readable: true
-    polled: true
-  - name: M65_H
-    type: HR
-    address: 4178
-    writable: false
-    readable: true
-    polled: true
-
-  # M66 - MI-02
-  - name: M66_S
-    type: DI
-    address: 1265
-    writable: false
-    readable: true
-    polled: true
-  - name: M66_F
-    type: HR
-    address: 4178
-    writable: false
-    readable: true
-    polled: true
-  - name: M66_H
-    type: HR
-    address: 4179
-    writable: false
-    readable: true
-    polled: true
-
-  # M67 - EXAUSTOR PRÉ LIMPEZA 01
-  - name: M67_S
-    type: DI
-    address: 1267
-    writable: false
-    readable: true
-    polled: true
-  - name: M67_F
-    type: HR
-    address: 4179
-    writable: false
-    readable: true
-    polled: true
-  - name: M67_H
-    type: HR
-    address: 4180
-    writable: false
-    readable: true
-    polled: true
-
-  # M68 - PRÉ LIMPEZA 01
-  - name: M68_S
-    type: DI
-    address: 1269
-    writable: false
-    readable: true
-    polled: true
-  - name: M68_F
-    type: HR
-    address: 4180
-    writable: false
-    readable: true
-    polled: true
-  - name: M68_H
-    type: HR
-    address: 4181
-    writable: false
-    readable: true
-    polled: true
-
-  # M69 - EXAUSTOR PRÉ LIMPEZA 02
-  - name: M69_S
-    type: DI
-    address: 1271
-    writable: false
-    readable: true
-    polled: true
-  - name: M69_F
-    type: HR
-    address: 4181
-    writable: false
-    readable: true
-    polled: true
-  - name: M69_H
-    type: HR
-    address: 4182
-    writable: false
-    readable: true
-    polled: true
-
-  # M70 - PRÉ LIMPEZA 02
-  - name: M70_S
-    type: DI
-    address: 1273
-    writable: false
-    readable: true
-    polled: true
-  - name: M70_F
-    type: HR
-    address: 4182
-    writable: false
-    readable: true
-    polled: true
-  - name: M70_H
-    type: HR
-    address: 4183
-    writable: false
-    readable: true
-    polled: true
-
-  # M71 - PRÉ LIMPEZA 03
-  - name: M71_S
-    type: DI
-    address: 1275
-    writable: false
-    readable: true
-    polled: true
-  - name: M71_F
-    type: HR
-    address: 4183
-    writable: false
-    readable: true
-    polled: true
-  - name: M71_H
-    type: HR
-    address: 4184
-    writable: false
-    readable: true
-    polled: true
-
-  # M72 - EXAUSTOR MI 02
-  - name: M72_S
-    type: DI
-    address: 1277
-    writable: false
-    readable: true
-    polled: true
-  - name: M72_F
-    type: HR
-    address: 4184
-    writable: false
-    readable: true
-    polled: true
-  - name: M72_H
-    type: HR
-    address: 4185
-    writable: false
-    readable: true
-    polled: true
-
-  # M73 - MI-01
-  - name: M73_S
-    type: DI
-    address: 1279
-    writable: false
-    readable: true
-    polled: true
-  - name: M73_F
-    type: HR
-    address: 4185
-    writable: false
-    readable: true
-    polled: true
-  - name: M73_H
-    type: HR
-    address: 4186
-    writable: false
-    readable: true
-    polled: true
-
-  # M74 - EXAUSTOR MI 04
-  - name: M74_S
-    type: DI
-    address: 1281
-    writable: false
-    readable: true
-    polled: true
-  - name: M74_F
-    type: HR
-    address: 4186
-    writable: false
-    readable: true
-    polled: true
-  - name: M74_H
-    type: HR
-    address: 4187
-    writable: false
-    readable: true
-    polled: true
-
-  # M75 - MI-04
-  - name: M75_S
-    type: DI
-    address: 1283
-    writable: false
-    readable: true
-    polled: true
-  - name: M75_F
-    type: HR
-    address: 4187
-    writable: false
-    readable: true
-    polled: true
-  - name: M75_H
-    type: HR
-    address: 4188
-    writable: false
-    readable: true
-    polled: true
-
-  # M76 - EXAUSTOR PRÉ LIMPEZA 04
-  - name: M76_S
-    type: DI
-    address: 1285
-    writable: false
-    readable: true
-    polled: true
-  - name: M76_F
-    type: HR
-    address: 4188
-    writable: false
-    readable: true
-    polled: true
-  - name: M76_H
-    type: HR
-    address: 4189
-    writable: false
-    readable: true
-    polled: true
-
-  # M77 - ROSCA RESIDUO MENOR
-  - name: M77_S
-    type: DI
-    address: 1287
-    writable: false
-    readable: true
-    polled: true
-  - name: M77_F
-    type: HR
-    address: 4189
-    writable: false
-    readable: true
-    polled: true
-  - name: M77_H
-    type: HR
-    address: 4190
-    writable: false
-    readable: true
-    polled: true
-
-  # M78 - ROSCA RESIDO
-  - name: M78_S
-    type: DI
-    address: 1289
-    writable: false
-    readable: true
-    polled: true
-  - name: M78_F
-    type: HR
-    address: 4190
-    writable: false
-    readable: true
-    polled: true
-  - name: M78_H
-    type: HR
-    address: 4191
-    writable: false
-    readable: true
-    polled: true
-
-  # M79 - ROSCA-08
-  - name: M79_S
-    type: DI
-    address: 1291
-    writable: false
-    readable: true
-    polled: true
-  - name: M79_F
-    type: HR
-    address: 4191
-    writable: false
-    readable: true
-    polled: true
-  - name: M79_H
-    type: HR
-    address: 4192
-    writable: false
-    readable: true
-    polled: true
-
-  # M80 - ROSCA SILO 1
-  - name: M80_S
-    type: DI
-    address: 1293
-    writable: false
-    readable: true
-    polled: true
-  - name: M80_F
-    type: HR
-    address: 4192
-    writable: false
-    readable: true
-    polled: true
-  - name: M80_H
-    type: HR
-    address: 4193
-    writable: false
-    readable: true
-    polled: true
-
-  # M81 - REDLER SILO PULMÃO 01
-  - name: M81_S
-    type: DI
-    address: 1295
-    writable: false
-    readable: true
-    polled: true
-  - name: M81_F
-    type: HR
-    address: 4193
-    writable: false
-    readable: true
-    polled: true
-  - name: M81_H
-    type: HR
-    address: 4194
-    writable: false
-    readable: true
-    polled: true
-
-  # M82 - REDLER SECADOR 1 (RD-SCC1)
-  - name: M82_S
-    type: DI
-    address: 1297
-    writable: false
-    readable: true
-    polled: true
-  - name: M82_F
-    type: HR
-    address: 4194
-    writable: false
-    readable: true
-    polled: true
-  - name: M82_H
-    type: HR
-    address: 4195
-    writable: false
-    readable: true
-    polled: true
-
-  # M83 - PRÉ LIMPEZA 03 (Repetido?)
-  - name: M83_S
-    type: DI
-    address: 1299
-    writable: false
-    readable: true
-    polled: true
-  - name: M83_F
-    type: HR
-    address: 4195
-    writable: false
-    readable: true
-    polled: true
-  - name: M83_H
-    type: HR
-    address: 4196
-    writable: false
-    readable: true
-    polled: true
-
-  # M84 - ESPALHADOR DE GRÃOS SILO 04
-  - name: M84_S
-    type: DI
-    address: 1301
-    writable: false
-    readable: true
-    polled: true
-  - name: M84_F
-    type: HR
-    address: 4196
-    writable: false
-    readable: true
-    polled: true
-  - name: M84_H
-    type: HR
-    address: 4197
-    writable: false
-    readable: true
-    polled: true
-
-  # M85 - CORREIA TRANSPORTADORA 07 - Reversão 1
-  - name: M85_S
-    type: DI
-    address: 1245
-    writable: false
-    readable: true
-    polled: true
-  - name: M85_F
-    type: HR
-    address: 4168
-    writable: false
-    readable: true
-    polled: true
-  - name: M85_H
-    type: HR
-    address: 4169
-    writable: false
-    readable: true
-    polled: true
-
-  # M85_1 - CORREIA TRANSPORTADORA 07 - Reversão 2
-  - name: M85_1_S
-    type: DI
-    address: 1303
-    writable: false
-    readable: true
-    polled: true
-
-  # M86 - Elevador 11
-  - name: M86_S
-    type: DI
-    address: 1321
-    writable: false
-    readable: true
-    polled: true
-  - name: M86_F
-    type: HR
-    address: 4198
-    writable: false
-    readable: true
-    polled: true
-  - name: M86_A
-    type: HR
-    address: 4199
-    writable: false
-    readable: true
-    polled: true
-  - name: M86_H
-    type: HR
-    address: 4200
+    address: 4070
     writable: false
     readable: true
     polled: true
 
   #==============================
-  #=== V1-V2 ====================
+  #=== MULTIMEDIDOR 1 ==========
   #==============================
-  - name: V1-V2
-    type: HR
-    address: 4301
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - V1_V2"
 
-  #==============================
-  #=== V2-V3 ====================
-  #==============================
-  - name: V2-V3
-    type: HR
-    address: 4302
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - V2-V3"
-
-  #==============================
-  #=== V3-V1 ====================
-  #==============================
-  - name: V3-V1
-    type: HR
-    address: 4303
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - V3-V1"
-
-  #==============================
-  #=== L1 =======================
-  #==============================
-  - name: L1
-    type: HR
-    address: 4304
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - L1"
-
-  #==============================
-  #=== L2 =======================
-  #==============================
-  - name: L2
-    type: HR
-    address: 4305
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - L2"
-
-  #==============================
-  #=== L3 =======================
-  #==============================
-  - name: L3
-    type: HR
-    address: 4306
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - L3"
-
-  #==============================
-  #=== Fator de potencia ========
-  #==============================
   - name: FP
     type: HR
-    address: 4307
+    address: 4080
     writable: false
     readable: true
     polled: true
     description: "CCM1 - FP"
 
-  #==============================
-  #=== HZ =======================
-  #==============================
-  - name: HZ
-    type: HR
-    address: 4308
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM1 - HZ"
-
-  #==============================
-  #=== V1-N =====================
-  #==============================
   - name: V1-N
     type: HR
-    address: 4309
+    address: 4081
     scale: 0.1
     writable: false
     readable: true
     polled: true
     description: "CCM1 - V1-N"
 
-  #==============================
-  #=== V2-N =====================
-  #==============================
   - name: V2-N
     type: HR
-    address: 4310
+    address: 4082
     scale: 0.1
     writable: false
     readable: true
     polled: true
     description: "CCM1 - V2-N"
 
-  #==============================
-  #=== V3-N =====================
-  #==============================
   - name: V3-N
     type: HR
-    address: 4311
+    address: 4083
     scale: 0.1
     writable: false
     readable: true
     polled: true
     description: "CCM1 - V3-N"
 
-  #==============================
-  #=== KW =======================
-  #==============================
-  - name: KW
-    name_front: "Potência Total (kW)"
+  - name: A1
     type: HR
-    address: 4312
+    address: 4084
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - A1"
+
+  - name: A2
+    type: HR
+    address: 4085
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - A2"
+
+  - name: A3
+    type: HR
+    address: 4086
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - A3"
+
+  - name: KW
+    type: HR
+    address: 4087
     writable: false
     readable: true
     polled: true
     description: "CCM1 - KW"
+
+  - name: V1-V2
+    type: HR
+    address: 4088
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V1-V2"
+
+  - name: V2-V3
+    type: HR
+    address: 4089
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V2-V3"
+
+  - name: V1-V3
+    type: HR
+    address: 4090
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - V1-V3"
+
+  - name: FREQUENCIA
+    type: HR
+    address: 4078
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - FREQUENCIA"
+
+  - name: CONSUMO
+    type: HR
+    address: 4079
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - CONSUMO"
+
+  #==============================
+  #=== MULTIMEDIDOR 2 ==========
+  #==============================
+
+  - name: _FP
+    type: HR
+    address: 4149
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _FP"
+
+  - name: _V1_N
+    type: HR
+    address: 4150
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V1_N"
+
+  - name: _V2_N
+    type: HR
+    address: 4151
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V2_N"
+
+  - name: _V3_N
+    type: HR
+    address: 4152
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V3_N"
+
+  - name: _A1
+    type: HR
+    address: 4153
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _A1"
+
+  - name: _A2
+    type: HR
+    address: 4154
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _A2"
+
+  - name: _A3
+    type: HR
+    address: 4155
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _A3"
+
+  - name: _KW
+    type: HR
+    address: 4156
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _KW"
+
+  - name: _V1-V2
+    type: HR
+    address: 4157
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V1-V2"
+
+  - name: _V2-V3
+    type: HR
+    address: 4158
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V2-V3"
+
+  - name: _V1-V3
+    type: HR
+    address: 4159
+    scale: 0.1
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _V1-V3"
+
+  - name: _FREQ
+    type: HR
+    address: 4160
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _FREQ"
+
+  - name: _CONS
+    type: HR
+    address: 4161
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - _CONS"

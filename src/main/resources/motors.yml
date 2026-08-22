@@ -5,869 +5,368 @@ motors:
   # ==============================================================================
   # CCM 1
   # ==============================================================================
-  
-  # --- Motores Softstarter (M1 a M13) ---
-  - name: "Elevador 02 - Moega"
+
+  # --- Motores Softstarter (M1 a M11) ---
+  - name: "200 HP"
     ccm: "ccm1"
-    category: "elevador"
+    category: "britador"
     nominalCurrent: 10.0
-    statusTagName: "M1_S"
     currentTagName: "M1_A"
     faultTagName: "M1_F"
     hoursTagName: "M1_H"
     hasInverter: false
 
-  - name: "Elevador 04"
+  - name: "CT TUNEL 0200-CT-01"
     ccm: "ccm1"
-    category: "elevador"
+    category: "correia"
     nominalCurrent: 10.0
-    statusTagName: "M2_S"
     currentTagName: "M2_A"
     faultTagName: "M2_F"
     hoursTagName: "M2_H"
     hasInverter: false
 
-  - name: "Elevador 06"
+  - name: "PENEIRA VIBRATORIA SCALP"
     ccm: "ccm1"
-    category: "elevador"
+    category: "peneira"
     nominalCurrent: 10.0
-    statusTagName: "M3_S"
     currentTagName: "M3_A"
     faultTagName: "M3_F"
     hoursTagName: "M3_H"
     hasInverter: false
 
-  - name: "Redler Silo 1"
+  - name: "PENEIRA VIBRATORIA 02"
     ccm: "ccm1"
-    category: "redler"
+    category: "peneira"
     nominalCurrent: 10.0
-    statusTagName: "M4_S"
     currentTagName: "M4_A"
     faultTagName: "M4_F"
     hoursTagName: "M4_H"
     hasInverter: false
 
-  - name: "Redler Silo 2"
+  - name: "PENEIRA VIBRATORIA 01"
     ccm: "ccm1"
-    category: "redler"
+    category: "peneira"
     nominalCurrent: 10.0
-    statusTagName: "M5_S"
     currentTagName: "M5_A"
     faultTagName: "M5_F"
     hoursTagName: "M5_H"
     hasInverter: false
 
-  - name: "Redler Silo 3"
+  - name: "CT BRITADOR"
     ccm: "ccm1"
-    category: "redler"
+    category: "correia"
     nominalCurrent: 10.0
-    statusTagName: "M6_S"
     currentTagName: "M6_A"
     faultTagName: "M6_F"
     hoursTagName: "M6_H"
     hasInverter: false
 
-  - name: "Redler Silo 4"
+  - name: "BRITADOR HP300"
     ccm: "ccm1"
-    category: "redler"
+    category: "britador"
     nominalCurrent: 10.0
-    statusTagName: "M7_S"
     currentTagName: "M7_A"
     faultTagName: "M7_F"
     hoursTagName: "M7_H"
     hasInverter: false
 
-  - name: "Rosca Varredora Silo 2"
+  - name: "RETORNO CONE 01"
     ccm: "ccm1"
-    category: "rosca"
+    category: "correia"
     nominalCurrent: 10.0
-    statusTagName: "M8_S"
     currentTagName: "M8_A"
     faultTagName: "M8_F"
     hoursTagName: "M8_H"
     hasInverter: false
 
-  - name: "Elevador 07 - Armazém"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "elevador"
+    category: "outros"
     nominalCurrent: 10.0
-    statusTagName: "M9_S"
     currentTagName: "M9_A"
     faultTagName: "M9_F"
     hoursTagName: "M9_H"
     hasInverter: false
 
-  - name: "Elevador 08 - Armazém"
+  - name: "CT NOVA CT4 - PL2"
     ccm: "ccm1"
-    category: "elevador"
+    category: "correia"
     nominalCurrent: 10.0
-    statusTagName: "M10_S"
     currentTagName: "M10_A"
     faultTagName: "M10_F"
     hoursTagName: "M10_H"
     hasInverter: false
 
-  - name: "Elevador 01 - Moega"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "elevador"
+    category: "outros"
     nominalCurrent: 10.0
-    statusTagName: "M11_S"
     currentTagName: "M11_A"
     faultTagName: "M11_F"
     hoursTagName: "M11_H"
     hasInverter: false
 
-  - name: "Elevador 09 - Silo Carga"
+  # --- Partida Direta (M12 a M35) ---
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "elevador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M12_S"
-    currentTagName: "M12_A"
     faultTagName: "M12_F"
     hoursTagName: "M12_H"
     hasInverter: false
 
-  - name: "Elevador 10 - Silo Descarga"
+  - name: "SIRENE"
     ccm: "ccm1"
-    category: "elevador"
+    category: "sirene"
     nominalCurrent: 10.0
     statusTagName: "M13_S"
-    currentTagName: "M13_A"
     faultTagName: "M13_F"
     hoursTagName: "M13_H"
     hasInverter: false
 
-  # --- Motores Inversores (M14 a M37) ---
-  - name: "Exaustor Secador 01 M1"
+  - name: "CT2 INF CONES"
     ccm: "ccm1"
-    category: "exaustor"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M14_S"
-    currentTagName: "M14_A"
     faultTagName: "M14_F"
     hoursTagName: "M14_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Exaustor Secador 01 M2"
+  - name: "CT7 PEDRA 1"
     ccm: "ccm1"
-    category: "exaustor"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M15_S"
-    currentTagName: "M15_A"
     faultTagName: "M15_F"
     hoursTagName: "M15_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Exaustor Secador 01 M3"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "exaustor"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M16_S"
-    currentTagName: "M16_A"
     faultTagName: "M16_F"
     hoursTagName: "M16_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Exaustor Secador 02 M1"
+  - name: "CT6 DESC VSI"
     ccm: "ccm1"
-    category: "exaustor"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M17_S"
-    currentTagName: "M17_A"
     faultTagName: "M17_F"
     hoursTagName: "M17_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Exaustor Secador 02 M2"
+  - name: "CT8 PEDRA 0"
     ccm: "ccm1"
-    category: "exaustor"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M18_S"
-    currentTagName: "M18_A"
     faultTagName: "M18_F"
     hoursTagName: "M18_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 01 - Armazém"
+  - name: "CT9 PEDRISCO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M19_S"
-    currentTagName: "M19_A"
     faultTagName: "M19_F"
     hoursTagName: "M19_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 02 - Armazém"
+  - name: "CT10 BICA CO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M20_S"
-    currentTagName: "M20_A"
     faultTagName: "M20_F"
     hoursTagName: "M20_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 03 - Armazém"
+  - name: "CT16 PEDRA 2"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M21_S"
-    currentTagName: "M21_A"
     faultTagName: "M21_F"
     hoursTagName: "M21_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 01 - Silo 1"
+  - name: "CT11 PO 1"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M22_S"
-    currentTagName: "M22_A"
     faultTagName: "M22_F"
     hoursTagName: "M22_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 02 - Silo 1"
+  - name: "CT12 PO 2"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M23_S"
-    currentTagName: "M23_A"
     faultTagName: "M23_F"
     hoursTagName: "M23_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 03 - Silo 1"
+  - name: "CT13 REGEITO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M24_S"
-    currentTagName: "M24_A"
     faultTagName: "M24_F"
     hoursTagName: "M24_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 04 - Silo 1"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M25_S"
-    currentTagName: "M25_A"
     faultTagName: "M25_F"
     hoursTagName: "M25_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 01 - Silo 2"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M26_S"
-    currentTagName: "M26_A"
     faultTagName: "M26_F"
     hoursTagName: "M26_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 02 - Silo 2"
+  - name: "BOMBA D'AGUA"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "bomba"
     nominalCurrent: 10.0
     statusTagName: "M27_S"
-    currentTagName: "M27_A"
     faultTagName: "M27_F"
     hoursTagName: "M27_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 03 - Silo 2"
+  - name: "CT15 RET CONE 2"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M28_S"
-    currentTagName: "M28_A"
     faultTagName: "M28_F"
     hoursTagName: "M28_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 04 - Silo 2"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M29_S"
-    currentTagName: "M29_A"
     faultTagName: "M29_F"
     hoursTagName: "M29_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 01 - Silo 3"
+  - name: "Unidade Hidraulica VSI"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "unidade_hidraulica"
     nominalCurrent: 10.0
     statusTagName: "M30_S"
-    currentTagName: "M30_A"
     faultTagName: "M30_F"
     hoursTagName: "M30_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 02 - Silo 3"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M31_S"
-    currentTagName: "M31_A"
     faultTagName: "M31_F"
     hoursTagName: "M31_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 03 - Silo 3"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M32_S"
-    currentTagName: "M32_A"
     faultTagName: "M32_F"
     hoursTagName: "M32_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 04 - Silo 3"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M33_S"
-    currentTagName: "M33_A"
     faultTagName: "M33_F"
     hoursTagName: "M33_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 01 - Silo 4"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "outros"
     nominalCurrent: 10.0
     statusTagName: "M34_S"
-    currentTagName: "M34_A"
     faultTagName: "M34_F"
     hoursTagName: "M34_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 02 - Silo 4"
+  - name: "BOMBA PRESSÃO ÁGUA"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "bomba"
     nominalCurrent: 10.0
     statusTagName: "M35_S"
-    currentTagName: "M35_A"
     faultTagName: "M35_F"
     hoursTagName: "M35_H"
-    hasInverter: true
+    hasInverter: false
 
-  - name: "Aeração 03 - Silo 4"
+  # --- Motores com Inversor (M36 a M39) ---
+  - name: "MESA VIBRATÓRIA ANTIGO"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "mesa_vibratoria"
     nominalCurrent: 10.0
     statusTagName: "M36_S"
-    currentTagName: "M36_A"
     faultTagName: "M36_F"
     hoursTagName: "M36_H"
     hasInverter: true
 
-  - name: "Aeração 04 - Silo 4"
+  - name: "MESA VIBRATÓRIA TUNEL"
     ccm: "ccm1"
-    category: "ventilador"
+    category: "mesa_vibratoria"
     nominalCurrent: 10.0
     statusTagName: "M37_S"
-    currentTagName: "M37_A"
     faultTagName: "M37_F"
     hoursTagName: "M37_H"
     hasInverter: true
 
-  # --- Motores Partida Direta (M38 a M84) ---
-  - name: "Elevador 03"
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "elevador"
+    category: "correia"
     nominalCurrent: 10.0
     statusTagName: "M38_S"
-    currentTagName: "M38_A"
     faultTagName: "M38_F"
     hoursTagName: "M38_H"
-    hasInverter: false
+    hasInverter: true
 
-  - name: "Elevador 05"
+  - name: "VSI"
     ccm: "ccm1"
-    category: "elevador"
+    category: "vsi"
     nominalCurrent: 10.0
     statusTagName: "M39_S"
     currentTagName: "M39_A"
     faultTagName: "M39_F"
     hoursTagName: "M39_H"
-    hasInverter: false
+    hasInverter: true
 
-  - name: "Redler Silo 1"
+  # --- M40 - Somente corrente disponível ---
+  - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
-    category: "redler"
+    category: "outros"
     nominalCurrent: 10.0
-    statusTagName: "M40_S"
     currentTagName: "M40_A"
-    faultTagName: "M40_F"
-    hoursTagName: "M40_H"
-    hasInverter: false
-
-  - name: "Rosca Varredora"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M41_S"
-    currentTagName: "M41_A"
-    faultTagName: "M41_F"
-    hoursTagName: "M41_H"
-    hasInverter: false
-
-  - name: "Rosca Varredora Silo 3"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M42_S"
-    currentTagName: "M42_A"
-    faultTagName: "M42_F"
-    hoursTagName: "M42_H"
-    hasInverter: false
-
-  - name: "Rosca Varredora Silo 4"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M43_S"
-    currentTagName: "M43_A"
-    faultTagName: "M43_F"
-    hoursTagName: "M43_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 08"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M44_S"
-    currentTagName: "M44_A"
-    faultTagName: "M44_F"
-    hoursTagName: "M44_H"
-    hasInverter: false
-
-  - name: "Redler 1"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M45_S"
-    currentTagName: "M45_A"
-    faultTagName: "M45_F"
-    hoursTagName: "M45_H"
-    hasInverter: false
-
-  - name: "Redler 2"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M46_S"
-    currentTagName: "M46_A"
-    faultTagName: "M46_F"
-    hoursTagName: "M46_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 06"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M47_S"
-    currentTagName: "M47_A"
-    faultTagName: "M47_F"
-    hoursTagName: "M47_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 09"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M48_S"
-    currentTagName: "M48_A"
-    faultTagName: "M48_F"
-    hoursTagName: "M48_H"
-    hasInverter: false
-
-  - name: "Pré Limpeza 03"
-    ccm: "ccm1"
-    category: "pre_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M49_S"
-    currentTagName: "M49_A"
-    faultTagName: "M49_F"
-    hoursTagName: "M49_H"
-    hasInverter: false
-
-  - name: "Rosca 09"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M50_S"
-    currentTagName: "M50_A"
-    faultTagName: "M50_F"
-    hoursTagName: "M50_H"
-    hasInverter: false
-
-  - name: "Rosca 10"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M51_S"
-    currentTagName: "M51_A"
-    faultTagName: "M51_F"
-    hoursTagName: "M51_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 02"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M52_S"
-    currentTagName: "M52_A"
-    faultTagName: "M52_F"
-    hoursTagName: "M52_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 03"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M53_S"
-    currentTagName: "M53_A"
-    faultTagName: "M53_F"
-    hoursTagName: "M53_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 04"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M54_S"
-    currentTagName: "M54_A"
-    faultTagName: "M54_F"
-    hoursTagName: "M54_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 05"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M55_S"
-    currentTagName: "M55_A"
-    faultTagName: "M55_F"
-    hoursTagName: "M55_H"
-    hasInverter: false
-
-  - name: "Redler Secador 2"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M56_S"
-    currentTagName: "M56_A"
-    faultTagName: "M56_F"
-    hoursTagName: "M56_H"
-    hasInverter: false
-
-  - name: "Exaustor Moega"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M57_S"
-    currentTagName: "M57_A"
-    faultTagName: "M57_F"
-    hoursTagName: "M57_H"
-    hasInverter: false
-
-  - name: "Aeração Silo Pulmão 01"
-    ccm: "ccm1"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M58_S"
-    currentTagName: "M58_A"
-    faultTagName: "M58_F"
-    hoursTagName: "M58_H"
-    hasInverter: false
-
-  - name: "Aeração Silo Pulmão 02"
-    ccm: "ccm1"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M59_S"
-    currentTagName: "M59_A"
-    faultTagName: "M59_F"
-    hoursTagName: "M59_H"
-    hasInverter: false
-
-  - name: "Exaustor Túnel Silo"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M60_S"
-    currentTagName: "M60_A"
-    faultTagName: "M60_F"
-    hoursTagName: "M60_H"
-    hasInverter: false
-
-  - name: "Redler 1 Pré Limpeza 1"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M61_S"
-    currentTagName: "M61_A"
-    faultTagName: "M61_F"
-    hoursTagName: "M61_H"
-    hasInverter: false
-
-  - name: "Rosca 02 Pré Limpeza 2"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M62_S"
-    currentTagName: "M62_A"
-    faultTagName: "M62_F"
-    hoursTagName: "M62_H"
-    hasInverter: false
-
-  - name: "Elevador Resíduo"
-    ccm: "ccm1"
-    category: "elevador"
-    nominalCurrent: 10.0
-    statusTagName: "M63_S"
-    currentTagName: "M63_A"
-    faultTagName: "M63_F"
-    hoursTagName: "M63_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 10"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M64_S"
-    currentTagName: "M64_A"
-    faultTagName: "M64_F"
-    hoursTagName: "M64_H"
-    hasInverter: false
-
-  - name: "Exaustor MI 01"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M65_S"
-    currentTagName: "M65_A"
-    faultTagName: "M65_F"
-    hoursTagName: "M65_H"
-    hasInverter: false
-
-  - name: "MI 02"
-    ccm: "ccm1"
-    category: "maquina_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M66_S"
-    currentTagName: "M66_A"
-    faultTagName: "M66_F"
-    hoursTagName: "M66_H"
-    hasInverter: false
-
-  - name: "Exaustor Pré Limpeza 01"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M67_S"
-    currentTagName: "M67_A"
-    faultTagName: "M67_F"
-    hoursTagName: "M67_H"
-    hasInverter: false
-
-  - name: "Pré Limpeza 01"
-    ccm: "ccm1"
-    category: "pre_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M68_S"
-    currentTagName: "M68_A"
-    faultTagName: "M68_F"
-    hoursTagName: "M68_H"
-    hasInverter: false
-
-  - name: "Exaustor Pré Limpeza 02"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M69_S"
-    currentTagName: "M69_A"
-    faultTagName: "M69_F"
-    hoursTagName: "M69_H"
-    hasInverter: false
-
-  - name: "Pré Limpeza 02"
-    ccm: "ccm1"
-    category: "pre_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M70_S"
-    currentTagName: "M70_A"
-    faultTagName: "M70_F"
-    hoursTagName: "M70_H"
-    hasInverter: false
-
-  - name: "Pré Limpeza 03"
-    ccm: "ccm1"
-    category: "pre_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M71_S"
-    currentTagName: "M71_A"
-    faultTagName: "M71_F"
-    hoursTagName: "M71_H"
-    hasInverter: false
-
-  - name: "Exaustor MI 02"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M72_S"
-    currentTagName: "M72_A"
-    faultTagName: "M72_F"
-    hoursTagName: "M72_H"
-    hasInverter: false
-
-  - name: "MI 01"
-    ccm: "ccm1"
-    category: "maquina_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M73_S"
-    currentTagName: "M73_A"
-    faultTagName: "M73_F"
-    hoursTagName: "M73_H"
-    hasInverter: false
-
-  - name: "Exaustor MI 04"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M74_S"
-    currentTagName: "M74_A"
-    faultTagName: "M74_F"
-    hoursTagName: "M74_H"
-    hasInverter: false
-
-  - name: "MI 04"
-    ccm: "ccm1"
-    category: "maquina_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M75_S"
-    currentTagName: "M75_A"
-    faultTagName: "M75_F"
-    hoursTagName: "M75_H"
-    hasInverter: false
-
-  - name: "Exaustor Pré Limpeza 04"
-    ccm: "ccm1"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M76_S"
-    currentTagName: "M76_A"
-    faultTagName: "M76_F"
-    hoursTagName: "M76_H"
-    hasInverter: false
-
-  - name: "Rosca Resíduo Menor"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M77_S"
-    currentTagName: "M77_A"
-    faultTagName: "M77_F"
-    hoursTagName: "M77_H"
-    hasInverter: false
-
-  - name: "Rosca Resíduo"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M78_S"
-    currentTagName: "M78_A"
-    faultTagName: "M78_F"
-    hoursTagName: "M78_H"
-    hasInverter: false
-
-  - name: "Rosca 08"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M79_S"
-    currentTagName: "M79_A"
-    faultTagName: "M79_F"
-    hoursTagName: "M79_H"
-    hasInverter: false
-
-  - name: "Rosca Silo 1"
-    ccm: "ccm1"
-    category: "rosca"
-    nominalCurrent: 10.0
-    statusTagName: "M80_S"
-    currentTagName: "M80_A"
-    faultTagName: "M80_F"
-    hoursTagName: "M80_H"
-    hasInverter: false
-
-  - name: "Redler Silo Pulmão 01"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M81_S"
-    currentTagName: "M81_A"
-    faultTagName: "M81_F"
-    hoursTagName: "M81_H"
-    hasInverter: false
-
-  - name: "Redler Secador 1"
-    ccm: "ccm1"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M82_S"
-    currentTagName: "M82_A"
-    faultTagName: "M82_F"
-    hoursTagName: "M82_H"
-    hasInverter: false
-
-  - name: "Pré Limpeza 03 (Repetido)"
-    ccm: "ccm1"
-    category: "pre_limpeza"
-    nominalCurrent: 10.0
-    statusTagName: "M83_S"
-    currentTagName: "M83_A"
-    faultTagName: "M83_F"
-    hoursTagName: "M83_H"
-    hasInverter: false
-
-  - name: "Espalhador de Grãos Silo 04"
-    ccm: "ccm1"
-    category: "espalhador"
-    nominalCurrent: 10.0
-    statusTagName: "M84_S"
-    currentTagName: "M84_A"
-    faultTagName: "M84_F"
-    hoursTagName: "M84_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 07 - Reversível"
-    ccm: "ccm1"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M85_S"
-    secondaryStatusTagName: "M85_1_S"
-    currentTagName: "M85_A"
-    faultTagName: "M85_F"
-    hoursTagName: "M85_H"
-    hasInverter: false
-
-  - name: "Elevador 11"
-    ccm: "ccm1"
-    category: "elevador"
-    nominalCurrent: 10.0
-    statusTagName: "M86_S"
-    currentTagName: "M86_A"
-    faultTagName: "M86_F"
-    hoursTagName: "M86_H"
     hasInverter: false
 
   # ==============================================================================
