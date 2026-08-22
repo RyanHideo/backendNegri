@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -33,6 +34,7 @@ public class MotorController {
     private final MotorCatalog motorCatalog;
     private final ModbusService modbusService;
     private static final String CMD_REGISTER_TAG = "CMD_REGISTER";
+    private static final Pattern MOTOR_TAG_PATTERN = Pattern.compile("^M(\\d+)_");
 
     @GetMapping("/overview")
     public List<MotorOverviewDto> getMotorsOverview() {
@@ -101,24 +103,34 @@ public class MotorController {
     }
 
     private MotorOverviewDto buildDtoForMotor(MotorDef motor) {
-        Double status = getValue(motor.getCcm(), motor.getStatusTagName()).orElse(0.0);
+        Double status = getValue(motor.getCcm(), motor.getStatusTagName());
         
         // Lógica para motor reversível (M85)
         if (motor.getSecondaryStatusTagName() != null && !motor.getSecondaryStatusTagName().isBlank()) {
-            Double status2 = getValue(motor.getCcm(), motor.getSecondaryStatusTagName()).orElse(0.0);
+            Double status2 = getValue(motor.getCcm(), motor.getSecondaryStatusTagName());
             // Se qualquer um dos dois estiver ligado (> 0), consideramos ligado
-            if (status2 > 0) {
+            if (status2 != null && status2 > 0) {
                 status = status2; 
+            } else if (status == null) {
+                status = status2;
             }
         }
 
-        Double current = getValue(motor.getCcm(), motor.getCurrentTagName()).orElse(0.0);
-        Double fault = getValue(motor.getCcm(), motor.getFaultTagName()).orElse(0.0);
-        Double hours = getValue(motor.getCcm(), motor.getHoursTagName()).orElse(0.0);
+        Double current = getValue(motor.getCcm(), motor.getCurrentTagName());
+        Double fault = getValue(motor.getCcm(), motor.getFaultTagName());
+        Double hours = getValue(motor.getCcm(), motor.getHoursTagName());
 
         return new MotorOverviewDto(
+                extractMotorId(motor),
                 motor.getName(),
                 motor.getCcm(),
+                motor.getCategory(),
+                motor.getNominalCurrent(),
+                motor.isHasInverter(),
+                motor.getStatusTagName(),
+                motor.getCurrentTagName(),
+                motor.getFaultTagName(),
+                motor.getHoursTagName(),
                 status,
                 current,
                 fault,
@@ -126,18 +138,45 @@ public class MotorController {
         );
     }
 
-    private Optional<Double> getValue(String ccm, String tagName) {
+    private String extractMotorId(MotorDef motor) {
+        return Stream.of(
+                        motor.getStatusTagName(),
+                        motor.getCurrentTagName(),
+                        motor.getFaultTagName(),
+                        motor.getHoursTagName()
+                )
+                .filter(tagName -> tagName != null && !tagName.isBlank())
+                .map(MOTOR_TAG_PATTERN::matcher)
+                .filter(Matcher::find)
+                .map(matcher -> "M" + matcher.group(1))
+                .findFirst()
+                .orElse(motor.getName());
+    }
+
+    private Double getValue(String ccm, String tagName) {
         if (tagName == null || tagName.isBlank()) {
-            return Optional.empty();
+            return null;
         }
-        return modbusService.get(ccm, tagName).map(TagValue::getValue);
+
+        return modbusService.get(ccm, tagName)
+                .filter(tagValue -> tagValue.getQuality() == TagValue.Quality.GOOD)
+                .map(TagValue::getValue)
+                .orElse(null);
     }
 
     @Data
     @AllArgsConstructor
     public static class MotorOverviewDto {
+        private String id;
         private String name;
         private String ccm;
+        private String category;
+        private Double nominalCurrent;
+        private boolean hasInverter;
+        private String statusTagName;
+        private String currentTagName;
+        private String faultTagName;
+        private String hoursTagName;
         private Double status;
         private Double current;
         private Double fault;
