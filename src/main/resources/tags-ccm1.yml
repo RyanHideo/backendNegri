@@ -1,6 +1,7 @@
 # tags-ccm1.yml
 # Definições de tags para o CCM1
 # Status/Falha: somente entradas X da planilha; registradores D dessas colunas foram ignorados.
+# DI Mitsubishi: X em octal convertido para decimal 1-based (address = 1000 + decimal(X + 1)).
 # Mapeamento HR: D0 = 4001 (portanto Dn = 4001 + n).
 
 tags:
@@ -14,9 +15,15 @@ tags:
     description: "Registrador de Comando"
 
   # M01 - 200 HP
+  - name: M1_S
+    type: HR
+    address: 4002
+    writable: false
+    readable: true
+    polled: true
   - name: M1_F
     type: DI
-    address: 1240
+    address: 1161
     writable: false
     readable: true
     polled: true
@@ -34,9 +41,15 @@ tags:
     polled: true
 
   # M02 - CT TUNEL 0200-CT-01
+  - name: M2_S
+    type: HR
+    address: 4006
+    writable: false
+    readable: true
+    polled: true
   - name: M2_F
     type: DI
-    address: 1241
+    address: 1162
     writable: false
     readable: true
     polled: true
@@ -54,9 +67,15 @@ tags:
     polled: true
 
   # M03 - PENEIRA VIBRATORIA SCALP
+  - name: M3_S
+    type: HR
+    address: 4010
+    writable: false
+    readable: true
+    polled: true
   - name: M3_F
     type: DI
-    address: 1242
+    address: 1163
     writable: false
     readable: true
     polled: true
@@ -74,9 +93,15 @@ tags:
     polled: true
 
   # M04 - PENEIRA VIBRATORIA 02
+  - name: M4_S
+    type: HR
+    address: 4014
+    writable: false
+    readable: true
+    polled: true
   - name: M4_F
     type: DI
-    address: 1243
+    address: 1164
     writable: false
     readable: true
     polled: true
@@ -94,9 +119,15 @@ tags:
     polled: true
 
   # M05 - PENEIRA VIBRATORIA 01
+  - name: M5_S
+    type: HR
+    address: 4018
+    writable: false
+    readable: true
+    polled: true
   - name: M5_F
     type: DI
-    address: 1244
+    address: 1165
     writable: false
     readable: true
     polled: true
@@ -114,9 +145,15 @@ tags:
     polled: true
 
   # M06 - CT BRITADOR
+  - name: M6_S
+    type: HR
+    address: 4022
+    writable: false
+    readable: true
+    polled: true
   - name: M6_F
     type: DI
-    address: 1245
+    address: 1166
     writable: false
     readable: true
     polled: true
@@ -134,9 +171,15 @@ tags:
     polled: true
 
   # M07 - BRITADOR HP300
+  - name: M7_S
+    type: HR
+    address: 4026
+    writable: false
+    readable: true
+    polled: true
   - name: M7_F
     type: DI
-    address: 1246
+    address: 1167
     writable: false
     readable: true
     polled: true
@@ -154,9 +197,15 @@ tags:
     polled: true
 
   # M08 - RETORNO CONE 01
+  - name: M8_S
+    type: HR
+    address: 4030
+    writable: false
+    readable: true
+    polled: true
   - name: M8_F
     type: DI
-    address: 1247
+    address: 1168
     writable: false
     readable: true
     polled: true
@@ -174,9 +223,15 @@ tags:
     polled: true
 
   # M09 - SEM INFORMAÇÃO
+  - name: M9_S
+    type: HR
+    address: 4034
+    writable: false
+    readable: true
+    polled: true
   - name: M9_F
     type: DI
-    address: 1250
+    address: 1169
     writable: false
     readable: true
     polled: true
@@ -194,9 +249,15 @@ tags:
     polled: true
 
   # M10 - CT NOVA CT4 - PL2
+  - name: M10_S
+    type: HR
+    address: 4038
+    writable: false
+    readable: true
+    polled: true
   - name: M10_F
     type: DI
-    address: 1251
+    address: 1170
     writable: false
     readable: true
     polled: true
@@ -214,9 +275,15 @@ tags:
     polled: true
 
   # M11 - SEM INFORMAÇÃO
+  - name: M11_S
+    type: HR
+    address: 4042
+    writable: false
+    readable: true
+    polled: true
   - name: M11_F
     type: DI
-    address: 1252
+    address: 1171
     writable: false
     readable: true
     polled: true
@@ -236,13 +303,13 @@ tags:
   # M12 - SEM INFORMAÇÃO
   - name: M12_S
     type: DI
-    address: 1010
+    address: 1009
     writable: false
     readable: true
     polled: true
   - name: M12_F
     type: DI
-    address: 1253
+    address: 1172
     writable: false
     readable: true
     polled: true
@@ -256,13 +323,13 @@ tags:
   # M13 - SIRENE
   - name: M13_S
     type: DI
-    address: 1011
+    address: 1010
     writable: false
     readable: true
     polled: true
   - name: M13_F
     type: DI
-    address: 1254
+    address: 1173
     writable: false
     readable: true
     polled: true
@@ -276,13 +343,13 @@ tags:
   # M14 - CT2 INF CONES
   - name: M14_S
     type: DI
-    address: 1012
+    address: 1011
     writable: false
     readable: true
     polled: true
   - name: M14_F
     type: DI
-    address: 1255
+    address: 1174
     writable: false
     readable: true
     polled: true
@@ -296,13 +363,13 @@ tags:
   # M15 - CT7 PEDRA 1
   - name: M15_S
     type: DI
-    address: 1013
+    address: 1011
     writable: false
     readable: true
     polled: true
   - name: M15_F
     type: DI
-    address: 1256
+    address: 1175
     writable: false
     readable: true
     polled: true
@@ -316,13 +383,13 @@ tags:
   # M16 - SEM INFORMAÇÃO
   - name: M16_S
     type: DI
-    address: 1014
+    address: 1012
     writable: false
     readable: true
     polled: true
   - name: M16_F
     type: DI
-    address: 1257
+    address: 1176
     writable: false
     readable: true
     polled: true
@@ -336,13 +403,13 @@ tags:
   # M17 - CT6 DESC VSI
   - name: M17_S
     type: DI
-    address: 1015
+    address: 1014
     writable: false
     readable: true
     polled: true
   - name: M17_F
     type: DI
-    address: 1260
+    address: 1177
     writable: false
     readable: true
     polled: true
@@ -356,13 +423,13 @@ tags:
   # M18 - CT8 PEDRA 0
   - name: M18_S
     type: DI
-    address: 1016
+    address: 1015
     writable: false
     readable: true
     polled: true
   - name: M18_F
     type: DI
-    address: 1261
+    address: 1178
     writable: false
     readable: true
     polled: true
@@ -376,13 +443,13 @@ tags:
   # M19 - CT9 PEDRISCO
   - name: M19_S
     type: DI
-    address: 1017
+    address: 1016
     writable: false
     readable: true
     polled: true
   - name: M19_F
     type: DI
-    address: 1262
+    address: 1179
     writable: false
     readable: true
     polled: true
@@ -396,13 +463,13 @@ tags:
   # M20 - CT10 BICA CO
   - name: M20_S
     type: DI
-    address: 1020
+    address: 1017
     writable: false
     readable: true
     polled: true
   - name: M20_F
     type: DI
-    address: 1263
+    address: 1180
     writable: false
     readable: true
     polled: true
@@ -416,13 +483,13 @@ tags:
   # M21 - CT16 PEDRA 2
   - name: M21_S
     type: DI
-    address: 1021
+    address: 1018
     writable: false
     readable: true
     polled: true
   - name: M21_F
     type: DI
-    address: 1264
+    address: 1181
     writable: false
     readable: true
     polled: true
@@ -436,13 +503,13 @@ tags:
   # M22 - CT11 PO 1
   - name: M22_S
     type: DI
-    address: 1022
+    address: 1019
     writable: false
     readable: true
     polled: true
   - name: M22_F
     type: DI
-    address: 1265
+    address: 1182
     writable: false
     readable: true
     polled: true
@@ -456,13 +523,13 @@ tags:
   # M23 - CT12 PO 2
   - name: M23_S
     type: DI
-    address: 1023
+    address: 1020
     writable: false
     readable: true
     polled: true
   - name: M23_F
     type: DI
-    address: 1266
+    address: 1183
     writable: false
     readable: true
     polled: true
@@ -476,13 +543,13 @@ tags:
   # M24 - CT13 REGEITO
   - name: M24_S
     type: DI
-    address: 1024
+    address: 1021
     writable: false
     readable: true
     polled: true
   - name: M24_F
     type: DI
-    address: 1267
+    address: 1184
     writable: false
     readable: true
     polled: true
@@ -496,13 +563,13 @@ tags:
   # M25 - SEM INFORMAÇÃO
   - name: M25_S
     type: DI
-    address: 1025
+    address: 1022
     writable: false
     readable: true
     polled: true
   - name: M25_F
     type: DI
-    address: 1270
+    address: 1185
     writable: false
     readable: true
     polled: true
@@ -516,13 +583,13 @@ tags:
   # M26 - SEM INFORMAÇÃO
   - name: M26_S
     type: DI
-    address: 1026
+    address: 1023
     writable: false
     readable: true
     polled: true
   - name: M26_F
     type: DI
-    address: 1271
+    address: 1186
     writable: false
     readable: true
     polled: true
@@ -536,13 +603,13 @@ tags:
   # M27 - BOMBA D'AGUA
   - name: M27_S
     type: DI
-    address: 1027
+    address: 1024
     writable: false
     readable: true
     polled: true
   - name: M27_F
     type: DI
-    address: 1272
+    address: 1187
     writable: false
     readable: true
     polled: true
@@ -556,13 +623,13 @@ tags:
   # M28 - CT15 RET CONE 2
   - name: M28_S
     type: DI
-    address: 1030
+    address: 1025
     writable: false
     readable: true
     polled: true
   - name: M28_F
     type: DI
-    address: 1273
+    address: 1188
     writable: false
     readable: true
     polled: true
@@ -574,35 +641,35 @@ tags:
     polled: true
 
   # M29 - SEM INFORMAÇÃO
-  - name: M29_S
-    type: DI
-    address: 1031
-    writable: false
-    readable: true
-    polled: true
-  - name: M29_F
-    type: DI
-    address: 1274
-    writable: false
-    readable: true
-    polled: true
-  - name: M29_H
-    type: HR
-    address: 4072
-    writable: false
-    readable: true
-    polled: true
+#  - name: M29_S
+#    type: DI
+#    address: 1026
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M29_F
+#    type: DI
+#    address: 1189
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M29_H
+#    type: HR
+#    address: 4072
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M30 - Unidade Hidraulica VSI
   - name: M30_S
     type: DI
-    address: 1032
+    address: 1027
     writable: false
     readable: true
     polled: true
   - name: M30_F
     type: DI
-    address: 1275
+    address: 1190
     writable: false
     readable: true
     polled: true
@@ -613,96 +680,96 @@ tags:
     readable: true
     polled: true
 
-  # M31 - SEM INFORMAÇÃO
-  - name: M31_S
-    type: DI
-    address: 1033
-    writable: false
-    readable: true
-    polled: true
-  - name: M31_F
-    type: DI
-    address: 1276
-    writable: false
-    readable: true
-    polled: true
-  - name: M31_H
-    type: HR
-    address: 4074
-    writable: false
-    readable: true
-    polled: true
+#  # M31 - SEM INFORMAÇÃO
+#  - name: M31_S
+#    type: DI
+#    address: 1028
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M31_F
+#    type: DI
+#    address: 1191
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M31_H
+#    type: HR
+#    address: 4074
+#    writable: false
+#    readable: true
+#    polled: true
 
-  # M32 - SEM INFORMAÇÃO
-  - name: M32_S
-    type: DI
-    address: 1034
-    writable: false
-    readable: true
-    polled: true
-  - name: M32_F
-    type: DI
-    address: 1277
-    writable: false
-    readable: true
-    polled: true
-  - name: M32_H
-    type: HR
-    address: 4075
-    writable: false
-    readable: true
-    polled: true
+#  # M32 - SEM INFORMAÇÃO
+#  - name: M32_S
+#    type: DI
+#    address: 1029
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M32_F
+#    type: DI
+#    address: 1192
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M32_H
+#    type: HR
+#    address: 4075
+#    writable: false
+#    readable: true
+#    polled: true
 
-  # M33 - SEM INFORMAÇÃO
-  - name: M33_S
-    type: DI
-    address: 1035
-    writable: false
-    readable: true
-    polled: true
-  - name: M33_F
-    type: DI
-    address: 1300
-    writable: false
-    readable: true
-    polled: true
-  - name: M33_H
-    type: HR
-    address: 4076
-    writable: false
-    readable: true
-    polled: true
+#  # M33 - SEM INFORMAÇÃO
+#  - name: M33_S
+#    type: DI
+#    address: 1030
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M33_F
+#    type: DI
+#    address: 1193
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M33_H
+#    type: HR
+#    address: 4076
+#    writable: false
+#    readable: true
+#    polled: true
 
-  # M34 - SEM INFORMAÇÃO
-  - name: M34_S
-    type: DI
-    address: 1036
-    writable: false
-    readable: true
-    polled: true
-  - name: M34_F
-    type: DI
-    address: 1301
-    writable: false
-    readable: true
-    polled: true
-  - name: M34_H
-    type: HR
-    address: 4077
-    writable: false
-    readable: true
-    polled: true
+#  # M34 - SEM INFORMAÇÃO
+#  - name: M34_S
+#    type: DI
+#    address: 1031
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M34_F
+#    type: DI
+#    address: 1194
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M34_H
+#    type: HR
+#    address: 4077
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M35 - BOMBA PRESSÃO ÁGUA
   - name: M35_S
     type: DI
-    address: 1037
+    address: 1032
     writable: false
     readable: true
     polled: true
   - name: M35_F
     type: DI
-    address: 1302
+    address: 1195
     writable: false
     readable: true
     polled: true
@@ -716,13 +783,13 @@ tags:
   # M36 - MESA VIBRATÓRIA ANTIGO
   - name: M36_S
     type: DI
-    address: 1001
+    address: 1002
     writable: false
     readable: true
     polled: true
   - name: M36_F
     type: DI
-    address: 1303
+    address: 1196
     writable: false
     readable: true
     polled: true
@@ -736,13 +803,13 @@ tags:
   # M37 - MESA VIBRATÓRIA TUNEL
   - name: M37_S
     type: DI
-    address: 1000
+    address: 1002
     writable: false
     readable: true
     polled: true
   - name: M37_F
     type: DI
-    address: 1304
+    address: 1197
     writable: false
     readable: true
     polled: true
@@ -753,36 +820,36 @@ tags:
     readable: true
     polled: true
 
-  # M38 - SEM INFORMAÇÃO
-  - name: M38_S
-    type: DI
-    address: 1007
-    writable: false
-    readable: true
-    polled: true
-  - name: M38_F
-    type: DI
-    address: 1305
-    writable: false
-    readable: true
-    polled: true
-  - name: M38_H
-    type: HR
-    address: 4095
-    writable: false
-    readable: true
-    polled: true
+#  # M38 - SEM INFORMAÇÃO
+#  - name: M38_S
+#    type: DI
+#    address: 1008
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M38_F
+#    type: DI
+#    address: 1198
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M38_H
+#    type: HR
+#    address: 4095
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M39 - VSI
   - name: M39_S
     type: DI
-    address: 1207
+    address: 1136
     writable: false
     readable: true
     polled: true
   - name: M39_F
     type: DI
-    address: 1210
+    address: 1137
     writable: false
     readable: true
     polled: true
@@ -799,13 +866,13 @@ tags:
     readable: true
     polled: true
 
-  # M40 - SEM INFORMAÇÃO
-  - name: M40_A
-    type: HR
-    address: 4071
-    writable: false
-    readable: true
-    polled: true
+#  # M40 - SEM INFORMAÇÃO
+#  - name: M40_A
+#    type: HR
+#    address: 4071
+#    writable: false
+#    readable: true
+#    polled: true
 
   #==============================
   #=== MULTIMEDIDOR 1 ==========
@@ -913,10 +980,18 @@ tags:
     polled: true
     description: "CCM1 - FREQUENCIA"
 
-  - name: CONSUMO
+  - name: CONSUMO1
     type: HR
     address: 4080
     writable: false
     readable: true
     polled: true
     description: "CCM1 - CONSUMO"
+
+  - name: CONSUMO2
+    type: HR
+    address: 4306
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - CONSUMO2"

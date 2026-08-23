@@ -11,631 +11,631 @@ tags:
     polled: false   # Não precisa ser lido no polling normal
     description: "Registrador de Comando (Ex: 1-200 para zerar horímetro motor, 999 para zerar consumo total)"
 
-  #============================================
-  #===Unidade 1 - CCM 2 =======================
-  #============================================
-  #==============================
-  #=== Motor 01 =================
-  #==============================
-  - name: M1_S
-    type: DI
-    address: 1002
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M1 Status"
-
-  - name: M1_F
-    type: HR
-    address: 4003
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M1 Falha"
-
-  - name: M1_A
-    type: HR
-    address: 4004
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M1 Corrente"
-
-  - name: M1_H
-    type: HR
-    address: 4005
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M1 Horimetro"
-
-  #==============================
-  #=== Motor 02 =================
-  #==============================
-  - name: M2_S
-    type: DI
-    address: 1003
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M2 Status"
-
-  - name: M2_F
-    type: HR
-    address: 4007
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M2 Falha"
-
-  - name: M2_A
-    type: HR
-    address: 4008
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M2 Corrente"
-
-  - name: M2_H
-    type: HR
-    address: 4009
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M2 Horimetro"
-
-  #==============================
-  #=== Motor 03 =================
-  #==============================
-  - name: M3_S
-    type: DI
-    address: 1004
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M3 Status"
-
-  - name: M3_F
-    type: HR
-    address: 4011
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M3 Falha"
-
-  - name: M3_A
-    type: HR
-    address: 4012
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M3 Corrente"
-
-  - name: M3_H
-    type: HR
-    address: 4013
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M3 Horimetro"
-
-  #==============================
-  #=== Motor 04 =================
-  #==============================
-  - name: M4_S
-    type: DI
-    address: 1005
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M4 Status"
-
-  - name: M4_F
-    type: HR
-    address: 4015
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M4 Falha"
-
-  - name: M4_A
-    type: HR
-    address: 4016
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M4 Corrente"
-
-  - name: M4_H
-    type: HR
-    address: 4017
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M4 Horimetro"
-
-  #==============================
-  #=== Motor 05 =================
-  #==============================
-  - name: M5_S
-    type: DI
-    address: 1006
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M5 Status"
-
-  - name: M5_F
-    type: HR
-    address: 4019
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M5 Falha"
-
-  - name: M5_A
-    type: HR
-    address: 4020
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M5 Corrente"
-
-  - name: M5_H
-    type: HR
-    address: 4021
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M5 Horimetro"
-
-  #==============================
-  #=== Motor 06 =================
-  #==============================
-  - name: M6_S
-    type: DI
-    address: 1007
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M6 Status"
-
-  - name: M6_F
-    type: HR
-    address: 4023
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M6 Falha"
-
-  - name: M6_A
-    type: HR
-    address: 4024
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M6 Corrente"
-
-  - name: M6_H
-    type: HR
-    address: 4025
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M6 Horimetro"
-
-  #==============================
-  #=== Motor 07 =================
-  #==============================
-  - name: M7_S
-    type: DI
-    address: 1008
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M7 Status"
-
-  - name: M7_F
-    type: HR
-    address: 4027
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M7 Falha"
-
-  - name: M7_A
-    type: HR
-    address: 4028
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M7 Corrente"
-
-  - name: M7_H
-    type: HR
-    address: 4029
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M7 Horimetro"
-
-  #==============================
-  #=== Motor 08 =================
-  #==============================
-  - name: M8_S
-    type: DI
-    address: 1009
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M8 Status"
-
-  - name: M8_F
-    type: HR
-    address: 4031
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M8 Falha"
-
-  - name: M8_A
-    type: HR
-    address: 4032
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M8 Corrente"
-
-  - name: M8_H
-    type: HR
-    address: 4033
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M8 Horimetro"
-
-  #==============================
-  #=== Motor 09 =================
-  #==============================
-  - name: M9_S
-    type: DI
-    address: 1010
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M9 Status"
-
-  - name: M9_F
-    type: HR
-    address: 4035
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M9 Falha"
-
-  - name: M9_A
-    type: HR
-    address: 4036
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M9 Corrente"
-
-  - name: M9_H
-    type: HR
-    address: 4037
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M9 Horimetro"
-
-  #==============================
-  #=== Motor 10 =================
-  #==============================
-  - name: M10_S
-    type: DI
-    address: 1011
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M10 Status"
-
-  - name: M10_F
-    type: HR
-    address: 4039
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M10 Falha"
-
-  - name: M10_A
-    type: HR
-    address: 4040
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M10 Corrente"
-
-  - name: M10_H
-    type: HR
-    address: 4041
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M10 Horimetro"
-
-  #==============================
-  #=== Motor 11 =================
-  #==============================
-  - name: M11_S
-    type: DI
-    address: 1012
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M11 Status"
-
-  - name: M11_F
-    type: HR
-    address: 4043
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M11 Falha"
-
-  - name: M11_A
-    type: HR
-    address: 4044
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M11 Corrente"
-
-  - name: M11_H
-    type: HR
-    address: 4045
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M11 Horimetro"
-
-  #============================================
-  #=== Motores Partida Direta =================
-  #============================================
-  #==============================
-  #=== Motor 12 =================
-  #==============================
-  - name: M12_S
-    type: DI
-    address: 1013
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M12 Status"
-
-  - name: M12_F
-    type: HR
-    address: 4047
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M12 Falha"
-
-  - name: M12_A
-    type: HR
-    address: 4048
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M12 Corrente"
-
-  - name: M12_H
-    type: HR
-    address: 4049
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M12 Horimetro"
-
-  #==============================
-  #=== Motor 13 =================
-  #==============================
-  - name: M13_S
-    type: DI
-    address: 1014
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M13 Status"
-
-  - name: M13_F
-    type: HR
-    address: 4051
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M13 Falha"
-
-  - name: M13_H
-    type: HR
-    address: 4052
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M13 Horimetro"
-
-  #==============================
-  #=== Motor 14 =================
-  #==============================
-  - name: M14_S
-    type: DI
-    address: 1015
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M14 Status"
-
-  - name: M14_F
-    type: HR
-    address: 4054
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M14 Falha"
-
-  - name: M14_H
-    type: HR
-    address: 4055
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - M14 Horimetro"
-
-  #==============================
-  #=== V1-V2 ====================
-  #==============================
-  - name: V1-V2
-    type: HR
-    address: 4071
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V1_V2"
-
-  #==============================
-  #=== V2-V3 ====================
-  #==============================
-  - name: V2-V3
-    type: HR
-    address: 4072
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V2-V3"
-
-  #==============================
-  #=== V3-V1 ====================
-  #==============================
-  - name: V3-V1
-    type: HR
-    address: 4073
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V3-V1"
-
-  #==============================
-  #=== L1 =======================
-  #==============================
-  - name: L1
-    type: HR
-    address: 4074
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - L1"
-
-  #==============================
-  #=== L2 =======================
-  #==============================
-  - name: L2
-    type: HR
-    address: 4075
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - L2"
-
-  #==============================
-  #=== L3 =======================
-  #==============================
-  - name: L3
-    type: HR
-    address: 4076
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - L3"
-
-  #==============================
-  #=== Fator de potencia ========
-  #==============================
-  - name: FP
-    type: HR
-    address: 4077
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - FP"
-
-  #==============================
-  #=== HZ =======================
-  #==============================
-  - name: HZ
-    type: HR
-    address: 4078
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - HZ"
-
-  #==============================
-  #=== V1-N =====================
-  #==============================
-  - name: V1-N
-    type: HR
-    address: 4079
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V1-N"
-
-  #==============================
-  #=== V2-N =====================
-  #==============================
-  - name: V2-N
-    type: HR
-    address: 4080
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V2-N"
-
-  #==============================
-  #=== V3-N =====================
-  #==============================
-  - name: V3-N
-    type: HR
-    address: 4081
-    scale: 0.1
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - V3-N"
-
-  #==============================
-  #=== Potencia aparente ========
-  #==============================
-  - name: PA
-    type: HR
-    address: 4082
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - PA"
-
-  #==============================
-  #=== KW =======================
-  #==============================
-  - name: KW
-    type: HR
-    address: 4083
-    writable: false
-    readable: true
-    polled: true
-    description: "CCM2 - KW"
+#  #============================================
+#  #===Unidade 1 - CCM 2 =======================
+#  #============================================
+#  #==============================
+#  #=== Motor 01 =================
+#  #==============================
+#  - name: M1_S
+#    type: DI
+#    address: 1002
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M1 Status"
+#
+#  - name: M1_F
+#    type: HR
+#    address: 4003
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M1 Falha"
+#
+#  - name: M1_A
+#    type: HR
+#    address: 4004
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M1 Corrente"
+#
+#  - name: M1_H
+#    type: HR
+#    address: 4005
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M1 Horimetro"
+#
+#  #==============================
+#  #=== Motor 02 =================
+#  #==============================
+#  - name: M2_S
+#    type: DI
+#    address: 1003
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M2 Status"
+#
+#  - name: M2_F
+#    type: HR
+#    address: 4007
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M2 Falha"
+#
+#  - name: M2_A
+#    type: HR
+#    address: 4008
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M2 Corrente"
+#
+#  - name: M2_H
+#    type: HR
+#    address: 4009
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M2 Horimetro"
+#
+#  #==============================
+#  #=== Motor 03 =================
+#  #==============================
+#  - name: M3_S
+#    type: DI
+#    address: 1004
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M3 Status"
+#
+#  - name: M3_F
+#    type: HR
+#    address: 4011
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M3 Falha"
+#
+#  - name: M3_A
+#    type: HR
+#    address: 4012
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M3 Corrente"
+#
+#  - name: M3_H
+#    type: HR
+#    address: 4013
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M3 Horimetro"
+#
+#  #==============================
+#  #=== Motor 04 =================
+#  #==============================
+#  - name: M4_S
+#    type: DI
+#    address: 1005
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M4 Status"
+#
+#  - name: M4_F
+#    type: HR
+#    address: 4015
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M4 Falha"
+#
+#  - name: M4_A
+#    type: HR
+#    address: 4016
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M4 Corrente"
+#
+#  - name: M4_H
+#    type: HR
+#    address: 4017
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M4 Horimetro"
+#
+#  #==============================
+#  #=== Motor 05 =================
+#  #==============================
+#  - name: M5_S
+#    type: DI
+#    address: 1006
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M5 Status"
+#
+#  - name: M5_F
+#    type: HR
+#    address: 4019
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M5 Falha"
+#
+#  - name: M5_A
+#    type: HR
+#    address: 4020
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M5 Corrente"
+#
+#  - name: M5_H
+#    type: HR
+#    address: 4021
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M5 Horimetro"
+#
+#  #==============================
+#  #=== Motor 06 =================
+#  #==============================
+#  - name: M6_S
+#    type: DI
+#    address: 1007
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M6 Status"
+#
+#  - name: M6_F
+#    type: HR
+#    address: 4023
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M6 Falha"
+#
+#  - name: M6_A
+#    type: HR
+#    address: 4024
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M6 Corrente"
+#
+#  - name: M6_H
+#    type: HR
+#    address: 4025
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M6 Horimetro"
+#
+#  #==============================
+#  #=== Motor 07 =================
+#  #==============================
+#  - name: M7_S
+#    type: DI
+#    address: 1008
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M7 Status"
+#
+#  - name: M7_F
+#    type: HR
+#    address: 4027
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M7 Falha"
+#
+#  - name: M7_A
+#    type: HR
+#    address: 4028
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M7 Corrente"
+#
+#  - name: M7_H
+#    type: HR
+#    address: 4029
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M7 Horimetro"
+#
+#  #==============================
+#  #=== Motor 08 =================
+#  #==============================
+#  - name: M8_S
+#    type: DI
+#    address: 1009
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M8 Status"
+#
+#  - name: M8_F
+#    type: HR
+#    address: 4031
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M8 Falha"
+#
+#  - name: M8_A
+#    type: HR
+#    address: 4032
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M8 Corrente"
+#
+#  - name: M8_H
+#    type: HR
+#    address: 4033
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M8 Horimetro"
+#
+#  #==============================
+#  #=== Motor 09 =================
+#  #==============================
+#  - name: M9_S
+#    type: DI
+#    address: 1010
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M9 Status"
+#
+#  - name: M9_F
+#    type: HR
+#    address: 4035
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M9 Falha"
+#
+#  - name: M9_A
+#    type: HR
+#    address: 4036
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M9 Corrente"
+#
+#  - name: M9_H
+#    type: HR
+#    address: 4037
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M9 Horimetro"
+#
+#  #==============================
+#  #=== Motor 10 =================
+#  #==============================
+#  - name: M10_S
+#    type: DI
+#    address: 1011
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M10 Status"
+#
+#  - name: M10_F
+#    type: HR
+#    address: 4039
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M10 Falha"
+#
+#  - name: M10_A
+#    type: HR
+#    address: 4040
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M10 Corrente"
+#
+#  - name: M10_H
+#    type: HR
+#    address: 4041
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M10 Horimetro"
+#
+#  #==============================
+#  #=== Motor 11 =================
+#  #==============================
+#  - name: M11_S
+#    type: DI
+#    address: 1012
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M11 Status"
+#
+#  - name: M11_F
+#    type: HR
+#    address: 4043
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M11 Falha"
+#
+#  - name: M11_A
+#    type: HR
+#    address: 4044
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M11 Corrente"
+#
+#  - name: M11_H
+#    type: HR
+#    address: 4045
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M11 Horimetro"
+#
+#  #============================================
+#  #=== Motores Partida Direta =================
+#  #============================================
+#  #==============================
+#  #=== Motor 12 =================
+#  #==============================
+#  - name: M12_S
+#    type: DI
+#    address: 1013
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M12 Status"
+#
+#  - name: M12_F
+#    type: HR
+#    address: 4047
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M12 Falha"
+#
+#  - name: M12_A
+#    type: HR
+#    address: 4048
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M12 Corrente"
+#
+#  - name: M12_H
+#    type: HR
+#    address: 4049
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M12 Horimetro"
+#
+#  #==============================
+#  #=== Motor 13 =================
+#  #==============================
+#  - name: M13_S
+#    type: DI
+#    address: 1014
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M13 Status"
+#
+#  - name: M13_F
+#    type: HR
+#    address: 4051
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M13 Falha"
+#
+#  - name: M13_H
+#    type: HR
+#    address: 4052
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M13 Horimetro"
+#
+#  #==============================
+#  #=== Motor 14 =================
+#  #==============================
+#  - name: M14_S
+#    type: DI
+#    address: 1015
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M14 Status"
+#
+#  - name: M14_F
+#    type: HR
+#    address: 4054
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M14 Falha"
+#
+#  - name: M14_H
+#    type: HR
+#    address: 4055
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - M14 Horimetro"
+#
+#  #==============================
+#  #=== V1-V2 ====================
+#  #==============================
+#  - name: V1-V2
+#    type: HR
+#    address: 4071
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V1_V2"
+#
+#  #==============================
+#  #=== V2-V3 ====================
+#  #==============================
+#  - name: V2-V3
+#    type: HR
+#    address: 4072
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V2-V3"
+#
+#  #==============================
+#  #=== V3-V1 ====================
+#  #==============================
+#  - name: V3-V1
+#    type: HR
+#    address: 4073
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V3-V1"
+#
+#  #==============================
+#  #=== L1 =======================
+#  #==============================
+#  - name: L1
+#    type: HR
+#    address: 4074
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - L1"
+#
+#  #==============================
+#  #=== L2 =======================
+#  #==============================
+#  - name: L2
+#    type: HR
+#    address: 4075
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - L2"
+#
+#  #==============================
+#  #=== L3 =======================
+#  #==============================
+#  - name: L3
+#    type: HR
+#    address: 4076
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - L3"
+#
+#  #==============================
+#  #=== Fator de potencia ========
+#  #==============================
+#  - name: FP
+#    type: HR
+#    address: 4077
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - FP"
+#
+#  #==============================
+#  #=== HZ =======================
+#  #==============================
+#  - name: HZ
+#    type: HR
+#    address: 4078
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - HZ"
+#
+#  #==============================
+#  #=== V1-N =====================
+#  #==============================
+#  - name: V1-N
+#    type: HR
+#    address: 4079
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V1-N"
+#
+#  #==============================
+#  #=== V2-N =====================
+#  #==============================
+#  - name: V2-N
+#    type: HR
+#    address: 4080
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V2-N"
+#
+#  #==============================
+#  #=== V3-N =====================
+#  #==============================
+#  - name: V3-N
+#    type: HR
+#    address: 4081
+#    scale: 0.1
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - V3-N"
+#
+#  #==============================
+#  #=== Potencia aparente ========
+#  #==============================
+#  - name: PA
+#    type: HR
+#    address: 4082
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - PA"
+#
+#  #==============================
+#  #=== KW =======================
+#  #==============================
+#  - name: KW
+#    type: HR
+#    address: 4083
+#    writable: false
+#    readable: true
+#    polled: true
+#    description: "CCM2 - KW"

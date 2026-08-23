@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.*;
@@ -324,15 +325,39 @@ public class ModbusService {
     public Map<String, TagValue> snapshot(String ccmKey) {
         CcmKey key = CcmKey.fromString(ccmKey);
         CcmState state = stateOf(key);
-        return Map.copyOf(state.cache);
+        Map<String, TagValue> tags = new HashMap<>(state.cache);
+        injectCalculatedConsumption(tags);
+        return Map.copyOf(tags);
     }
     public Map<String, TagValue> snapshot() { return snapshot("ccm1"); }
     public Optional<TagValue> get(String ccmKey, String name) {
+        if ("CONSUMO".equalsIgnoreCase(name)) {
+            return Optional.ofNullable(snapshot(ccmKey).get("CONSUMO"));
+        }
+
         CcmKey key = CcmKey.fromString(ccmKey);
         CcmState state = stateOf(key);
         return Optional.ofNullable(state.cache.get(name));
     }
     public Optional<TagValue> get(String name) { return get("ccm1", name); }
+
+    private void injectCalculatedConsumption(Map<String, TagValue> tags) {
+        TagValue consumption1Tag = Optional.ofNullable(tags.get("KWH1")).orElse(tags.get("CONSUMO1"));
+        TagValue consumption2Tag = Optional.ofNullable(tags.get("KWH2")).orElse(tags.get("CONSUMO2"));
+
+        if (consumption1Tag == null || consumption2Tag == null) {
+            return;
+        }
+
+        try {
+            double consumption1 = consumption1Tag.getValue();
+            double consumption2 = consumption2Tag.getValue();
+            double totalConsumption = (consumption1 * 65536.0) + consumption2;
+            tags.put("CONSUMO", new TagValue("CONSUMO", totalConsumption, Instant.now(), TagValue.Quality.GOOD, null));
+        } catch (Exception e) {
+            log.warn("Falha ao calcular CONSUMO a partir de KWH1/KWH2 ou CONSUMO1/CONSUMO2: {}", e.getMessage());
+        }
+    }
 
     private void ensureType(TagDef t, TagType expected) {
         if (t.getType() != expected) {
