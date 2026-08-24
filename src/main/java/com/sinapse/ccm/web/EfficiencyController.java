@@ -67,8 +67,7 @@ public class EfficiencyController {
                 double loadPercentage = 0;
 
                 if (isActive) {
-                    double valueFromPlc = modbusService.get(elevator.getCcm(), elevator.getCurrentTagName())
-                            .map(TagValue::getValue).orElse(0.0);
+                    double valueFromPlc = getCurrentValue(elevator);
 
                     actualCurrent = elevator.isHasInverter()
                             ? elevator.getNominalCurrent() - valueFromPlc
@@ -108,8 +107,7 @@ public class EfficiencyController {
                         .map(tag -> tag.getValue() > 0).orElse(false);
 
                 if (isActive) {
-                    double valueFromPlc = modbusService.get(motor.getCcm(), motor.getCurrentTagName())
-                            .map(TagValue::getValue).orElse(0.0);
+                    double valueFromPlc = getCurrentValue(motor);
                     
                     double actualCurrent = motor.isHasInverter()
                         ? motor.getNominalCurrent() - valueFromPlc
@@ -142,8 +140,7 @@ public class EfficiencyController {
                         .map(tag -> tag.getValue() > 0).orElse(false);
 
                 if (isActive) {
-                    double valueFromPlc = modbusService.get(motor.getCcm(), motor.getCurrentTagName())
-                            .map(TagValue::getValue).orElse(0.0);
+                    double valueFromPlc = getCurrentValue(motor);
 
                     double actualCurrent = motor.isHasInverter()
                             ? motor.getNominalCurrent() - valueFromPlc
@@ -162,6 +159,17 @@ public class EfficiencyController {
 
             return new EnergyEfficiencySnapshot(overallLoadPercentage, totalActiveCurrent,
                     totalNominalCurrentOfActives, activeMotorsCount, activeMotorNames);
+        }
+
+        private double getCurrentValue(MotorDef motor) {
+            String currentTagName = motor.getCurrentTagName();
+            if (currentTagName == null || currentTagName.isBlank()) {
+                return 0.0;
+            }
+
+            return modbusService.get(motor.getCcm(), currentTagName)
+                    .map(TagValue::getValue)
+                    .orElse(0.0);
         }
     }
 

@@ -223,30 +223,30 @@ tags:
     polled: true
 
   # M09 - SEM INFORMAÇÃO
-  - name: M9_S
-    type: HR
-    address: 4034
-    writable: false
-    readable: true
-    polled: true
-  - name: M9_F
-    type: DI
-    address: 1169
-    writable: false
-    readable: true
-    polled: true
+#  - name: M9_S
+#    type: HR
+#    address: 4034
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M9_F
+#    type: DI
+#    address: 1169
+#    writable: false
+#    readable: true
+#    polled: true
   - name: M9_A
     type: HR
     address: 4036
     writable: false
     readable: true
     polled: true
-  - name: M9_H
-    type: HR
-    address: 4037
-    writable: false
-    readable: true
-    polled: true
+#  - name: M9_H
+#    type: HR
+#    address: 4037
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M10 - CT NOVA CT4 - PL2
   - name: M10_S
@@ -274,51 +274,51 @@ tags:
     readable: true
     polled: true
 
-  # M11 - SEM INFORMAÇÃO
-  - name: M11_S
-    type: HR
-    address: 4042
-    writable: false
-    readable: true
-    polled: true
-  - name: M11_F
-    type: DI
-    address: 1171
-    writable: false
-    readable: true
-    polled: true
+#  # M11 - SEM INFORMAÇÃO
+#  - name: M11_S
+#    type: HR
+#    address: 4042
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M11_F
+#    type: DI
+#    address: 1171
+#    writable: false
+#    readable: true
+#    polled: true
   - name: M11_A
     type: HR
     address: 4044
     writable: false
     readable: true
     polled: true
-  - name: M11_H
-    type: HR
-    address: 4045
-    writable: false
-    readable: true
-    polled: true
+#  - name: M11_H
+#    type: HR
+#    address: 4045
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M12 - SEM INFORMAÇÃO
-  - name: M12_S
-    type: DI
-    address: 1009
-    writable: false
-    readable: true
-    polled: true
-  - name: M12_F
-    type: DI
-    address: 1172
-    writable: false
-    readable: true
-    polled: true
-  - name: M12_H
-    type: HR
-    address: 4046
-    writable: false
-    readable: true
-    polled: true
+#  - name: M12_S
+#    type: DI
+#    address: 1009
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M12_F
+#    type: DI
+#    address: 1172
+#    writable: false
+#    readable: true
+#    polled: true
+#  - name: M12_H
+#    type: HR
+#    address: 4046
+#    writable: false
+#    readable: true
+#    polled: true
 
   # M13 - SIRENE
   - name: M13_S
@@ -853,26 +853,26 @@ tags:
     writable: false
     readable: true
     polled: true
-  - name: M39_A
+  - name: Potencia1Vsi
     type: HR
     address: 4070
     writable: false
     readable: true
     polled: true
+    description: "M39 VSI - Potência 1 recebida e exposta em kW"
+  - name: Potencia2Vsi
+    type: HR
+    address: 4071
+    writable: false
+    readable: true
+    polled: true
+    description: "M39 VSI - Potência 2 recebida e exposta em kW"
   - name: M39_H
     type: HR
     address: 4096
     writable: false
     readable: true
     polled: true
-
-#  # M40 - SEM INFORMAÇÃO
-#  - name: M40_A
-#    type: HR
-#    address: 4071
-#    writable: false
-#    readable: true
-#    polled: true
 
   #==============================
   #=== MULTIMEDIDOR 1 ==========
@@ -995,3 +995,11 @@ tags:
     readable: true
     polled: true
     description: "CCM1 - CONSUMO2"
+
+  - name: TEMP
+    type: HR
+    address: 4306
+    writable: false
+    readable: true
+    polled: true
+    description: "CCM1 - TEMPERATURA"

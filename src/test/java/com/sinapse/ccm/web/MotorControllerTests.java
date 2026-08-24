@@ -40,12 +40,51 @@ class MotorControllerTests {
         assertThat(result.isHasInverter()).isFalse();
         assertThat(result.getStatusTagName()).isEqualTo("M7_S");
         assertThat(result.getCurrentTagName()).isEqualTo("M7_A");
+        assertThat(result.getPower1TagName()).isNull();
+        assertThat(result.getPower2TagName()).isNull();
         assertThat(result.getFaultTagName()).isEqualTo("M7_F");
         assertThat(result.getHoursTagName()).isEqualTo("M7_H");
         assertThat(result.getStatus()).isEqualTo(1.0);
         assertThat(result.getCurrent()).isEqualTo(8.5);
+        assertThat(result.getLoadPercentage()).isEqualTo(85.0);
+        assertThat(result.getPotencia1Vsi()).isNull();
+        assertThat(result.getPotencia2Vsi()).isNull();
         assertThat(result.getFault()).isNull();
         assertThat(result.getHours()).isNull();
+    }
+
+    @Test
+    void returnsVsiPowerReadingsWhenConfigured() {
+        MotorCatalog catalog = mock(MotorCatalog.class);
+        ModbusService modbus = mock(ModbusService.class);
+        MotorDef motor = motor();
+        motor.setName("VSI");
+        motor.setCategory("vsi");
+        motor.setStatusTagName("M39_S");
+        motor.setCurrentTagName(null);
+        motor.setPower1TagName("Potencia1Vsi");
+        motor.setPower2TagName("Potencia2Vsi");
+        motor.setFaultTagName("M39_F");
+        motor.setHoursTagName("M39_H");
+        motor.setHasInverter(true);
+
+        when(catalog.getMotors()).thenReturn(List.of(motor));
+        when(modbus.get("ccm1", "M39_S")).thenReturn(Optional.of(tag("M39_S", 1, TagValue.Quality.GOOD)));
+        when(modbus.get("ccm1", "Potencia1Vsi")).thenReturn(Optional.of(tag("Potencia1Vsi", 45.0, TagValue.Quality.GOOD)));
+        when(modbus.get("ccm1", "Potencia2Vsi")).thenReturn(Optional.of(tag("Potencia2Vsi", 55.0, TagValue.Quality.GOOD)));
+        when(modbus.get("ccm1", "M39_F")).thenReturn(Optional.of(tag("M39_F", 0, TagValue.Quality.GOOD)));
+        when(modbus.get("ccm1", "M39_H")).thenReturn(Optional.of(tag("M39_H", 100, TagValue.Quality.GOOD)));
+
+        MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
+                .getMotorsOverview()
+                .getFirst();
+
+        assertThat(result.getId()).isEqualTo("M39");
+        assertThat(result.getPower1TagName()).isEqualTo("Potencia1Vsi");
+        assertThat(result.getPower2TagName()).isEqualTo("Potencia2Vsi");
+        assertThat(result.getPotencia1Vsi()).isEqualTo(45.0);
+        assertThat(result.getPotencia2Vsi()).isEqualTo(55.0);
+        assertThat(result.getLoadPercentage()).isNull();
     }
 
     private static MotorDef motor() {

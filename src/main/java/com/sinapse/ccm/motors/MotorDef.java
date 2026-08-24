@@ -21,6 +21,12 @@ public class MotorDef {
     @JsonProperty("currentTagName")
     private String currentTagName;
 
+    @JsonProperty("power1TagName")
+    private String power1TagName;
+
+    @JsonProperty("power2TagName")
+    private String power2TagName;
+
     @JsonProperty("faultTagName")
     private String faultTagName; // Tag de falha (ex: M1_F)
 

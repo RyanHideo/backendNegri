@@ -356,18 +356,11 @@ motors:
     category: "vsi"
     nominalCurrent: 10.0
     statusTagName: "M39_S"
-    currentTagName: "M39_A"
+    power1TagName: "Potencia1Vsi"
+    power2TagName: "Potencia2Vsi"
     faultTagName: "M39_F"
     hoursTagName: "M39_H"
     hasInverter: true
-
-  # --- M40 - Somente corrente disponível ---
-  - name: "SEM INFORMAÇÃO"
-    ccm: "ccm1"
-    category: "outros"
-    nominalCurrent: 10.0
-    currentTagName: "M40_A"
-    hasInverter: false
 
   # ==============================================================================
   # CCM 2 (Nomes Específicos)

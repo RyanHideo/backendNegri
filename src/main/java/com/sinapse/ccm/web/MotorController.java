@@ -1,5 +1,6 @@
 package com.sinapse.ccm.web;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sinapse.ccm.modbus.ModbusService;
 import com.sinapse.ccm.modbus.TagValue;
 import com.sinapse.ccm.motors.MotorCatalog;
@@ -117,6 +118,9 @@ public class MotorController {
         }
 
         Double current = getValue(motor.getCcm(), motor.getCurrentTagName());
+        Double loadPercentage = calculateLoadPercentage(current, motor.getNominalCurrent());
+        Double potencia1Vsi = getValue(motor.getCcm(), motor.getPower1TagName());
+        Double potencia2Vsi = getValue(motor.getCcm(), motor.getPower2TagName());
         Double fault = getValue(motor.getCcm(), motor.getFaultTagName());
         Double hours = getValue(motor.getCcm(), motor.getHoursTagName());
 
@@ -129,19 +133,33 @@ public class MotorController {
                 motor.isHasInverter(),
                 motor.getStatusTagName(),
                 motor.getCurrentTagName(),
+                motor.getPower1TagName(),
+                motor.getPower2TagName(),
                 motor.getFaultTagName(),
                 motor.getHoursTagName(),
                 status,
                 current,
+                potencia1Vsi,
+                potencia2Vsi,
                 fault,
-                hours
+                hours,
+                loadPercentage
         );
+    }
+
+    private Double calculateLoadPercentage(Double current, double nominalCurrent) {
+        if (current == null || current < 0 || nominalCurrent <= 0) {
+            return null;
+        }
+        return Math.round((current / nominalCurrent) * 1000.0) / 10.0;
     }
 
     private String extractMotorId(MotorDef motor) {
         return Stream.of(
                         motor.getStatusTagName(),
                         motor.getCurrentTagName(),
+                        motor.getPower1TagName(),
+                        motor.getPower2TagName(),
                         motor.getFaultTagName(),
                         motor.getHoursTagName()
                 )
@@ -175,12 +193,19 @@ public class MotorController {
         private boolean hasInverter;
         private String statusTagName;
         private String currentTagName;
+        private String power1TagName;
+        private String power2TagName;
         private String faultTagName;
         private String hoursTagName;
         private Double status;
         private Double current;
+        @JsonProperty("Potencia1Vsi")
+        private Double potencia1Vsi;
+        @JsonProperty("Potencia2Vsi")
+        private Double potencia2Vsi;
         private Double fault;
         private Double hours;
+        private Double loadPercentage;
     }
 
     @Data

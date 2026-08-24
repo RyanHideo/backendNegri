@@ -4,6 +4,7 @@ import com.ghgande.j2mod.modbus.facade.ModbusTCPMaster;
 import com.ghgande.j2mod.modbus.procimg.InputRegister;
 import com.ghgande.j2mod.modbus.procimg.Register;
 import com.ghgande.j2mod.modbus.procimg.SimpleRegister;
+import com.sinapse.ccm.vsi.VsiPowerService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class ModbusService {
     // --- Injeção de Dependências ---
     private final TagCatalog ccm1Catalog;
     private final TagCatalog ccm2Catalog;
+    private final VsiPowerService vsiPowerService;
 
     // --- Configuração ---
     @Value("${modbus.host}") private String host;
@@ -42,9 +44,11 @@ public class ModbusService {
     private static final int HR_BASE   = 4001;
 
     public ModbusService(@Qualifier("ccm1Catalog") TagCatalog ccm1Catalog,
-                         @Qualifier("ccm2Catalog") TagCatalog ccm2Catalog) {
+                         @Qualifier("ccm2Catalog") TagCatalog ccm2Catalog,
+                         VsiPowerService vsiPowerService) {
         this.ccm1Catalog = ccm1Catalog;
         this.ccm2Catalog = ccm2Catalog;
+        this.vsiPowerService = vsiPowerService;
     }
 
     public enum CcmKey {
@@ -327,12 +331,21 @@ public class ModbusService {
         CcmState state = stateOf(key);
         Map<String, TagValue> tags = new HashMap<>(state.cache);
         injectCalculatedConsumption(tags);
+        if (key == CcmKey.CCM1) {
+            vsiPowerService.addKvaComparison(tags);
+        }
         return Map.copyOf(tags);
     }
     public Map<String, TagValue> snapshot() { return snapshot("ccm1"); }
     public Optional<TagValue> get(String ccmKey, String name) {
         if ("CONSUMO".equalsIgnoreCase(name)) {
             return Optional.ofNullable(snapshot(ccmKey).get("CONSUMO"));
+        }
+        if (vsiPowerService.isCalculatedTag(name)) {
+            return snapshot(ccmKey).entrySet().stream()
+                    .filter(entry -> entry.getKey().equalsIgnoreCase(name))
+                    .map(Map.Entry::getValue)
+                    .findFirst();
         }
 
         CcmKey key = CcmKey.fromString(ccmKey);
