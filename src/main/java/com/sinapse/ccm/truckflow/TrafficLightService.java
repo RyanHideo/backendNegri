@@ -19,7 +19,6 @@ public class TrafficLightService {
     private final ModbusService modbusService;
     private final TruckCountStore truckCountStore;
     private final boolean enabled;
-    private final String ccm;
     private final String colorTag;
     private final String powerTag;
     private final double redValue;
@@ -34,7 +33,6 @@ public class TrafficLightService {
             ModbusService modbusService,
             TruckCountStore truckCountStore,
             @Value("${truckflow.enabled:false}") boolean enabled,
-            @Value("${truckflow.ccm:ccm1}") String ccm,
             @Value("${truckflow.color-tag:}") String colorTag,
             @Value("${truckflow.power-tag:}") String powerTag,
             @Value("${truckflow.red-value:0}") double redValue,
@@ -45,7 +43,6 @@ public class TrafficLightService {
         this.modbusService = modbusService;
         this.truckCountStore = truckCountStore;
         this.enabled = enabled;
-        this.ccm = ccm;
         this.colorTag = colorTag;
         this.powerTag = powerTag;
         this.redValue = redValue;
@@ -63,8 +60,7 @@ public class TrafficLightService {
         }
 
         if (hasRequiredTags()) {
-            log.info("Semaforo configurado em {}: tag de energia={}, tag de cor={}.",
-                    ccm, powerTag, colorTag);
+            log.info("Semaforo configurado: tag de energia={}, tag de cor={}.", powerTag, colorTag);
         } else {
             log.warn("Fluxo de caminhoes ativado, mas as tags de energia e cor nao foram informadas.");
         }
@@ -104,7 +100,7 @@ public class TrafficLightService {
             return Observation.unknown(TagValue.Quality.STALE);
         }
 
-        TagValue powerTagValue = modbusService.get(ccm, powerTag).orElse(null);
+        TagValue powerTagValue = modbusService.get(powerTag).orElse(null);
         if (powerTagValue == null) {
             return Observation.unknown(TagValue.Quality.STALE);
         }
@@ -132,7 +128,7 @@ public class TrafficLightService {
             );
         }
 
-        TagValue colorTagValue = modbusService.get(ccm, colorTag).orElse(null);
+        TagValue colorTagValue = modbusService.get(colorTag).orElse(null);
         if (colorTagValue == null) {
             return Observation.unknown(TagValue.Quality.STALE);
         }

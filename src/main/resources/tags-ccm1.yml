@@ -235,12 +235,12 @@ tags:
 #    writable: false
 #    readable: true
 #    polled: true
-  - name: M9_A
-    type: HR
-    address: 4036
-    writable: false
-    readable: true
-    polled: true
+#  - name: M9_A
+#    type: HR
+#    address: 4036
+#    writable: false
+#    readable: true
+#    polled: true
 #  - name: M9_H
 #    type: HR
 #    address: 4037
@@ -287,12 +287,12 @@ tags:
 #    writable: false
 #    readable: true
 #    polled: true
-  - name: M11_A
-    type: HR
-    address: 4044
-    writable: false
-    readable: true
-    polled: true
+#  - name: M11_A
+#    type: HR
+#    address: 4044
+#    writable: false
+#    readable: true
+#    polled: true
 #  - name: M11_H
 #    type: HR
 #    address: 4045
@@ -998,7 +998,7 @@ tags:
 
   - name: TEMP
     type: HR
-    address: 4306
+    address: 4307
     writable: false
     readable: true
     polled: true

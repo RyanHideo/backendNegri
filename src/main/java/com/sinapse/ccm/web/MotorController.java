@@ -34,6 +34,7 @@ public class MotorController {
 
     private final MotorCatalog motorCatalog;
     private final ModbusService modbusService;
+    private static final String LEGACY_CCM_KEY = "ccm1";
     private static final String CMD_REGISTER_TAG = "CMD_REGISTER";
     private static final Pattern MOTOR_TAG_PATTERN = Pattern.compile("^M(\\d+)_");
 
@@ -71,11 +72,11 @@ public class MotorController {
     @PostMapping("/reset-hourmeter")
     public ResponseEntity<?> resetHourmeter(@RequestBody ResetHourmeterRequest request) {
         Optional<MotorDef> motorOpt = motorCatalog.getMotors().stream()
-                .filter(m -> m.getName().equals(request.getMotorName()) && m.getCcm().equals(request.getCcm()))
+                .filter(m -> m.getName().equals(request.getMotorName()))
                 .findFirst();
 
         if (motorOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Motor não encontrado: " + request.getMotorName() + " no CCM " + request.getCcm());
+            return ResponseEntity.badRequest().body("Motor não encontrado: " + request.getMotorName());
         }
 
         MotorDef motor = motorOpt.get();
@@ -93,9 +94,9 @@ public class MotorController {
 
             log.info("Reset Horímetro: Motor ID extraído = {}, Valor de comando enviado ao CLP = {}", motorId, commandValue);
 
-            modbusService.write(motor.getCcm(), CMD_REGISTER_TAG, commandValue);
+            modbusService.write(CMD_REGISTER_TAG, commandValue);
             
-            return ResponseEntity.ok().body("Comando para zerar horímetro do motor " + motorId + " (código " + commandValue + ") enviado para " + motor.getCcm());
+            return ResponseEntity.ok().body("Comando para zerar horímetro do motor " + motorId + " (código " + commandValue + ") enviado para o CCM");
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().body("Falha ao extrair ID numérico da tag: " + motor.getStatusTagName());
         } catch (Exception e) {
@@ -104,11 +105,11 @@ public class MotorController {
     }
 
     private MotorOverviewDto buildDtoForMotor(MotorDef motor) {
-        Double status = getValue(motor.getCcm(), motor.getStatusTagName());
+        Double status = getValue(motor.getStatusTagName());
         
         // Lógica para motor reversível (M85)
         if (motor.getSecondaryStatusTagName() != null && !motor.getSecondaryStatusTagName().isBlank()) {
-            Double status2 = getValue(motor.getCcm(), motor.getSecondaryStatusTagName());
+            Double status2 = getValue(motor.getSecondaryStatusTagName());
             // Se qualquer um dos dois estiver ligado (> 0), consideramos ligado
             if (status2 != null && status2 > 0) {
                 status = status2; 
@@ -117,17 +118,17 @@ public class MotorController {
             }
         }
 
-        Double current = getValue(motor.getCcm(), motor.getCurrentTagName());
+        Double current = getValue(motor.getCurrentTagName());
         Double loadPercentage = calculateLoadPercentage(current, motor.getNominalCurrent());
-        Double potencia1Vsi = getValue(motor.getCcm(), motor.getPower1TagName());
-        Double potencia2Vsi = getValue(motor.getCcm(), motor.getPower2TagName());
-        Double fault = getValue(motor.getCcm(), motor.getFaultTagName());
-        Double hours = getValue(motor.getCcm(), motor.getHoursTagName());
+        Double potencia1Vsi = getValue(motor.getPower1TagName());
+        Double potencia2Vsi = getValue(motor.getPower2TagName());
+        Double fault = getValue(motor.getFaultTagName());
+        Double hours = getValue(motor.getHoursTagName());
 
         return new MotorOverviewDto(
                 extractMotorId(motor),
                 motor.getName(),
-                motor.getCcm(),
+                LEGACY_CCM_KEY,
                 motor.getCategory(),
                 motor.getNominalCurrent(),
                 motor.isHasInverter(),
@@ -171,12 +172,12 @@ public class MotorController {
                 .orElse(motor.getName());
     }
 
-    private Double getValue(String ccm, String tagName) {
+    private Double getValue(String tagName) {
         if (tagName == null || tagName.isBlank()) {
             return null;
         }
 
-        return modbusService.get(ccm, tagName)
+        return modbusService.get(tagName)
                 .filter(tagValue -> tagValue.getQuality() == TagValue.Quality.GOOD)
                 .map(TagValue::getValue)
                 .orElse(null);
@@ -211,6 +212,5 @@ public class MotorController {
     @Data
     public static class ResetHourmeterRequest {
         private String motorName;
-        private String ccm;
     }
 }

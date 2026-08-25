@@ -5,115 +5,72 @@ import com.sinapse.ccm.modbus.TagValue;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/modbus")
-@CrossOrigin(origins = "*") // Para desenvolvimento, permite acesso de qualquer origem
+@CrossOrigin(origins = "*")
 public class ModbusController {
 
     private final ModbusService modbusService;
 
     /**
-     * Retorna um mapa com os snapshots de todos os CCMs.
-     * Exemplo: GET /api/modbus/tags/all
-     * @return Um mapa onde a chave é o ID do CCM ("ccm1", "ccm2") e o valor é o snapshot das tags.
+     * O caminho ccm1 permanece como alias de compatibilidade para o frontend já implantado.
      */
-    @GetMapping("/tags/all")
-    public Map<String, Map<String, TagValue>> getAllTags() {
-        return Arrays.stream(ModbusService.CcmKey.values())
-                .collect(Collectors.toMap(
-                        ModbusService.CcmKey::getKey,
-                        key -> modbusService.snapshot(key.getKey())
-                ));
+    @GetMapping({"/ccm/tags", "/ccm1/tags"})
+    public Map<String, TagValue> getTags() {
+        return modbusService.snapshot();
     }
 
-    /**
-     * Retorna o snapshot mais recente de todas as tags para um CCM específico.
-     * Exemplo: GET /api/modbus/ccm1/tags
-     * @param ccmKey "ccm1" ou "ccm2"
-     * @return Um mapa com nome da tag -> valor da tag.
-     */
-    @GetMapping("/{ccmKey}/tags")
-    public Map<String, TagValue> getTags(@PathVariable String ccmKey) {
-        return modbusService.snapshot(ccmKey);
-    }
-
-    /**
-     * Retorna o valor de uma tag específica.
-     * Exemplo: GET /api/modbus/ccm1/tags/NOME_DA_TAG
-     * @param ccmKey "ccm1" ou "ccm2"
-     * @param tagName O nome da tag a ser lida.
-     * @return O valor da tag ou 404 Not Found se não existir.
-     */
-    @GetMapping("/{ccmKey}/tags/{tagName}")
-    public ResponseEntity<TagValue> getTag(@PathVariable String ccmKey, @PathVariable String tagName) {
-        return modbusService.get(ccmKey, tagName)
+    @GetMapping({"/ccm/tags/{tagName}", "/ccm1/tags/{tagName}"})
+    public ResponseEntity<TagValue> getTag(@org.springframework.web.bind.annotation.PathVariable String tagName) {
+        return modbusService.get(tagName)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    /**
-     * DTO para a requisição de escrita.
-     */
     @Data
     public static class WriteRequest {
         private String name;
         private int value;
     }
 
-    /**
-     * Escreve um valor "raw" em uma tag (HR ou COIL).
-     * Exemplo: POST /api/modbus/ccm1/write
-     * Body: { "name": "NOME_DA_TAG", "value": 1 }
-     * @param ccmKey "ccm1" ou "ccm2"
-     * @param request O corpo da requisição com 'name' e 'value'.
-     * @return Resposta de sucesso ou erro.
-     */
-    @PostMapping("/{ccmKey}/write")
-    public ResponseEntity<?> writeTag(@PathVariable String ccmKey, @RequestBody WriteRequest request) {
+    @PostMapping({"/ccm/write", "/ccm1/write"})
+    public ResponseEntity<?> writeTag(@RequestBody WriteRequest request) {
         try {
-            modbusService.write(ccmKey, request.getName(), request.getValue());
+            modbusService.write(request.getName(), request.getValue());
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 
-    /**
-     * Aciona o comando de RESET por pulso.
-     * Exemplo: POST /api/modbus/ccm1/reset
-     * @param ccmKey "ccm1" ou "ccm2"
-     * @return Resposta de sucesso ou erro.
-     */
-    @PostMapping("/{ccmKey}/reset")
-    public ResponseEntity<?> reset(@PathVariable String ccmKey) {
+    @PostMapping({"/ccm/reset", "/ccm1/reset"})
+    public ResponseEntity<?> reset(@RequestParam(defaultValue = "200") int pulseMs) {
         try {
-            modbusService.resetPulse(ccmKey, 200); // Duração padrão de 200ms
+            modbusService.resetPulse(pulseMs);
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 
-    /**
-     * Aciona o comando de EMERGÊNCIA (retentivo).
-     * Exemplo: POST /api/modbus/ccm1/emergency
-     * @param ccmKey "ccm1" ou "ccm2"
-     * @return Resposta de sucesso ou erro.
-     */
-    @PostMapping("/{ccmKey}/emergency")
-    public ResponseEntity<?> emergency(@PathVariable String ccmKey) {
+    @PostMapping({"/ccm/emergency", "/ccm1/emergency"})
+    public ResponseEntity<?> emergency() {
         try {
-            modbusService.latchEmergency(ccmKey);
+            modbusService.latchEmergency();
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
 }

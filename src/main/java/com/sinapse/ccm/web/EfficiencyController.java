@@ -48,6 +48,7 @@ public class EfficiencyController {
         private final MotorCatalog motorCatalog;
         private final ModbusService modbusService;
 
+        private static final String LEGACY_CCM_KEY = "ccm1";
         private static final Set<String> PRODUCTIVE_CATEGORIES = Set.of("elevador", "redler");
         private static final String ELEVATOR_CATEGORY = "elevador";
 
@@ -60,7 +61,7 @@ public class EfficiencyController {
                     .toList();
 
             for (MotorDef elevator : elevators) {
-                boolean isActive = modbusService.get(elevator.getCcm(), elevator.getStatusTagName())
+                boolean isActive = modbusService.get(elevator.getStatusTagName())
                         .map(tag -> tag.getValue() > 0).orElse(false);
 
                 double actualCurrent = 0;
@@ -81,7 +82,7 @@ public class EfficiencyController {
 
                 result.add(new IndividualLoadSnapshot(
                         elevator.getName(),
-                        elevator.getCcm(),
+                        LEGACY_CCM_KEY,
                         isActive ? "ACTIVE" : "INACTIVE",
                         loadPercentage,
                         actualCurrent,
@@ -103,7 +104,7 @@ public class EfficiencyController {
                     .toList();
 
             for (MotorDef motor : productiveMotors) {
-                boolean isActive = modbusService.get(motor.getCcm(), motor.getStatusTagName())
+                boolean isActive = modbusService.get(motor.getStatusTagName())
                         .map(tag -> tag.getValue() > 0).orElse(false);
 
                 if (isActive) {
@@ -136,7 +137,7 @@ public class EfficiencyController {
             List<String> activeMotorNames = new java.util.ArrayList<>();
 
             for (MotorDef motor : motorCatalog.getMotors()) {
-                boolean isActive = modbusService.get(motor.getCcm(), motor.getStatusTagName())
+                boolean isActive = modbusService.get(motor.getStatusTagName())
                         .map(tag -> tag.getValue() > 0).orElse(false);
 
                 if (isActive) {
@@ -167,7 +168,7 @@ public class EfficiencyController {
                 return 0.0;
             }
 
-            return modbusService.get(motor.getCcm(), currentTagName)
+            return modbusService.get(currentTagName)
                     .map(TagValue::getValue)
                     .orElse(0.0);
         }

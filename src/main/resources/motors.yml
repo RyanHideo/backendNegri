@@ -7,10 +7,10 @@ motors:
   # ==============================================================================
 
   # --- Motores Softstarter (M1 a M11) ---
-  - name: "200 HP"
+  - name: "HP 200"
     ccm: "ccm1"
     category: "britador"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     currentTagName: "M1_A"
     faultTagName: "M1_F"
     hoursTagName: "M1_H"
@@ -19,7 +19,7 @@ motors:
   - name: "CT TUNEL 0200-CT-01"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 30.2
     currentTagName: "M2_A"
     faultTagName: "M2_F"
     hoursTagName: "M2_H"
@@ -28,7 +28,7 @@ motors:
   - name: "PENEIRA VIBRATORIA SCALP"
     ccm: "ccm1"
     category: "peneira"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     currentTagName: "M3_A"
     faultTagName: "M3_F"
     hoursTagName: "M3_H"
@@ -37,7 +37,7 @@ motors:
   - name: "PENEIRA VIBRATORIA 02"
     ccm: "ccm1"
     category: "peneira"
-    nominalCurrent: 10.0
+    nominalCurrent: 42.8
     currentTagName: "M4_A"
     faultTagName: "M4_F"
     hoursTagName: "M4_H"
@@ -46,7 +46,7 @@ motors:
   - name: "PENEIRA VIBRATORIA 01"
     ccm: "ccm1"
     category: "peneira"
-    nominalCurrent: 10.0
+    nominalCurrent: 47.3
     currentTagName: "M5_A"
     faultTagName: "M5_F"
     hoursTagName: "M5_H"
@@ -55,7 +55,7 @@ motors:
   - name: "CT BRITADOR"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 37.4
     currentTagName: "M6_A"
     faultTagName: "M6_F"
     hoursTagName: "M6_H"
@@ -64,7 +64,7 @@ motors:
   - name: "BRITADOR HP300"
     ccm: "ccm1"
     category: "britador"
-    nominalCurrent: 10.0
+    nominalCurrent: 409.0
     currentTagName: "M7_A"
     faultTagName: "M7_F"
     hoursTagName: "M7_H"
@@ -73,7 +73,7 @@ motors:
   - name: "RETORNO CONE 01"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 21.8
     currentTagName: "M8_A"
     faultTagName: "M8_F"
     hoursTagName: "M8_H"
@@ -82,7 +82,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     currentTagName: "M9_A"
     faultTagName: "M9_F"
     hoursTagName: "M9_H"
@@ -91,7 +91,7 @@ motors:
   - name: "CT NOVA CT4 - PL2"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 30.2
     currentTagName: "M10_A"
     faultTagName: "M10_F"
     hoursTagName: "M10_H"
@@ -100,17 +100,17 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     currentTagName: "M11_A"
     faultTagName: "M11_F"
     hoursTagName: "M11_H"
     hasInverter: false
 
-  # --- Partida Direta (M12 a M35) ---
+  # --- Partida Direta (M12 a M39; sem medição de corrente) ---
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M12_S"
     faultTagName: "M12_F"
     hoursTagName: "M12_H"
@@ -119,7 +119,7 @@ motors:
   - name: "SIRENE"
     ccm: "ccm1"
     category: "sirene"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M13_S"
     faultTagName: "M13_F"
     hoursTagName: "M13_H"
@@ -128,7 +128,7 @@ motors:
   - name: "CT2 INF CONES"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 21.8
     statusTagName: "M14_S"
     faultTagName: "M14_F"
     hoursTagName: "M14_H"
@@ -137,7 +137,7 @@ motors:
   - name: "CT7 PEDRA 1"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M15_S"
     faultTagName: "M15_F"
     hoursTagName: "M15_H"
@@ -146,7 +146,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M16_S"
     faultTagName: "M16_F"
     hoursTagName: "M16_H"
@@ -155,7 +155,7 @@ motors:
   - name: "CT6 DESC VSI"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 6.61
     statusTagName: "M17_S"
     faultTagName: "M17_F"
     hoursTagName: "M17_H"
@@ -164,7 +164,7 @@ motors:
   - name: "CT8 PEDRA 0"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 7.95
     statusTagName: "M18_S"
     faultTagName: "M18_F"
     hoursTagName: "M18_H"
@@ -173,7 +173,7 @@ motors:
   - name: "CT9 PEDRISCO"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 7.95
     statusTagName: "M19_S"
     faultTagName: "M19_F"
     hoursTagName: "M19_H"
@@ -182,7 +182,7 @@ motors:
   - name: "CT10 BICA CO"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.15
     statusTagName: "M20_S"
     faultTagName: "M20_F"
     hoursTagName: "M20_H"
@@ -191,7 +191,7 @@ motors:
   - name: "CT16 PEDRA 2"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 11.9
     statusTagName: "M21_S"
     faultTagName: "M21_F"
     hoursTagName: "M21_H"
@@ -200,7 +200,7 @@ motors:
   - name: "CT11 PO 1"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.15
     statusTagName: "M22_S"
     faultTagName: "M22_F"
     hoursTagName: "M22_H"
@@ -209,7 +209,7 @@ motors:
   - name: "CT12 PO 2"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.19
     statusTagName: "M23_S"
     faultTagName: "M23_F"
     hoursTagName: "M23_H"
@@ -218,7 +218,7 @@ motors:
   - name: "CT13 REGEITO"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.15
     statusTagName: "M24_S"
     faultTagName: "M24_F"
     hoursTagName: "M24_H"
@@ -227,7 +227,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M25_S"
     faultTagName: "M25_F"
     hoursTagName: "M25_H"
@@ -236,7 +236,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M26_S"
     faultTagName: "M26_F"
     hoursTagName: "M26_H"
@@ -245,7 +245,7 @@ motors:
   - name: "BOMBA D'AGUA"
     ccm: "ccm1"
     category: "bomba"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.0
     statusTagName: "M27_S"
     faultTagName: "M27_F"
     hoursTagName: "M27_H"
@@ -254,7 +254,7 @@ motors:
   - name: "CT15 RET CONE 2"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 11.9
     statusTagName: "M28_S"
     faultTagName: "M28_F"
     hoursTagName: "M28_H"
@@ -263,7 +263,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M29_S"
     faultTagName: "M29_F"
     hoursTagName: "M29_H"
@@ -272,7 +272,7 @@ motors:
   - name: "Unidade Hidraulica VSI"
     ccm: "ccm1"
     category: "unidade_hidraulica"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.0
     statusTagName: "M30_S"
     faultTagName: "M30_F"
     hoursTagName: "M30_H"
@@ -281,7 +281,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M31_S"
     faultTagName: "M31_F"
     hoursTagName: "M31_H"
@@ -290,7 +290,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M32_S"
     faultTagName: "M32_F"
     hoursTagName: "M32_H"
@@ -299,7 +299,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M33_S"
     faultTagName: "M33_F"
     hoursTagName: "M33_H"
@@ -308,7 +308,7 @@ motors:
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "outros"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M34_S"
     faultTagName: "M34_F"
     hoursTagName: "M34_H"
@@ -317,191 +317,46 @@ motors:
   - name: "BOMBA PRESSÃO ÁGUA"
     ccm: "ccm1"
     category: "bomba"
-    nominalCurrent: 10.0
+    nominalCurrent: 0.0
     statusTagName: "M35_S"
     faultTagName: "M35_F"
     hoursTagName: "M35_H"
     hasInverter: false
 
-  # --- Motores com Inversor (M36 a M39) ---
   - name: "MESA VIBRATÓRIA ANTIGO"
     ccm: "ccm1"
     category: "mesa_vibratoria"
-    nominalCurrent: 10.0
+    nominalCurrent: 21.8
     statusTagName: "M36_S"
     faultTagName: "M36_F"
     hoursTagName: "M36_H"
-    hasInverter: true
+    hasInverter: false
 
   - name: "MESA VIBRATÓRIA TUNEL"
     ccm: "ccm1"
     category: "mesa_vibratoria"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.15
     statusTagName: "M37_S"
     faultTagName: "M37_F"
     hoursTagName: "M37_H"
-    hasInverter: true
+    hasInverter: false
 
   - name: "SEM INFORMAÇÃO"
     ccm: "ccm1"
     category: "correia"
-    nominalCurrent: 10.0
+    nominalCurrent: 8.15
     statusTagName: "M38_S"
     faultTagName: "M38_F"
     hoursTagName: "M38_H"
-    hasInverter: true
+    hasInverter: false
 
   - name: "VSI"
     ccm: "ccm1"
     category: "vsi"
-    nominalCurrent: 10.0
+    nominalCurrent: 278.0
     statusTagName: "M39_S"
     power1TagName: "Potencia1Vsi"
     power2TagName: "Potencia2Vsi"
     faultTagName: "M39_F"
     hoursTagName: "M39_H"
-    hasInverter: true
-
-  # ==============================================================================
-  # CCM 2 (Nomes Específicos)
-  # ==============================================================================
-
-  - name: "Aeração 1"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M1_S"
-    currentTagName: "M1_A"
-    faultTagName: "M1_F"
-    hoursTagName: "M1_H"
-    hasInverter: false
-
-  - name: "Aeração 2"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M2_S"
-    currentTagName: "M2_A"
-    faultTagName: "M2_F"
-    hoursTagName: "M2_H"
-    hasInverter: false
-
-  - name: "Aeração 3"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M3_S"
-    currentTagName: "M3_A"
-    faultTagName: "M3_F"
-    hoursTagName: "M3_H"
-    hasInverter: false
-
-  - name: "Aeração 4"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M4_S"
-    currentTagName: "M4_A"
-    faultTagName: "M4_F"
-    hoursTagName: "M4_H"
-    hasInverter: false
-
-  - name: "Aeração 5"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M5_S"
-    currentTagName: "M5_A"
-    faultTagName: "M5_F"
-    hoursTagName: "M5_H"
-    hasInverter: false
-
-  - name: "Aeração 6"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M6_S"
-    currentTagName: "M6_A"
-    faultTagName: "M6_F"
-    hoursTagName: "M6_H"
-    hasInverter: false
-
-  - name: "Aeração 7"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M7_S"
-    currentTagName: "M7_A"
-    faultTagName: "M7_F"
-    hoursTagName: "M7_H"
-    hasInverter: false
-
-  - name: "Aeração 8"
-    ccm: "ccm2"
-    category: "ventilador"
-    nominalCurrent: 10.0
-    statusTagName: "M8_S"
-    currentTagName: "M8_A"
-    faultTagName: "M8_F"
-    hoursTagName: "M8_H"
-    hasInverter: false
-
-  - name: "Elevador 12"
-    ccm: "ccm2"
-    category: "elevador"
-    nominalCurrent: 10.0
-    statusTagName: "M9_S"
-    currentTagName: "M9_A"
-    faultTagName: "M9_F"
-    hoursTagName: "M9_H"
-    hasInverter: false
-
-  - name: "Redler 1"
-    ccm: "ccm2"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M10_S"
-    currentTagName: "M10_A"
-    faultTagName: "M10_F"
-    hoursTagName: "M10_H"
-    hasInverter: false
-
-  - name: "Redler 2"
-    ccm: "ccm2"
-    category: "redler"
-    nominalCurrent: 10.0
-    statusTagName: "M11_S"
-    currentTagName: "M11_A"
-    faultTagName: "M11_F"
-    hoursTagName: "M11_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 2 Inferior"
-    ccm: "ccm2"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M12_S"
-    currentTagName: "M12_A"
-    faultTagName: "M12_F"
-    hoursTagName: "M12_H"
-    hasInverter: false
-
-  - name: "Correia Transportadora 1 Superior"
-    ccm: "ccm2"
-    category: "correia"
-    nominalCurrent: 10.0
-    statusTagName: "M13_S"
-    currentTagName: "M13_A"
-    faultTagName: "M13_F"
-    hoursTagName: "M13_H"
-    hasInverter: false
-
-  - name: "Exaustor 1"
-    ccm: "ccm2"
-    category: "exaustor"
-    nominalCurrent: 10.0
-    statusTagName: "M14_S"
-    currentTagName: "M14_A"
-    faultTagName: "M14_F"
-    hoursTagName: "M14_H"
     hasInverter: false

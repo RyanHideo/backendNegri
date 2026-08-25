@@ -22,32 +22,22 @@ public class ConsumptionController {
     private static final String CMD_REGISTER_TAG = "CMD_REGISTER";
     private static final int RESET_CONSUMPTION_CODE = 999; // Código para zerar consumo total
 
-    /**
-     * Endpoint para o front-end acionar o reset do consumo para um CCM específico.
-     * @param ccmKey "ccm1" ou "ccm2"
-     */
-    @PostMapping("/{ccmKey}/reset")
-    public ResponseEntity<String> resetConsumption(@PathVariable String ccmKey) {
+    @PostMapping({"/reset", "/ccm1/reset"})
+    public ResponseEntity<String> resetConsumption() {
         try {
-            // Envia o código de comando para o registrador de comando do CLP
-            modbusService.write(ccmKey, CMD_REGISTER_TAG, RESET_CONSUMPTION_CODE);
+            modbusService.write(CMD_REGISTER_TAG, RESET_CONSUMPTION_CODE);
 
-            // Atualiza e persiste a data do reset para o CCM específico
-            stateService.updateAndPersistResetTimestamp(ccmKey);
+            stateService.updateAndPersistResetTimestamp();
 
-            return ResponseEntity.ok("Comando de reset de consumo enviado para " + ccmKey + " e data atualizada.");
+            return ResponseEntity.ok("Comando de reset de consumo enviado para o CCM e data atualizada.");
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Falha ao enviar comando para " + ccmKey + ": " + e.getMessage());
+            return ResponseEntity.status(500).body("Falha ao enviar comando para o CCM: " + e.getMessage());
         }
     }
 
-    /**
-     * Endpoint para o front-end buscar a data do último reset de um CCM específico.
-     * @param ccmKey "ccm1" ou "ccm2"
-     */
-    @GetMapping("/{ccmKey}/reset-date")
-    public ResponseEntity<ResetDateResponse> getResetDate(@PathVariable String ccmKey) {
-        Instant timestamp = stateService.getLastResetTimestamp(ccmKey);
+    @GetMapping({"/reset-date", "/ccm1/reset-date"})
+    public ResponseEntity<ResetDateResponse> getResetDate() {
+        Instant timestamp = stateService.getLastResetTimestamp();
         return ResponseEntity.ok(new ResetDateResponse(timestamp));
     }
 

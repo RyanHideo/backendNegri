@@ -31,9 +31,9 @@ class TrafficLightServiceTests {
     @Test
     void doesNotCountWhenTheFirstKnownStateIsGreen() {
         TrafficLightService service = trafficLightService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+        when(modbusService.get("TRAFFIC_LIGHT_POWER"))
                 .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)));
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+        when(modbusService.get("TRAFFIC_LIGHT_COLOR"))
                 .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1)));
 
         service.refresh();
@@ -45,13 +45,13 @@ class TrafficLightServiceTests {
     @Test
     void countsAndPersistsOnlyTheRedToGreenTransition() {
         TrafficLightService service = trafficLightService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+        when(modbusService.get("TRAFFIC_LIGHT_POWER"))
                 .thenReturn(
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 1))
                 );
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+        when(modbusService.get("TRAFFIC_LIGHT_COLOR"))
                 .thenReturn(
                         Optional.of(tag("TRAFFIC_LIGHT_COLOR", 0)),
                         Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1)),
@@ -72,7 +72,7 @@ class TrafficLightServiceTests {
     @Test
     void returnsOffWhenThePowerBitIsZero() {
         TrafficLightService service = trafficLightService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+        when(modbusService.get("TRAFFIC_LIGHT_POWER"))
                 .thenReturn(Optional.of(tag("TRAFFIC_LIGHT_POWER", 0)));
 
         service.refresh();
@@ -84,13 +84,13 @@ class TrafficLightServiceTests {
     @Test
     void doesNotCountRedToOffToGreenAsADirectTransition() {
         TrafficLightService service = trafficLightService();
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_POWER"))
+        when(modbusService.get("TRAFFIC_LIGHT_POWER"))
                 .thenReturn(
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 1)),
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 0)),
                         Optional.of(tag("TRAFFIC_LIGHT_POWER", 1))
                 );
-        when(modbusService.get("ccm1", "TRAFFIC_LIGHT_COLOR"))
+        when(modbusService.get("TRAFFIC_LIGHT_COLOR"))
                 .thenReturn(
                         Optional.of(tag("TRAFFIC_LIGHT_COLOR", 0)),
                         Optional.of(tag("TRAFFIC_LIGHT_COLOR", 1))
@@ -109,7 +109,6 @@ class TrafficLightServiceTests {
                 modbusService,
                 truckCountStore,
                 true,
-                "ccm1",
                 "TRAFFIC_LIGHT_COLOR",
                 "TRAFFIC_LIGHT_POWER",
                 0,

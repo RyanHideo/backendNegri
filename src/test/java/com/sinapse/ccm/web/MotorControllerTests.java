@@ -23,10 +23,10 @@ class MotorControllerTests {
         MotorDef motor = motor();
 
         when(catalog.getMotors()).thenReturn(List.of(motor));
-        when(modbus.get("ccm1", "M7_S")).thenReturn(Optional.of(tag("M7_S", 1, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "M7_A")).thenReturn(Optional.of(tag("M7_A", 8.5, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "M7_F")).thenReturn(Optional.of(tag("M7_F", 0, TagValue.Quality.BAD)));
-        when(modbus.get("ccm1", "M7_H")).thenReturn(Optional.empty());
+        when(modbus.get("M7_S")).thenReturn(Optional.of(tag("M7_S", 1, TagValue.Quality.GOOD)));
+        when(modbus.get("M7_A")).thenReturn(Optional.of(tag("M7_A", 8.5, TagValue.Quality.GOOD)));
+        when(modbus.get("M7_F")).thenReturn(Optional.of(tag("M7_F", 0, TagValue.Quality.BAD)));
+        when(modbus.get("M7_H")).thenReturn(Optional.empty());
 
         MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
                 .getMotorsOverview()
@@ -69,11 +69,11 @@ class MotorControllerTests {
         motor.setHasInverter(true);
 
         when(catalog.getMotors()).thenReturn(List.of(motor));
-        when(modbus.get("ccm1", "M39_S")).thenReturn(Optional.of(tag("M39_S", 1, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "Potencia1Vsi")).thenReturn(Optional.of(tag("Potencia1Vsi", 45.0, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "Potencia2Vsi")).thenReturn(Optional.of(tag("Potencia2Vsi", 55.0, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "M39_F")).thenReturn(Optional.of(tag("M39_F", 0, TagValue.Quality.GOOD)));
-        when(modbus.get("ccm1", "M39_H")).thenReturn(Optional.of(tag("M39_H", 100, TagValue.Quality.GOOD)));
+        when(modbus.get("M39_S")).thenReturn(Optional.of(tag("M39_S", 1, TagValue.Quality.GOOD)));
+        when(modbus.get("Potencia1Vsi")).thenReturn(Optional.of(tag("Potencia1Vsi", 45.0, TagValue.Quality.GOOD)));
+        when(modbus.get("Potencia2Vsi")).thenReturn(Optional.of(tag("Potencia2Vsi", 55.0, TagValue.Quality.GOOD)));
+        when(modbus.get("M39_F")).thenReturn(Optional.of(tag("M39_F", 0, TagValue.Quality.GOOD)));
+        when(modbus.get("M39_H")).thenReturn(Optional.of(tag("M39_H", 100, TagValue.Quality.GOOD)));
 
         MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
                 .getMotorsOverview()
@@ -90,7 +90,7 @@ class MotorControllerTests {
     private static MotorDef motor() {
         MotorDef motor = new MotorDef();
         motor.setName("BRITADOR HP300");
-        motor.setCcm("ccm1");
+        motor.setCcm("ccm1"); // metadado legado, não usado para seleção do Modbus
         motor.setCategory("britador");
         motor.setNominalCurrent(10.0);
         motor.setStatusTagName("M7_S");

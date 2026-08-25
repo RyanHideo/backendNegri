@@ -6,7 +6,13 @@ import lombok.Data;
 @Data
 public class MotorDef {
     private String name;
+
+    /**
+     * Campo legado mantido somente para carregar o motors.yml atual.
+     * Não participa mais de filtros, seleção de catálogo ou acesso Modbus.
+     */
     private String ccm;
+
     private String category;
 
     @JsonProperty("nominalCurrent")
