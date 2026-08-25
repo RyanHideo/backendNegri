@@ -105,7 +105,8 @@ public class MotorController {
     }
 
     private MotorOverviewDto buildDtoForMotor(MotorDef motor) {
-        Double status = getValue(motor.getStatusTagName());
+        Double rawStatus = getValue(motor.getStatusTagName());
+        Double status = normalizeStatus(motor, rawStatus);
         
         // Lógica para motor reversível (M85)
         if (motor.getSecondaryStatusTagName() != null && !motor.getSecondaryStatusTagName().isBlank()) {
@@ -122,7 +123,7 @@ public class MotorController {
         Double loadPercentage = calculateLoadPercentage(current, motor.getNominalCurrent());
         Double potencia1Vsi = getValue(motor.getPower1TagName());
         Double potencia2Vsi = getValue(motor.getPower2TagName());
-        Double fault = getValue(motor.getFaultTagName());
+        Double fault = normalizeFault(motor, rawStatus, getValue(motor.getFaultTagName()));
         Double hours = getValue(motor.getHoursTagName());
 
         return new MotorOverviewDto(
@@ -146,6 +147,33 @@ public class MotorController {
                 hours,
                 loadPercentage
         );
+    }
+
+    private Double normalizeStatus(MotorDef motor, Double rawStatus) {
+        if (rawStatus == null || !motor.isSoftStarterStatusWord()) {
+            return rawStatus;
+        }
+
+        int statusWord = toUnsignedStatusWord(rawStatus);
+        return isBitSet(statusWord, 0) ? 1.0 : 0.0;
+    }
+
+    private Double normalizeFault(MotorDef motor, Double rawStatus, Double externalFault) {
+        if (!motor.isSoftStarterStatusWord() || rawStatus == null) {
+            return externalFault;
+        }
+
+        boolean wordFault = isBitSet(toUnsignedStatusWord(rawStatus), 15);
+        boolean discreteFault = externalFault != null && externalFault != 0.0;
+        return wordFault || discreteFault ? 1.0 : 0.0;
+    }
+
+    private int toUnsignedStatusWord(Double rawStatus) {
+        return ((int) Math.round(rawStatus)) & 0xFFFF;
+    }
+
+    private boolean isBitSet(int statusWord, int bit) {
+        return (statusWord & (1 << bit)) != 0;
     }
 
     private Double calculateLoadPercentage(Double current, double nominalCurrent) {

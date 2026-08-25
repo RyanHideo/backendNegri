@@ -21,6 +21,13 @@ public class MotorDef {
     @JsonProperty("statusTagName")
     private String statusTagName;
 
+    /**
+     * Indica que a tag de status é uma palavra de estado da soft-starter WEG.
+     * Nessa palavra, o bit 0 informa motor girando e o bit 15 informa falha.
+     */
+    @JsonProperty("softStarterStatusWord")
+    private boolean softStarterStatusWord = false;
+
     @JsonProperty("secondaryStatusTagName")
     private String secondaryStatusTagName; // Para motores com reversão (ex: M85)
 

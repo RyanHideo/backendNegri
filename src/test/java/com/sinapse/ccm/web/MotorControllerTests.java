@@ -87,6 +87,63 @@ class MotorControllerTests {
         assertThat(result.getLoadPercentage()).isNull();
     }
 
+    @Test
+    void decodesRunningBitFromSoftStarterStatusWord() {
+        MotorCatalog catalog = mock(MotorCatalog.class);
+        ModbusService modbus = mock(ModbusService.class);
+        MotorDef motor = motor();
+        motor.setSoftStarterStatusWord(true);
+
+        when(catalog.getMotors()).thenReturn(List.of(motor));
+        when(modbus.get("M7_S")).thenReturn(Optional.of(tag("M7_S", 20771, TagValue.Quality.GOOD)));
+        when(modbus.get("M7_F")).thenReturn(Optional.of(tag("M7_F", 0, TagValue.Quality.GOOD)));
+
+        MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
+                .getMotorsOverview()
+                .getFirst();
+
+        assertThat(result.getStatus()).isEqualTo(1.0);
+        assertThat(result.getFault()).isEqualTo(0.0);
+    }
+
+    @Test
+    void ignoresOtherStatusBitsWhenRunningBitIsOff() {
+        MotorCatalog catalog = mock(MotorCatalog.class);
+        ModbusService modbus = mock(ModbusService.class);
+        MotorDef motor = motor();
+        motor.setSoftStarterStatusWord(true);
+
+        when(catalog.getMotors()).thenReturn(List.of(motor));
+        when(modbus.get("M7_S")).thenReturn(Optional.of(tag("M7_S", 20770, TagValue.Quality.GOOD)));
+        when(modbus.get("M7_F")).thenReturn(Optional.of(tag("M7_F", 0, TagValue.Quality.GOOD)));
+
+        MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
+                .getMotorsOverview()
+                .getFirst();
+
+        assertThat(result.getStatus()).isEqualTo(0.0);
+        assertThat(result.getFault()).isEqualTo(0.0);
+    }
+
+    @Test
+    void givesFaultPriorityToBitFifteenOrDiscreteFault() {
+        MotorCatalog catalog = mock(MotorCatalog.class);
+        ModbusService modbus = mock(ModbusService.class);
+        MotorDef motor = motor();
+        motor.setSoftStarterStatusWord(true);
+
+        when(catalog.getMotors()).thenReturn(List.of(motor));
+        when(modbus.get("M7_S")).thenReturn(Optional.of(tag("M7_S", 53539, TagValue.Quality.GOOD)));
+        when(modbus.get("M7_F")).thenReturn(Optional.of(tag("M7_F", 0, TagValue.Quality.GOOD)));
+
+        MotorController.MotorOverviewDto result = new MotorController(catalog, modbus)
+                .getMotorsOverview()
+                .getFirst();
+
+        assertThat(result.getStatus()).isEqualTo(1.0);
+        assertThat(result.getFault()).isEqualTo(1.0);
+    }
+
     private static MotorDef motor() {
         MotorDef motor = new MotorDef();
         motor.setName("BRITADOR HP300");
