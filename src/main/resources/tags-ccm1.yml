@@ -30,6 +30,7 @@ tags:
   - name: M1_A
     type: HR
     address: 4004
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -56,6 +57,7 @@ tags:
   - name: M2_A
     type: HR
     address: 4008
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -82,6 +84,7 @@ tags:
   - name: M3_A
     type: HR
     address: 4012
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -108,6 +111,7 @@ tags:
   - name: M4_A
     type: HR
     address: 4016
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -134,6 +138,7 @@ tags:
   - name: M5_A
     type: HR
     address: 4020
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -160,6 +165,7 @@ tags:
   - name: M6_A
     type: HR
     address: 4024
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -186,6 +192,7 @@ tags:
   - name: M7_A
     type: HR
     address: 4028
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -212,6 +219,7 @@ tags:
   - name: M8_A
     type: HR
     address: 4032
+    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -264,6 +272,7 @@ tags:
   - name: M10_A
     type: HR
     address: 4040
+    scale: 0.1
     writable: false
     readable: true
     polled: true
