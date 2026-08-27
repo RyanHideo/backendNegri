@@ -24,4 +24,21 @@ class MotorCurrentTagScalingTests {
                     () -> "Escala incorreta para " + tagName);
         }
     }
+
+    @Test
+    void m8UsesD30ForCurrentAndD31ForFault() {
+        TagCatalog catalog = new TagCatalog("tags-ccm1.yml");
+
+        TagDef current = catalog.byName("M8_A");
+        TagDef fault = catalog.byName("M8_F");
+
+        assertNotNull(current);
+        assertEquals(TagType.HR, current.getType());
+        assertEquals(4031, current.getAddress());
+        assertEquals(0.1, current.getScaleOrDefault(), 0.00001);
+
+        assertNotNull(fault);
+        assertEquals(TagType.HR, fault.getType());
+        assertEquals(4032, fault.getAddress());
+    }
 }

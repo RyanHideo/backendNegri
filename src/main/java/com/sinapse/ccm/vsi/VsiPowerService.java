@@ -25,24 +25,27 @@ public class VsiPowerService {
     private final double kwToKvaFactor;
     private final double kvaToKwFactor;
     private final double maximumPowerKw;
+    private final double rawFullScale;
 
     public VsiPowerService(
             @Value("${vsi.power.kw-to-kva-factor:1.25}") double kwToKvaFactor,
             @Value("${vsi.power.kva-to-kw-factor:0.8}") double kvaToKwFactor,
-            @Value("${vsi.power.maximum-kw:150}") double maximumPowerKw
+            @Value("${vsi.power.maximum-kw:150}") double maximumPowerKw,
+            @Value("${vsi.power.raw-full-scale:1000}") double rawFullScale
     ) {
-        if (kwToKvaFactor <= 0 || kvaToKwFactor <= 0 || maximumPowerKw <= 0) {
-            throw new IllegalArgumentException("Os fatores e a potência máxima do VSI devem ser maiores que zero");
+        if (kwToKvaFactor <= 0 || kvaToKwFactor <= 0 || maximumPowerKw <= 0 || rawFullScale <= 0) {
+            throw new IllegalArgumentException("Os fatores, a escala bruta e a potência máxima do VSI devem ser maiores que zero");
         }
 
         this.kwToKvaFactor = kwToKvaFactor;
         this.kvaToKwFactor = kvaToKwFactor;
         this.maximumPowerKw = maximumPowerKw;
+        this.rawFullScale = rawFullScale;
     }
 
     public void addKvaComparison(Map<String, TagValue> tags) {
-        TagValue power1 = tags.get(POWER_1_TAG);
-        TagValue power2 = tags.get(POWER_2_TAG);
+        TagValue power1 = convertRawPowerToKw(tags, POWER_1_TAG);
+        TagValue power2 = convertRawPowerToKw(tags, POWER_2_TAG);
 
         if (power1 == null && power2 == null) {
             return;
@@ -97,13 +100,40 @@ public class VsiPowerService {
         return roundToTwo(powerKva * kvaToKwFactor);
     }
 
+    public double rawToPercentage(double rawValue) {
+        return roundToTwo((rawValue / rawFullScale) * 100.0);
+    }
+
+    public double rawToKw(double rawValue) {
+        return roundToTwo((rawValue / rawFullScale) * maximumPowerKw);
+    }
+
     public boolean isCalculatedTag(String tagName) {
-        return POWER_1_COMPARISON_TAG.equalsIgnoreCase(tagName)
+        return POWER_1_TAG.equalsIgnoreCase(tagName)
+                || POWER_2_TAG.equalsIgnoreCase(tagName)
+                || POWER_1_COMPARISON_TAG.equalsIgnoreCase(tagName)
                 || POWER_2_COMPARISON_TAG.equalsIgnoreCase(tagName)
                 || VSI_TRANSFORMER_POWER_TAG.equalsIgnoreCase(tagName)
                 || GENERAL_POWER_TAG.equalsIgnoreCase(tagName)
                 || MAX_POWER_KW_TAG.equalsIgnoreCase(tagName)
                 || MAX_POWER_COMPARISON_TAG.equalsIgnoreCase(tagName);
+    }
+
+    private TagValue convertRawPowerToKw(Map<String, TagValue> tags, String tagName) {
+        TagValue raw = tags.get(tagName);
+        if (raw == null) {
+            return null;
+        }
+
+        TagValue converted = new TagValue(
+                tagName,
+                rawToKw(raw.getValue()),
+                raw.getTs(),
+                raw.getQuality(),
+                raw.getError()
+        );
+        tags.put(tagName, converted);
+        return converted;
     }
 
     private TagValue addComparison(Map<String, TagValue> tags, String tagName, TagValue source) {

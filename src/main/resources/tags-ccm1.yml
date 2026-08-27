@@ -210,16 +210,16 @@ tags:
     writable: false
     readable: true
     polled: true
-  - name: M8_F
-    type: DI
-    address: 1168
+  - name: M8_A
+    type: HR
+    address: 4031
+    scale: 0.1
     writable: false
     readable: true
     polled: true
-  - name: M8_A
+  - name: M8_F
     type: HR
     address: 4032
-    scale: 0.1
     writable: false
     readable: true
     polled: true
@@ -868,14 +868,14 @@ tags:
     writable: false
     readable: true
     polled: true
-    description: "M39 VSI - Potência 1 recebida e exposta em kW"
+    description: "M39 VSI - Escala CLP 0..1000 convertida para 0..150 kW"
   - name: Potencia2Vsi
     type: HR
     address: 4071
     writable: false
     readable: true
     polled: true
-    description: "M39 VSI - Potência 2 recebida e exposta em kW"
+    description: "M39 VSI - Escala CLP 0..1000 convertida para 0..150 kW"
   - name: M39_H
     type: HR
     address: 4096
