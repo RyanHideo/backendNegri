@@ -10,7 +10,7 @@ motors:
   - name: "HP 200"
     ccm: "ccm1"
     category: "britador"
-    nominalCurrent: 0.0
+    nominalCurrent: 312.0
     statusTagName: "M1_S"
     softStarterStatusWord: true
     currentTagName: "M1_A"
@@ -32,7 +32,7 @@ motors:
   - name: "PENEIRA VIBRATORIA SCALP"
     ccm: "ccm1"
     category: "peneira"
-    nominalCurrent: 0.0
+    nominalCurrent: 24.0
     statusTagName: "M3_S"
     softStarterStatusWord: true
     currentTagName: "M3_A"
